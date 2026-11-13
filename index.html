@@ -53,8 +53,8 @@ th{color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;
 .chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;border-radius:999px;font:600 .88rem "Source Sans 3",sans-serif;cursor:pointer}
 .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
 @media (prefers-color-scheme:dark){.chip.on{color:#10201f}}
-button.btn{font:600 .92rem "Source Sans 3",sans-serif;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:9px 16px;border-radius:10px;cursor:pointer}
-@media (prefers-color-scheme:dark){button.btn{color:#10201f}}
+button.btn,a.btn{font:600 .92rem "Source Sans 3",sans-serif;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:9px 16px;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-block}
+@media (prefers-color-scheme:dark){button.btn,a.btn{color:#10201f}}
 button.btn.ghost{background:transparent;color:var(--accent)}
 button.btn.small{padding:5px 10px;font-size:.84rem}
 button.btn.bad{border-color:var(--bad);background:transparent;color:var(--bad)}
@@ -135,6 +135,10 @@ a{color:var(--accent)}
   </div>
   <div class="grid">
     <div class="card"><h3>Süre bütçesi</h3><p class="small muted">Soru başına ortalama 2 dk 15 sn düşer. Kelime ve dil bilgisi sorularını hızlı geçip zamanı okumaya ayırmak gerekir.</p><table id="timeTable"></table></div>
+    <div class="card"><h3>Deneme 1 — Tam sınav</h3>
+      <p class="small muted">Gerçek bir çıkmış sınav kitapçığından 80 soru, ÖSYM'nin resmî bölüm sırasıyla. Anında doğru/yanlış, canlı puan takibi.</p>
+      <a class="btn small" href="deneme1.html">Denemeye başla →</a>
+    </div>
     <div class="card"><h3>Kaynaklarım</h3>
       <p class="small muted">ÖSYM'nin resmî çıkmış soru kitapçıkları. Kendi seçtiğin kaynakları aşağıdan ekleyebilirsin.</p>
       <div id="sources"></div>
