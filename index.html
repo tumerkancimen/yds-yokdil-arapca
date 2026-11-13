@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YDS Arapça Çalışma Kütüphanesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7;--paper:#fffdf8;--ink:#2a2622;--muted:#6f675d;--line:#e3d9c7;
+  --accent:#1f5f5b;--accent-soft:#e2efed;--gold:#a8742a;--gold-soft:#f5ead7;
+  --ok:#2f7a45;--ok-soft:#e3f2e7;--bad:#a63d32;--bad-soft:#f8e4e1;
+  --radius:14px;--shadow:0 1px 2px rgba(60,40,10,.06),0 4px 14px rgba(60,40,10,.05);
+  --ar:"Noto Naskh Arabic","Amiri",serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#181614;--paper:#221f1c;--ink:#ece6dc;--muted:#a59c8f;--line:#38322c;
+  --accent:#6cbab3;--accent-soft:#1f3533;--gold:#d6a65a;--gold-soft:#352a1b;
+  --ok:#73c08a;--ok-soft:#1d3224;--bad:#e2847a;--bad-soft:#3a2220;--shadow:none;}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif}
+.ar{font-family:var(--ar);direction:rtl;font-size:1.22em;line-height:1.9}
+header.top{padding:22px 18px 8px;max-width:920px;margin:0 auto}
+h1{font-family:"Source Serif 4",Georgia,serif;font-size:1.65rem;margin:0;line-height:1.2}
+h1 .ar{font-size:1.05em;color:var(--gold);margin-inline-start:6px}
+.sub{color:var(--muted);margin:4px 0 0;font-size:.95rem}
+.countdown{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;padding:12px 14px;background:var(--gold-soft);border-radius:var(--radius);font-size:.95rem}
+.countdown b{font-size:1.4rem;color:var(--gold);font-variant-numeric:tabular-nums}
+.countdown input{font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .inner{max-width:920px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:8px 12px;scrollbar-width:none}
+nav.tabs .inner::-webkit-scrollbar{display:none}
+nav.tabs a{flex:0 0 auto;text-decoration:none;color:var(--muted);padding:8px 13px;border-radius:999px;font-weight:600;font-size:.93rem;white-space:nowrap}
+nav.tabs a.on{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){nav.tabs a.on{color:#10201f}}
+main{max-width:920px;margin:0 auto;padding:16px 14px 80px}
+section.view{display:none}section.view.on{display:block}
+h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.3rem;margin:6px 0 4px}
+h3{font-size:1.05rem;margin:0 0 6px}
+p.lead{color:var(--muted);margin:0 0 14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 12px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{text-align:start;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.03em}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.78rem;font-weight:600;background:var(--accent-soft);color:var(--accent)}
+.pill.gold{background:var(--gold-soft);color:var(--gold)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;border-radius:999px;font:600 .88rem "Source Sans 3",sans-serif;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.chip.on{color:#10201f}}
+button.btn{font:600 .92rem "Source Sans 3",sans-serif;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:9px 16px;border-radius:10px;cursor:pointer}
+@media (prefers-color-scheme:dark){button.btn{color:#10201f}}
+button.btn.ghost{background:transparent;color:var(--accent)}
+button.btn.small{padding:5px 10px;font-size:.84rem}
+button.btn.bad{border-color:var(--bad);background:transparent;color:var(--bad)}
+input[type=search],input[type=text],input[type=number],input[type=date],textarea,select{font:inherit;width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.vocab{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.vocab:last-child{border-bottom:0}
+.vocab .tr{color:var(--ink);font-size:.95rem}
+.vocab .ex{color:var(--muted);font-size:.85rem}
+.vocab .ar{font-size:1.35rem;flex:0 0 auto;text-align:right}
+.mark{border:1px solid var(--line);background:transparent;border-radius:8px;padding:3px 8px;cursor:pointer;font-size:.8rem;color:var(--muted)}
+.mark.known{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.flash{min-height:210px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none}
+.flash .ar{font-size:2.1rem}
+.flash .back{margin-top:10px;color:var(--muted)}
+details.topic{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);margin:0 0 10px;box-shadow:var(--shadow)}
+details.topic summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+details.topic summary::-webkit-details-marker{display:none}
+details.topic summary::after{content:"+";color:var(--muted);font-size:1.2rem}
+details.topic[open] summary::after{content:"–"}
+details.topic .body{padding:0 16px 14px}
+.ex-box{background:var(--accent-soft);border-radius:10px;padding:8px 12px;margin:8px 0}
+.tip{border-inline-start:3px solid var(--gold);padding:4px 10px;margin:8px 0;color:var(--ink);background:var(--gold-soft);border-radius:0 8px 8px 0;font-size:.93rem}
+.q-stem{margin:4px 0 12px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:start;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px 12px;margin:0 0 8px;cursor:pointer;font:inherit}
+.opt .L{font-weight:700;color:var(--muted);flex:0 0 auto}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.opt[disabled]{cursor:default}
+.explain{margin-top:6px;padding:10px 12px;border-radius:10px;background:var(--gold-soft);font-size:.94rem}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.stat{font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.empty{color:var(--muted);text-align:center;padding:24px}
+.plan-day{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.plan-day:last-child{border-bottom:0}
+.plan-day input{margin-top:4px;width:18px;height:18px;flex:0 0 auto}
+.plan-day.done .t{text-decoration:line-through;color:var(--muted)}
+a{color:var(--accent)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:10px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
+.toast.on{opacity:1}
+.sec-inputs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.sec-inputs label{font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>YDS Arapça Çalışma Kütüphanesi <span class="ar">مكتبة التحضير</span></h1>
+  <p class="sub">Kelime, dil bilgisi, soru tipi stratejileri, alıştırma, yanlış defteri ve deneme takibi tek yerde.</p>
+  <div class="countdown" id="countdown"></div>
+</header>
+<nav class="tabs"><div class="inner" id="tabs">
+  <a href="#sinav" data-v="sinav">Sınav</a>
+  <a href="#kelime" data-v="kelime">Kelime &amp; Kalıplar</a>
+  <a href="#dilbilgisi" data-v="dilbilgisi">Dil Bilgisi</a>
+  <a href="#strateji" data-v="strateji">Stratejiler</a>
+  <a href="#kalip" data-v="kalip">Kalıp Avcısı</a>
+  <a href="#banka" data-v="banka">Soru Bankası</a>
+  <a href="#alistirma" data-v="alistirma">Alıştırma</a>
+  <a href="#oyunlar" data-v="oyunlar">Oyunlar</a>
+  <a href="#yanlis" data-v="yanlis">Yanlış Defteri</a>
+  <a href="#takip" data-v="takip">Plan &amp; Takip</a>
+</div></nav>
+<main>
+
+<!-- SINAV -->
+<section class="view" id="v-sinav">
+  <h2>Sınavın yapısı</h2>
+  <p class="lead">80 soru, 180 dakika, beş seçenek. Her doğru 1,25 puan; yanlış doğruyu götürmez. Bölüm düzeni ÖSYM'nin 2024-YDS/1 Arapça soru kitapçığından alındı.</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>Sorular</th><th>Bölüm</th><th class="num">Adet</th></tr></thead>
+      <tbody id="formatTable"></tbody>
+    </table>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Süre bütçesi</h3><p class="small muted">Soru başına ortalama 2 dk 15 sn düşer. Kelime ve dil bilgisi sorularını hızlı geçip zamanı okumaya ayırmak gerekir.</p><table id="timeTable"></table></div>
+    <div class="card"><h3>Kaynaklarım</h3>
+      <p class="small muted">ÖSYM'nin resmî çıkmış soru kitapçıkları. Kendi seçtiğin kaynakları aşağıdan ekleyebilirsin.</p>
+      <div id="sources"></div>
+      <div class="row" style="margin-top:10px">
+        <input type="text" id="srcName" placeholder="Kaynak adı" style="flex:1 1 160px">
+        <input type="text" id="srcUrl" placeholder="Bağlantı (isteğe bağlı)" style="flex:1 1 160px">
+        <button class="btn small" id="srcAdd">Ekle</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KELİME -->
+<section class="view" id="v-kelime">
+  <h2>Kelime &amp; Kalıplar</h2>
+  <p class="lead">Bağlaçlar, harf-i cerli fiiller ve sınavda sık geçen akademik kelimeler. Bildiklerini işaretle; kart modunda yalnız bilmediklerin gelir.</p>
+  <div class="row" style="margin-bottom:10px">
+    <input type="search" id="vSearch" placeholder="Arapça ya da Türkçe ara…" style="flex:1 1 220px">
+    <button class="btn ghost" id="vMode">Kart moduna geç</button>
+  </div>
+  <div class="chips" id="vCats"></div>
+  <div class="card" style="padding:10px 16px" id="vProgress"></div>
+  <div id="vList" class="card"></div>
+  <div id="vFlash" style="display:none">
+    <div class="card flash" id="flashCard"></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn bad" id="fAgain">Tekrar et</button>
+      <button class="btn" id="fKnow">Biliyorum</button>
+    </div>
+  </div>
+</section>
+
+<!-- DİL BİLGİSİ -->
+<section class="view" id="v-dilbilgisi">
+  <h2>Dil bilgisi konuları</h2>
+  <p class="lead">Boşluk doldurma ve cloze sorularında en çok işe yarayan konular. Her konuda kural, örnek ve sınav ipucu var.</p>
+  <div id="gList"></div>
+</section>
+
+<!-- STRATEJİ -->
+<section class="view" id="v-strateji">
+  <h2>Soru tipi stratejileri</h2>
+  <p class="lead">Kitapçıktaki sırayla her bölüm için çözüm yolu.</p>
+  <div id="sList"></div>
+</section>
+
+<!-- KALIP AVCISI -->
+<section class="view" id="v-kalip">
+  <h2>Kalıp Avcısı</h2>
+  <p class="lead">Fiili gör, harf-i ceri hatırla. Bağlacı gör, ilişkiyi tanı. Veriler 15 gerçek ÖSYM Arapça YDS sınavından (2018–2025) sayılmış sıklıklardır.</p>
+  <div class="tip">Bunlar ilk eleme içindir: kalıbı tanı, adayı bul, sonra cümleye bir kez bakıp doğrula. ÖSYM bazen aynı fiille başka bir harf-i cer sorar. <b>Çift kalıplı</b> işaretli fiillere özellikle dikkat.</div>
+  <div class="chips" id="kTabs" style="margin-top:12px"></div>
+  <div id="kListe">
+    <div class="card" style="padding:10px 16px" id="kProg"></div>
+    <input type="search" id="kSearch" placeholder="Fiil, harf-i cer ya da Türkçe ara…" style="margin-bottom:10px">
+    <div class="chips" id="kFilters"></div>
+    <div class="card" id="kItems"></div>
+  </div>
+  <div id="kRef" style="display:none"><div id="kRefBox"></div></div>
+  <div id="kKel" style="display:none">
+    <div class="tip small" style="margin-bottom:10px">ÖSYM'nin 15 sınavında en çok geçen kelime ve fiiller. Sıra: önce kaç sınavda çıktığı, eşitlikte toplam geçiş. Üst sıralardakiler hemen her sınavda karşına çıkar.</div>
+    <div class="chips" id="kwSet"></div>
+    <div class="card" style="padding:10px 16px" id="kwProg"></div>
+    <input type="search" id="kwSearch" placeholder="Arapça ya da Türkçe ara…" style="margin-bottom:10px">
+    <div class="chips" id="kwFil"></div>
+    <div class="card" id="kwItems"></div>
+  </div>
+  <div id="kSik" style="display:none">
+    <div class="card small" style="margin-bottom:10px">Harf-i cer sorularında fiil soru kökünde, harf-i cer şıkta olur. Bu yüzden en iyi kanıt, edatların <b>şıkta</b> sütunudur: من, على, في, إلى, عن ve لـ / بـ en çok şık olarak çıkanlar. Fiil + harf-i cer çiftleri ise çoğunlukla parçaların içinde geçtiği için onlar için "metinde" sayısı daha anlamlıdır.</div>
+    <div class="chips" id="kSikType"></div>
+    <div class="card" id="kTop" style="padding:10px 16px"></div>
+    <div class="chips" id="kSikTag"></div>
+    <div class="chips" id="kSikSort"></div>
+    <div class="card" id="kSikList"></div>
+  </div>
+  <div class="card small muted">Kaynak: Enes Özdemir, <a href="https://drive.google.com/file/d/1HWG4GFZgQ6BvR6d5k3pvrFDUdv-V3AQG/view" target="_blank" rel="noopener">Arapça YDS (2018–2025) – ÖSYM'nin En Çok Kullandığı Kelime, Fiil, Edat ve Bağlaçlar</a>. Dosyanın kendi notuna göre 2022–2025 sınavları taranmış görüntü olduğu için OCR ile okunmuştur; sayılar yaklaşık. Kısaltmalar: "Şıkta" = 1–3 kelimelik kısa cevap şıklarında geçme sayısı.</div>
+</section>
+
+<!-- SORU BANKASI -->
+<section class="view" id="v-banka">
+  <h2>Seviyeli soru bankası</h2>
+  <p class="lead">A1'den C1'e her seviyede YDS tarzı özgün sorular. Her soruda cümle analizi, adım adım çözüm, şık şık değerlendirme ve "Bu şık neden doğru?" açıklaması var.</p>
+  <div class="chips" id="bLv"></div>
+  <div class="chips" id="bCat"></div>
+  <div id="bBox"></div>
+  <div class="card" id="genBox" style="display:none">
+    <h3>Claude'a yeni soru ürettir</h3>
+    <p class="small muted">Seçtiğin seviye ve türde, aynı açıklama biçiminde yeni sorular yazar. Sorular bu tarayıcıda saklanır, yanlışların deftere düşer.</p>
+    <div class="row">
+      <select id="gLv" style="flex:1 1 130px"></select>
+      <select id="gCat" style="flex:1 1 150px"></select>
+      <select id="gN" style="flex:0 1 110px"><option value="3">3 soru</option><option value="5" selected>5 soru</option><option value="8">8 soru</option></select>
+    </div>
+    <div class="row" style="margin-top:10px"><button class="btn" id="genBtn">Soru üret</button><button class="btn ghost small" id="genClear">Üretilenleri sil</button></div>
+    <div class="small muted" id="genMsg" style="margin-top:8px"></div>
+  </div>
+  <div class="card small muted" id="genOff">Yeni soru üretme özelliği bu görünümde kullanılamıyor. Sayfayı claude.ai'de açınca çalışır.</div>
+</section>
+
+<!-- ALIŞTIRMA -->
+<section class="view" id="v-alistirma">
+  <h2>Alıştırma</h2>
+  <p class="lead">YDS biçiminde özgün sorular. Yanlış yaptığın soru otomatik olarak yanlış defterine düşer.</p>
+  <div class="chips" id="qCats"></div>
+  <div id="qBox"></div>
+</section>
+
+<!-- OYUNLAR -->
+<section class="view" id="v-oyunlar">
+  <h2>Oyunlar</h2>
+  <p class="lead">Kelime ve cümle yapısını oyunla pekiştir. Oyunlar önce henüz "biliyorum" demediğin kelimeleri kullanır.</p>
+  <div id="gameBox"></div>
+</section>
+
+<!-- YANLIŞ -->
+<section class="view" id="v-yanlis">
+  <h2>Yanlış defteri</h2>
+  <p class="lead">Alıştırmadaki yanlışların buraya gelir. Çıkmış sorulardan ya da denemelerden kendi yanlışlarını da ekleyebilirsin.</p>
+  <div class="card">
+    <h3>Elle ekle</h3>
+    <div class="row" style="margin-bottom:8px">
+      <select id="wType" style="flex:1 1 160px"></select>
+      <input type="text" id="wSrc" placeholder="Nereden? (örn. 2024-YDS/1, s. 23)" style="flex:2 1 200px">
+    </div>
+    <textarea id="wText" class="ar" placeholder="Soru / cümle"></textarea>
+    <textarea id="wNote" placeholder="Neden yanlış yaptım? Doğrusu ne?" style="margin-top:8px"></textarea>
+    <div style="margin-top:8px"><button class="btn" id="wAdd">Deftere ekle</button></div>
+  </div>
+  <div class="chips" id="wFilter"></div>
+  <div id="wList"></div>
+</section>
+
+<!-- TAKİP -->
+<section class="view" id="v-takip">
+  <h2>Plan &amp; Takip</h2>
+  <div class="grid" id="statGrid"></div>
+  <div class="card">
+    <h3>Son 10 gün planı</h3>
+    <p class="small muted">Sınava kalan son günler için. Tamamladığın günü işaretle.</p>
+    <div id="planList"></div>
+  </div>
+  <div class="card">
+    <h3>Deneme kaydı</h3>
+    <p class="small muted">Her bölümde kaç doğru yaptığını gir; puanı ve en zayıf bölümü hesaplar.</p>
+    <div class="row" style="margin-bottom:8px">
+      <input type="date" id="dDate" style="flex:1 1 150px">
+      <input type="text" id="dName" placeholder="Deneme adı (örn. 2023-YDS/1)" style="flex:2 1 200px">
+    </div>
+    <div class="sec-inputs" id="dInputs"></div>
+    <div style="margin-top:10px"><button class="btn" id="dAdd">Kaydet</button></div>
+    <div id="dList" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h3>Yedek</h3>
+    <p class="small muted">İlerlemen bu tarayıcıda saklanır. Başka cihaza taşımak için yedeği kopyala, diğer cihazda yapıştırıp yükle.</p>
+    <div class="row"><button class="btn ghost" id="bCopy">Yedeği kopyala</button><button class="btn ghost" id="bLoadShow">Yedek yükle</button></div>
+    <div id="bLoadBox" style="display:none;margin-top:8px"><textarea id="bText" placeholder="Yedek metnini buraya yapıştır"></textarea><button class="btn small" id="bLoad" style="margin-top:6px">Yükle</button></div>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+(()=>{
+/* ---------- depolama ---------- */
+const KEY='yds-arapca-v1';
+let mem={};
+function load(){try{const s=localStorage.getItem(KEY);if(s)mem=JSON.parse(s)||{};}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){}}
+load();
+const st=(k,d)=>{if(mem[k]===undefined)mem[k]=d;return mem[k];};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),1800);}
+
+/* ---------- sınav yapısı (2024-YDS/1 Arapça kitapçığı) ---------- */
+const SECTIONS=[
+ {id:'kelime',r:'1–6',n:6,name:'Boşluk doldurma: sözcük'},
+ {id:'dilb',r:'7–16',n:10,name:'Boşluk doldurma: dil bilgisi / ifade'},
+ {id:'cloze',r:'17–26',n:10,name:'Parça içinde boşluk (cloze), iki parça'},
+ {id:'tamam',r:'27–36',n:10,name:'Cümle tamamlama'},
+ {id:'ceviri',r:'37–42',n:6,name:'Çeviri (Arapça→Türkçe, Türkçe→Arapça)'},
+ {id:'okuma',r:'43–62',n:20,name:'Okuma: beş parça, her biri 4 soru'},
+ {id:'diyalog',r:'63–67',n:5,name:'Diyalog tamamlama'},
+ {id:'yakin',r:'68–71',n:4,name:'Anlamca en yakın cümle'},
+ {id:'paragraf',r:'72–75',n:4,name:'Paragrafta boşluğa cümle getirme'},
+ {id:'ilgisiz',r:'76–80',n:5,name:'Anlam bütünlüğünü bozan cümle'}
+];
+$('#formatTable').innerHTML=SECTIONS.map(s=>`<tr><td class="num">${s.r}</td><td>${s.name}</td><td class="num">${s.n}</td></tr>`).join('');
+const TIME=[['Sözcük + dil bilgisi (1–16)','20 dk'],['Cloze (17–26)','15 dk'],['Cümle tamamlama (27–36)','20 dk'],['Çeviri (37–42)','15 dk'],['Okuma (43–62)','50 dk'],['Diyalog, anlamca yakın (63–71)','20 dk'],['Paragraf, ilgisiz cümle (72–80)','20 dk'],['Kontrol ve optik','20 dk']];
+$('#timeTable').innerHTML=TIME.map(t=>`<tr><td>${t[0]}</td><td class="num">${t[1]}</td></tr>`).join('');
+
+/* ---------- geri sayım ---------- */
+function cdMsg(d,name){
+  if(!d)return `<span class="muted">${name}: tarih gir</span>`;
+  const now=new Date();now.setHours(0,0,0,0);
+  const days=Math.round((new Date(d+'T00:00:00')-now)/864e5);
+  return days>0?`<span>${name}'e <b>${days}</b> gün kaldı</span>`:days===0?`<span><b>Bugün ${name} günü.</b> Başarılar!</span>`:`<span class="muted">${name} tarihi geçti, yenisini gir</span>`;
+}
+function renderCountdown(){
+  const d=st('examDate','2026-11-22'),y=st('yokdilDate','');
+  $('#countdown').innerHTML=`<div style="display:flex;flex-direction:column;gap:8px;width:100%"><div class="row" style="justify-content:space-between;gap:8px">${cdMsg(d,'YDS')}<label class="small muted">Tarih <input type="date" id="exDate" value="${esc(d)}"></label></div><div class="row" style="justify-content:space-between;gap:8px">${cdMsg(y,'YÖKDİL')}<label class="small muted">Tarih <input type="date" id="yokDate" value="${esc(y)}"></label></div></div>`;
+  $('#exDate').onchange=e=>{mem.examDate=e.target.value;save();renderCountdown();renderPlan();};
+  $('#yokDate').onchange=e=>{mem.yokdilDate=e.target.value;save();renderCountdown();};
+}
+
+/* ---------- kaynaklar ---------- */
+const OFFICIAL=[
+ {n:'2024-YDS/1 Arapça soru kitapçığı (ÖSYM)',u:'https://dokuman.osym.gov.tr/pdfdokuman/2024/YDS-1/arp_ydd24032024.pdf'},
+ {n:'2023-YDS/1 Arapça soru kitapçığı (ÖSYM)',u:'https://dokuman.osym.gov.tr/pdfdokuman/2023/YDS-1/arapca09042023.pdf'},
+ {n:'2016-YDS Sonbahar Arapça soru kitapçığı (ÖSYM)',u:'https://dokuman.osym.gov.tr/pdfdokuman/2016/YDSSONBAHAR/2016_YDS_Sonbahar_Arapca.pdf'}
+];
+const DRIVE_ROOT='https://drive.google.com/drive/folders/12ESaYJdv1y7-oEeibYfdzwcJ4YqdYjAa';
+const DRIVE=[
+ ['Kelimeler',[
+  ['Arapça YDS (2018–2025) – ÖSYM\'nin En Çok Kullandığı Kelime, Fiil, Edat ve Bağlaç','1HWG4GFZgQ6BvR6d5k3pvrFDUdv-V3AQG'],
+  ['YDS Arapça Kelimeler 2015-2017','1WINxcQhaKbV2ZdTuIBL8Au1nvxC1RXyh'],
+  ['YDS Arapça 2015-2017 Kelimeler','1DUDo91vkoJwYljjEzFO8VyctZnejG8vi'],
+  ['YDS Arapça 2018 İlkbahar Kelimeler','1U4P-lwmHUdJQplu13VsN4OfUoAKyXMh-'],
+  ['YDS Arapça 2018 Sonbahar Kelimeler','1CGkXw2wDd8K04X-CL0C6Zm2iyrMeqwB5'],
+  ['YDS Arapça 2021 İlkbahar Kelimeler','1Xx-IXHMnqBUw5tQalAqvQWWZDVLd2xej'],
+  ['Yıllara Göre YDS AR Kelimeler (117 s.)','1Q859J9ObXOK4BPuoPyWgLCepUvhxHl4S'],
+  ['YDS AR Kelimeler (67 s.)','1fqxj6nFK_WQR90eswYRLnTrk6pmtTSBc'],
+  ['YDS AR Türkçe Açıklamalı 1616 Kelime – Mehmet Hayri Acat (67 s.)','12ljtgDV7FfW_rZJddq9K3W0cmFthGJWW'],
+  ['2 Bin Arapça YDS-YÖKDİL Kelimesi','18tcFLeAqlPtZnmS6okiWeriCAHmu3YYE'],
+  ['Eş Anlamlı Kelime Tabloları (11 s.)','1-K0fjFetnZfhU6E_kJmjgTBMYBxsYHPd'],
+  ['Basın Dili Kelime ve Kavramlar (16 s.)','1eeMORE9cQLjU4UN0mEaD0ZIiEjHP3QaK'],
+  ['Arapça-Türkçe Basın Medya Kelime ve Terimleri Sözlüğü (4500 kelime)','1jzh4SVDs-PZumKUi1tLPTITaFr-Qssaz']]],
+ ['YDS Arapça Notlar',[
+  ['Edat, Bağlaç, Kalıp İfade','1xHdYaBrA1cIRiJJRFF55-J2t1bWakT5c'],
+  ['İsm-i Mevsul','18R1PoiHXP3Ox6zXf0wsDA5LLtuPJmh5M']]],
+ ['Sorular',[
+  ['Soru Çözümü (YDS/YÖKDİL Yapay Zekâ Destekli Sorular)','17a61n9lxB7EY9SSVdHkjgtFbYIG8jQwl'],
+  ['YDS Arapça için Yapay Zekâ Dersi','1riCB1pZw6BLf56hXS7pjiSkwCkhpOCxW']]],
+ ['Gramer',[
+  ['1. Emsile Ders Notu','182omq8iLIJGt-WlKXPr2OwlAnjLWOYnR'],
+  ['2. Bina Ders Notu','1Uw0i9elBSlZnD41McoSSurTGZh5GtZDD'],
+  ['3. Maksud Ders Notu','1JebAM2hcAAwKlXMk6j6QaJCX_35wcQh4'],
+  ['4. Avamil Ders Notu','1k-1JkEvcZjFDiSiKZt1nJyLbPsKySuBq'],
+  ['Avamil Tablosu Tamamı','1ejbe2feVXcmiasrMhrGfCf-fVJgNG9vy'],
+  ['Nahvî Özet Tablo (1 s.)','1jr_cxcloiYdXs9clyTnVYC0Msitji11P'],
+  ['Sarfî Özet Tablo (1 s.)','1nRXuqho_J_LyOwPob7CjtODa20D61Kq7'],
+  ['Şematik Sarf İlmi','1n_cXpkhegqLoamSLar7Tai2O0CNnEPDe'],
+  ['Sarf Bina Kitabı 35 Bab – Mikail Yetkin','1CKYhmsndLKm26na0sB3PEV2kYfWi6Ho4'],
+  ['Belâgat İlmi (1 s.)','1IJAolSWRaE0_2VQHtX8WRX7feRnso6Df'],
+  ['Klasik Usul (medrese usulü Arapça, avâmile kadar)','1PADPdyWGgeCPnVuITW6yiyUCM2ZsLoPj']]],
+ ['Okuma: Modern Metinler',[
+  ['Modern Metinler – Enes Özdemir','1U0wbkV54sjTTpDgy1z_qJk3hlwOxHJyN'],
+  ['Arapça Modern Metinler 1','1RTuxuQK2Pe2FH3826UepezLKXJVdrIFp'],
+  ['İngilizce Modern Metinler 1','1VO6JwjC0TAIbYD154Q43mbYrA4zYUp9r']]]
+];
+const YANDEX=[
+ ['Kelimeler',[
+  ['YDS AR. Kelimeler (67 s.)','https://yadi.sk/i/OsX-AnzgB0oX7w'],
+  ['YDS AR. Kelimeler (117 s.)','https://yadi.sk/i/2LE7lVErPdMl5A'],
+  ['Arapça-Türkçe Kelimeler (42 s.)','https://yadi.sk/i/Zwa75dnd5Hr5fA'],
+  ['Türkçe-Arapça Kelimeler (32 s.)','https://yadi.sk/i/3yl6ExRJv8lvmg'],
+  ['Harf-i Cerli Fiiller (406 s.)','https://yadi.sk/i/H95HemvbHPFP_w']]],
+ ['Soru bankaları',[
+  ['YDS AR. Soru Bankası (128 s.)','https://yadi.sk/i/t1Sn9ki9wjKRiA'],
+  ['YDS AR. Soru Bankası (619 s.)','https://yadi.sk/i/Yc3GIvVjLddhZQ'],
+  ['Deneme YDS soru-cevap','https://yadi.sk/i/flVnZl6QVw2fyw']]],
+ ['Basın Arapçası',[
+  ['Basın Arapçası (370 s.)','https://yadi.sk/i/gpN8YClUsj58WQ'],
+  ['Basın Arapçası – Dağarcık (189 s.)','https://yadi.sk/i/dOWx_T4QUV4juQ'],
+  ['Arap Basını (14 s.)','https://yadi.sk/i/np-q_QaMcXfjGw'],
+  ['Basın-Medya Kelimeleri ve Terimleri','https://yadi.sk/i/UjqGqmoaks7IAQ'],
+  ['Arapça Basın Sözlüğü (4500 kelime)','https://yadi.sk/i/icvLo3TjVWJ7FQ'],
+  ['Arapça Medya Dili (24 s., .doc)','https://yadi.sk/i/jeWocTNC-28IUA']]]
+];
+function renderSources(){
+  const mine=st('sources',[]);
+  const li=(s,i,own)=>`<div class="vocab"><div>${s.u?`<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.n)}</a>`:esc(s.n)} ${own?'<span class="pill gold">benim</span>':'<span class="pill">resmî</span>'}</div>${own?`<button class="mark" data-del="${i}">Sil</button>`:''}</div>`;
+  const drv=DRIVE.map(([g,L])=>`<details class="topic" style="margin:8px 0 0;box-shadow:none"><summary><span>${esc(g)} <span class="muted small">(${L.length})</span></span></summary><div class="body">${L.map(([n,id])=>`<div class="vocab"><a href="https://drive.google.com/file/d/${id}/view" target="_blank" rel="noopener">${esc(n)}</a></div>`).join('')}</div></details>`).join('');
+  $('#sources').innerHTML=OFFICIAL.map((s,i)=>li(s,i,false)).join('')+mine.map((s,i)=>li(s,i,true)).join('')+`<h3 style="margin:14px 0 2px">Yandex Disk arşivi <span class="pill gold">senin eklediğin</span></h3>`+YANDEX.map(([g,L])=>`<details class="topic" style="margin:8px 0 0;box-shadow:none"><summary><span>${esc(g)} <span class="muted small">(${L.length})</span></span></summary><div class="body">${L.map(([n,u])=>`<div class="vocab"><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></div>`).join('')}</div></details>`).join('')+`<h3 style="margin:14px 0 2px">Enes Özdemir arşivi <span class="pill gold">senin eklediğin</span></h3><div class="small"><a href="${DRIVE_ROOT}" target="_blank" rel="noopener">Klasörü Drive'da aç</a></div>`+drv;
+  $('#sources').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{mine.splice(+b.dataset.del,1);save();renderSources();});
+}
+$('#srcAdd').onclick=()=>{const n=$('#srcName').value.trim();if(!n)return;let u=$('#srcUrl').value.trim();if(u&&!/^https?:\/\//.test(u))u='https://'+u;st('sources',[]).push({n,u});save();$('#srcName').value='';$('#srcUrl').value='';renderSources();};
+
+/* ---------- kelime ---------- */
+const VCATS={rabit:'Bağlaç & rabıtlar',fiil:'Harf-i cerli fiiller',akad:'Akademik kelimeler',ifade:'Kalıp ifadeler'};
+const V=[
+// rabıtlar
+['rabit','لكنّ / لكنْ','ama, fakat','لكنّ‌ ismi nasb eder; لكنْ amel etmez'],
+['rabit','بل','bilakis, hatta','olumsuzdan sonra düzeltme: ما جاء زيدٌ بل عمرٌو'],
+['rabit','إلّا أنّ','ancak, şu var ki','زيادة السكان سريعة، إلّا أنّ الموارد محدودة'],
+['rabit','رغم أنّ / على الرغم من','-e rağmen','رغم صعوبة الامتحان نجح الجميع'],
+['rabit','مع أنّ','-diği hâlde','مع أنّه غنيّ يعيش ببساطة'],
+['rabit','بينما','iken, oysa','ينام الأطفال بينما يعمل الأب'],
+['rabit','في حين أنّ','oysa, -iken','زادت الصادرات في حين أنّ الواردات انخفضت'],
+['rabit','إذ','çünkü, zira; o sırada','تأخّر القطار؛ إذ كانت السكّة مغلقة'],
+['rabit','حيث','-dığı yerde; çünkü','وصلنا إلى المدينة حيث وُلد الشاعر'],
+['rabit','لذلك / لذا','bu yüzden','كان الطريق مزدحمًا، لذلك تأخّرتُ'],
+['rabit','بالتالي','dolayısıyla','قلّت الأمطار، وبالتالي تراجع المحصول'],
+['rabit','فضلًا عن','-in yanı sıra, bir yana','فضلًا عن الكتابة يُتقن الترجمة'],
+['rabit','علاوةً على ذلك','buna ek olarak','علاوةً على ذلك، أُضيفت مادّة جديدة'],
+['rabit','أمّا … فـ','…a gelince','أمّا أخي فيحبّ الرياضة'],
+['rabit','كلّما … (فعل ماضٍ)','her ne zaman …-dıkça','كلّما قرأتُ ازددتُ علمًا'],
+['rabit','لمّا + ماضٍ','-dığı zaman','لمّا وصلتُ كان الدرس قد بدأ'],
+['rabit','لمّا + مضارع مجزوم','henüz … -madı','لمّا يصلِ القطارُ'],
+['rabit','ما دام','-dığı sürece','لن تتقدّم ما دمتَ كسولًا'],
+['rabit','ما لم','-madıkça','لن تنجح ما لم تجتهد'],
+['rabit','لكي / كي + منصوب','-mek için','جئتُ لكي أتعلّم'],
+['rabit','لئلّا','-memek için','أسرعتُ لئلّا يفوتني القطار'],
+['rabit','لولا','… olmasaydı','لولا المطرُ لخرجنا'],
+['rabit','لو … لـ','eğer -seydi, -ardı','لو درستَ لنجحتَ'],
+['rabit','إذا / إن','eğer','إن تدرسْ تنجحْ'],
+['rabit','حتّى','-e kadar; hatta; -sin diye','انتظرتُه حتّى جاء'],
+['rabit','بعد أن / قبل أن','-dıktan sonra / -meden önce','قبل أن تتكلّم فكّر'],
+['rabit','كما أنّ','ayrıca, keza','كما أنّ الموقع مناسب'],
+['rabit','أي','yani','الضاد، أي اللغة العربية'],
+// fiiller
+['fiil','اعتمد على','-e dayanmak','تعتمد الدراسة على بيانات حديثة'],
+['fiil','أدّى إلى','-e yol açmak','أدّى الجفاف إلى المجاعة'],
+['fiil','أسفر عن','ile sonuçlanmak','أسفر الحادث عن إصابات'],
+['fiil','نجم عن / نتج عن','-den kaynaklanmak','نجم التلوّث عن المصانع'],
+['fiil','ترتّب على','-e bağlı olarak doğmak','ما يترتّب على القرار من آثار'],
+['fiil','تمكّن من','-meyi başarmak','تمكّن العلماء من عزل الفيروس'],
+['fiil','حصل على','elde etmek','حصل على منحة دراسية'],
+['fiil','استفاد من','-den yararlanmak','استفاد الطلاب من المكتبة'],
+['fiil','ساهم في / أسهم في','-e katkıda bulunmak','ساهم في تطوير اللغة'],
+['fiil','اشتمل على / انطوى على','içermek','اشتمل الكتاب على عشرة فصول'],
+['fiil','تعرّض لـ','maruz kalmak','تعرّضت المدينة لزلزال'],
+['fiil','اهتمّ بـ','ilgilenmek','يهتمّ بالأدب الحديث'],
+['fiil','قام بـ','yapmak, gerçekleştirmek','قام الفريق بدراسة ميدانية'],
+['fiil','اعترف بـ','kabul etmek, tanımak','اعترف بخطئه'],
+['fiil','تخلّى عن','vazgeçmek, bırakmak','تخلّى عن عاداته القديمة'],
+['fiil','رغب في / رغب عن','istemek / yüz çevirmek','harf-i cer anlamı tersine çevirir!'],
+['fiil','انتهى إلى','-e varmak (sonuca)','انتهى البحث إلى نتائج مهمّة'],
+['fiil','عمد إلى','-e girişmek, kasten yapmak','عمد إلى تغيير الخطّة'],
+['fiil','حثّ على','teşvik etmek','حثّ الطلاب على القراءة'],
+['fiil','حذّر من','uyarmak','حذّر الأطبّاء من التدخين'],
+['fiil','تميّز بـ','ile öne çıkmak','تميّز أسلوبه بالإيجاز'],
+['fiil','تأثّر بـ / أثّر في','etkilenmek / etkilemek','تأثّر الشاعر بالمتنبّي'],
+['fiil','انتمى إلى','mensup olmak','ينتمي إلى أسرة عريقة'],
+['fiil','تطلّع إلى','göz dikmek, ummak','نتطلّع إلى مستقبل أفضل'],
+// akademik
+['akad','ازدهار','gelişme, refah','ازدهار التجارة في العصر العبّاسيّ'],
+['akad','انحسار / تراجع','gerileme','تراجع معدّل البطالة'],
+['akad','تفاقم','kötüleşme, büyüme (sorun)','تفاقمت الأزمة الاقتصادية'],
+['akad','تراكم','birikme','تراكم الديون'],
+['akad','ركود','durgunluk','ركود الأسواق'],
+['akad','انتشار','yayılma','انتشار الوباء'],
+['akad','ملحوظ','kayda değer','ارتفاع ملحوظ في الأسعار'],
+['akad','حاسم','belirleyici, kesin','دور حاسم'],
+['akad','جوهريّ','temel, esaslı','فرق جوهريّ'],
+['akad','مستدام','sürdürülebilir','التنمية المستدامة'],
+['akad','موارد','kaynaklar','الموارد الطبيعية'],
+['akad','ظاهرة','olgu, fenomen','ظاهرة الاحتباس الحراريّ'],
+['akad','عيّنة','örneklem','عيّنة من ألف شخص'],
+['akad','نسبة / معدّل','oran','نسبة الأمّيّة'],
+['akad','إحصائيّات','istatistikler','تشير الإحصائيّات إلى…'],
+['akad','تبنّى','benimsemek','تبنّت الحكومة سياسة جديدة'],
+['akad','استيعاب','kavrama; kapsama','القدرة على الاستيعاب'],
+['akad','حيويّ','hayati','دور حيويّ'],
+['akad','مزمن','kronik','مرض مزمن'],
+['akad','وقاية','korunma','الوقاية خير من العلاج'],
+['akad','مناخ','iklim','التغيّر المناخيّ'],
+['akad','تلوّث','kirlilik','تلوّث الهواء'],
+['akad','انقراض','nesli tükenme','الأنواع المهدّدة بالانقراض'],
+['akad','اكتشاف / اختراع','keşif / icat','اكتشاف البنسلين'],
+['akad','حضارة','medeniyet','الحضارة الأندلسية'],
+['akad','آثار','eserler; kalıntılar; etkiler','آثار الحرب'],
+['akad','مخطوطة','yazma eser','مخطوطة نادرة'],
+['akad','هجرة','göç','هجرة العقول'],
+// ifadeler
+['ifade','يُعدّ / يُعتبر … من','… arasında sayılır','يُعدّ المتنبّي من أعظم الشعراء'],
+['ifade','تشير الدراسات إلى أنّ','araştırmalar …-e işaret ediyor','—'],
+['ifade','لا يزال / ما زال','hâlâ','لا يزال البحث مستمرًّا'],
+['ifade','لم يعد','artık … değil','لم يعد الأمر سهلًا'],
+['ifade','على حدّ سواء','eşit derecede','الكبار والصغار على حدّ سواء'],
+['ifade','بصفة عامّة','genel olarak','—'],
+['ifade','من ناحية … ومن ناحية أخرى','bir yandan … öte yandan','—'],
+['ifade','بفضل','sayesinde','بفضل التكنولوجيا'],
+['ifade','بسبب / نتيجةً لـ','yüzünden / sonucu olarak','نتيجةً للحرب'],
+['ifade','بدلًا من','yerine','بدلًا من السيّارة'],
+['ifade','وفقًا لـ','-e göre','وفقًا للتقرير'],
+['ifade','في ظلّ','… gölgesinde, ortamında','في ظلّ الأزمة'],
+['ifade','لا بدّ من','… şarttır','لا بدّ من الصبر'],
+['ifade','ليس … فحسب بل','sadece … değil, aynı zamanda','ليس مفيدًا فحسب بل ممتعًا أيضًا'],
+['ifade','سواء أ… أم','ister … ister','سواء أكان غنيًّا أم فقيرًا']
+];
+V.forEach((v,i)=>v.id='v'+i);
+let vCat='all',vFlash=false,fQueue=[],fIdx=0,fShow=false;
+const known=()=>st('known',{});
+function vFiltered(){const q=$('#vSearch').value.trim().toLowerCase();return V.filter(v=>(vCat==='all'||v[0]===vCat)&&(!q||(v[1]+' '+v[2]+' '+v[3]).toLowerCase().includes(q)));}
+function renderVCats(){$('#vCats').innerHTML=[['all','Hepsi'],...Object.entries(VCATS)].map(([k,n])=>`<button class="chip ${vCat===k?'on':''}" data-c="${k}">${n}</button>`).join('');$('#vCats').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{vCat=b.dataset.c;renderVCats();renderVocab();});}
+function renderVProgress(){const k=known();const list=V.filter(v=>vCat==='all'||v[0]===vCat);const n=list.filter(v=>k[v.id]).length;const p=list.length?Math.round(n/list.length*100):0;$('#vProgress').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${list.length}</span><span class="small muted">%${p}</span></div><div class="bar" style="margin-top:6px"><i style="width:${p}%"></i></div>`;}
+function renderVocab(){
+  renderVProgress();
+  if(vFlash){startFlash();return;}
+  const k=known();const list=vFiltered();
+  $('#vList').innerHTML=list.length?list.map(v=>`<div class="vocab"><div><div class="tr">${esc(v[2])}</div>${v[3]&&v[3]!=='—'?`<div class="ex ${/[؀-ۿ]/.test(v[3])&&!/[a-zğüşıöç]/i.test(v[3])?'ar':''}" style="${/[؀-ۿ]/.test(v[3])&&!/[a-zğüşıöç]/i.test(v[3])?'font-size:1rem;text-align:left':''}">${esc(v[3])}</div>`:''}<button class="mark ${k[v.id]?'known':''}" data-k="${v.id}" style="margin-top:4px">${k[v.id]?'✓ Biliyorum':'Biliyorum'}</button></div><div class="ar">${esc(v[1])}</div></div>`).join(''):'<div class="empty">Sonuç yok.</div>';
+  $('#vList').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{const kk=known();kk[b.dataset.k]=!kk[b.dataset.k];if(!kk[b.dataset.k])delete kk[b.dataset.k];save();renderVocab();});
+}
+function startFlash(){const k=known();fQueue=vFiltered().filter(v=>!k[v.id]).sort(()=>Math.random()-.5);fIdx=0;fShow=false;drawFlash();}
+function drawFlash(){
+  const c=$('#flashCard');
+  if(!fQueue.length||fIdx>=fQueue.length){c.innerHTML=`<div class="empty">Bu gruptaki tüm kartları bitirdin. 🎉<br><span class="small">Liste moduna dönüp işaretleri sıfırlayabilirsin.</span></div>`;return;}
+  const v=fQueue[fIdx];
+  c.innerHTML=`<div class="small muted">${fIdx+1} / ${fQueue.length} · ${VCATS[v[0]]}</div><div class="ar">${esc(v[1])}</div>${fShow?`<div class="back"><b style="color:var(--ink)">${esc(v[2])}</b><br>${v[3]!=='—'?esc(v[3]):''}</div>`:'<div class="back small">Anlamı görmek için dokun</div>'}`;
+}
+$('#flashCard').onclick=()=>{fShow=!fShow;drawFlash();};
+$('#fKnow').onclick=()=>{const v=fQueue[fIdx];if(!v)return;known()[v.id]=true;save();fIdx++;fShow=false;renderVProgress();drawFlash();};
+$('#fAgain').onclick=()=>{const v=fQueue[fIdx];if(!v)return;fQueue.push(v);fIdx++;fShow=false;drawFlash();};
+$('#vMode').onclick=()=>{vFlash=!vFlash;$('#vMode').textContent=vFlash?'Liste moduna geç':'Kart moduna geç';$('#vList').style.display=vFlash?'none':'';$('#vFlash').style.display=vFlash?'':'none';renderVocab();};
+$('#vSearch').oninput=renderVocab;
+
+/* ---------- dil bilgisi ---------- */
+const G=[
+ {t:'إنّ وأخواتها',tr:'İnne ve kardeşleri',rule:'إنّ، أنّ، كأنّ، لكنّ، ليت، لعلّ isim cümlesine girer: mübtedayı nasb eder (ismi), haberi merfû bırakır (haberi).',ex:['إنّ العلمَ نورٌ','كأنّ القمرَ مصباحٌ','إنّ المعلّمين مخلصون'],tip:'Boşluk ismin yerindeyse mansub şekli ara: ـَ / ـين / ـَين. Haber yerindeyse merfû: ـٌ / ـون / ـان. إنّ cümle başında, أنّ fiil ya da harf-i cerden sonra (علمتُ أنّ… / بأنّ…).'},
+ {t:'كان وأخواتها',tr:'Kâne ve kardeşleri',rule:'كان، صار، أصبح، أمسى، ظلّ، بات، ليس، ما زال، ما دام: ismi merfû, haberi mansub yapar.',ex:['كان الجوُّ جميلًا','أصبح الطالبُ مجتهدًا','ليس الأمرُ سهلًا'],tip:'ما زال = hâlâ; ليس yalnız geniş zaman olumsuzu verir. Haber boşluğunda tenvinli fetha (ـًا) ya da ـين arayın.'},
+ {t:'المضارع: النصب والجزم',tr:'Muzarinin nasb ve cezmi',rule:'Nasb: أن، لن، كي، لكي، حتّى، لِـ (ta‘lîl), إذن. Cezm: لم، لمّا، لا (nehiy), لام الأمر ve şart edatları (إن، مَن، ما، مهما…).',ex:['لن يسافرَ','لم يسافرْ','يجب أن يدرسوا','لم يدرسوا'],tip:'Elif-i fârika ile biten ـوا şekli hem nasb hem cezmde aynıdır; şıkta يدرسون varsa edata bakın. لم + muzari = geçmiş olumsuz, لن + muzari = gelecek olumsuz.'},
+ {t:'أسلوب الشرط',tr:'Şart cümlesi',rule:'إن/مَن/ما/مهما/أينما/متى iki muzariyi cezmeder. إذا genellikle mazi ile, cezmetmez. لو imkânsız/varsayımsal şart: cevabı çoğunlukla لـ ile. لولا + isim: “… olmasaydı”.',ex:['مَن يجتهدْ ينجحْ','إذا جاء الربيعُ أزهرت الأشجار','لو درستَ لنجحتَ','لولا الأملُ لما عشنا'],tip:'Cevap cümlesi isim cümlesi, emir, لن/قد/سوف ile başlıyorsa başına فـ gelir: إن تجتهدْ فأنت ناجح.'},
+ {t:'الاسم الموصول',tr:'İsm-i mevsul',rule:'الذي / التي / اللذان-اللذين / اللتان-اللتين / الذين / اللاتي-اللواتي; genel: مَن (akıllı), ما (akılsız).',ex:['الطالبةُ التي نجحت','الطلابُ الذين حضروا','رأيتُ اللذَين فازا'],tip:'Mevsul, öncesindeki marife isme cinsiyet-sayıda uyar. Önceki isim nekreyse mevsul gelmez: رأيتُ رجلًا يقرأ (sıfat cümlesi).'},
+ {t:'الحال',tr:'Hâl',rule:'Fiilin gerçekleştiği andaki durumu bildirir; çoğunlukla nekre ve mansub. Cümle de hâl olabilir (و + isim cümlesi).',ex:['جاء الطالبُ مسرعًا','دخل المعلّمُ وهو يبتسم'],tip:'“nasıl?” sorusuna cevap veren tenvinli nekre şık genellikle hâldir.'},
+ {t:'المفعول المطلق ولأجله',tr:'Mef‘ûl-i mutlak ve mef‘ûl-i leh',rule:'Mutlak: fiilin kendi masdarı (pekiştirme/tür/sayı). Leh: sebep/amaç bildiren mansub masdar.',ex:['ارتفعت الأسعارُ ارتفاعًا كبيرًا','سافرتُ طلبًا للعلم','وقف الناسُ احترامًا للمعلّم'],tip:'Boşluğun hemen önünde masdar varsa ardından gelen sıfat ona uyar: ارتفاعًا ملحوظًا. “Niçin?” → mef‘ûl-i leh.'},
+ {t:'التمييز',tr:'Temyiz',rule:'Belirsizliği gideren mansub nekre: ölçü, sayı, ism-i tafdil ve تعجّب sonrası.',ex:['اشتريتُ رطلًا عسلًا','هو أكثرُ منك علمًا','ما أجملَه خُلُقًا'],tip:'أكثر / أقلّ / أشدّ + mansub nekre kalıbı çok sık çıkar: أكثرُ انتشارًا.'},
+ {t:'العدد والمعدود',tr:'Sayı ve sayılan',rule:'3–10: sayı, sayılanın tekilinin cinsiyetine zıt; sayılan çoğul ve mecrur. 11–99: sayılan tekil ve mansub. 100, 1000: tekil ve mecrur.',ex:['ثلاثةُ كتبٍ','ثلاثُ طالباتٍ','خمسةَ عشرَ طالبًا','مئةُ كتابٍ'],tip:'Cinsiyete tekilden bakılır: كتاب eril → ثلاثة; طالبة dişil → ثلاث.'},
+ {t:'الممنوع من الصرف',tr:'Gayr-i munsarif',rule:'Tenvin almaz, cerde fetha alır (marife ya da muzâf değilse). Sık görülenler: مفاعل/مفاعيل vezni, أفعل sıfatlar, ـاء ile biten dişiller, yabancı/dişil özel isimler.',ex:['مررتُ بمساجدَ كثيرةٍ','صلّيتُ في المساجدِ','زرتُ مكّةَ'],tip:'مساجد، مدارس، أحمر، صحراء، إبراهيم… şıklarda tenvinli hâli görürsen ele.'},
+ {t:'الاستثناء ولا النافية للجنس',tr:'İstisna ve lâ-yı nâfiye',rule:'إلّا sonrası müspet tam cümlede mansub; olumsuz eksik cümlede (hasr) amil neyse o. غير/سوى sonrası isim mecrur. لا النافية للجنس ismini tenvinsiz fetha ile nasb eder.',ex:['حضر الطلابُ إلّا زيدًا','ما حضر إلّا زيدٌ','لا شكَّ في ذلك'],tip:'ما … إلّا = “yalnızca”: ما نجح إلّا المجتهدون → Yalnızca çalışkanlar başardı. Çeviri sorularında çok çıkar.'},
+ {t:'المبنيّ للمجهول',tr:'Meçhul fiil',rule:'Mazi: ilk harf ötre, sondan önceki esre (كُتِبَ). Muzari: ilk harf ötre, sondan önceki fetha (يُكتَبُ). Fail düşer, meful nâib-i fail olur ve merfû olur.',ex:['أُلِّفَ الكتابُ في القرن الرابع','يُعقَدُ المؤتمرُ سنويًّا'],tip:'Çeviride “-ıldı / -ılır” kalıbı; şıklarda etken/edilgen karışıklığına dikkat.'},
+ {t:'أوزان المزيد ومعانيها',tr:'Mezîd vezinler',rule:'فعّل: geçişli kılma/çokluk; أفعل: geçişli kılma; تفاعل: karşılıklılık; انفعل: dönüşlülük/edilgenlik; افتعل: dönüşlülük; استفعل: isteme/sayma.',ex:['علّم ← تعلّم','كسر ← انكسر','غفر ← استغفر','عاون ← تعاون'],tip:'Kökü bildiğin bilinmeyen bir kelimede vezinden anlam çıkarabilirsin: تعاون → yardımlaşma.'}
+];
+$('#gList').innerHTML=G.map(g=>`<details class="topic"><summary><span><span class="ar" style="font-size:1.15rem">${g.t}</span> <span class="muted">· ${g.tr}</span></span></summary><div class="body"><p>${esc(g.rule)}</p><div class="ex-box">${g.ex.map(e=>`<div class="ar">${esc(e)}</div>`).join('')}</div><div class="tip">${esc(g.tip)}</div></div></details>`).join('');
+
+/* ---------- strateji ---------- */
+const S=[
+ {r:'1–6',t:'Sözcük boşluğu',p:['Önce cümlenin konusunu ve boşluğun öncesi/sonrasındaki kelimeyle uyumu oku (masdar + sıfat, fiil + harf-i cer).','Şıklar genellikle aynı vezinde gelir (متفاقم، متراكم…). Kökün anlamını düşün, vezin yalnız anlamın yönünü verir.','Olumlu/olumsuz ton: cümle bir düşüşten mi artıştan mı söz ediyor? Zıt anlamlı şıkları ele.']},
+ {r:'7–16',t:'Dil bilgisi / ifade boşluğu',p:['Boşluktan sonra gelen kelimenin i‘rabına bak: mansub isim mi, mecrur mu, muzari mi?','Boşluk iki cümleyi bağlıyorsa iki cümle arasındaki ilişkiyi bul: zıtlık (لكنّ، بينما)، sebep (لأنّ، إذ)، sonuç (لذلك)، amaç (لكي).','Harf-i cerli fiil soruları: şıklarda harf değişiyorsa fiilin hangi harfle geldiğini hatırla (رغب في ≠ رغب عن).']},
+ {r:'17–26',t:'Cloze (parça içinde boşluk)',p:['Önce parçanın tamamını hızlıca oku; boşlukları bağlamla doldur.','Her boşlukta bir önceki ve sonraki cümleyi birlikte düşün; rabıt soruları paragraf akışına bağlıdır.','Dil bilgisi boşluklarında i‘rab ipucu en hızlı eleme yoludur.']},
+ {r:'27–36',t:'Cümle tamamlama',p:['Verilen yarım cümledeki bağlacı işaretle: رغم → zıtlık, لأنّ → sebep, كلّما → orantı, لو → varsayım.','Şıklarda konusu farklı olanları hemen ele; sonra mantık ilişkisine uyanı seç.','Zaman uyumu: verilen kısım mazi ise sonuç kısmı da genellikle mazi gelir.']},
+ {r:'37–42',t:'Çeviri',p:['Arapça cümlenin ana fiilini, olumsuzluğunu ve zamanını belirle; şıkları bu üçüyle ele.','Hasr (ما … إلّا / إنّما), karşılaştırma (أكثر … من) ve şart yapısı tam karşılanmalı.','Fazladan bilgi ekleyen ya da bir öğeyi atlayan şık yanlıştır, Türkçesi ne kadar güzel olursa olsun.']},
+ {r:'43–62',t:'Okuma parçaları',p:['Önce soruları oku, sonra parçayı; aradığın bilgiyi bilerek okursun.','Ana fikir soruları için ilk ve son cümle; ayrıntı soruları için soru kökündeki anahtar kelimeyi parçada tara.','Parçada yazmayanı çıkarım diye seçme; “kesin olarak söylenebilir” sorularında en dar ifadeyi seç.','Beş parçanın her birine yaklaşık 10 dakika ayır.']},
+ {r:'63–67',t:'Diyalog tamamlama',p:['Boşluktan SONRAKİ replik en güçlü ipucudur: cevap ona zemin hazırlamalı.','Soru sorulmuşsa cevap o soruya uymalı; şıkta yeni konu açan cevap genellikle yanlıştır.','Kalıp ifadeleri bil: لا بأس، على الرحب والسعة، بكلّ سرور، يا ليت.']},
+ {r:'68–71',t:'Anlamca en yakın cümle',p:['Anlamı koruyup sözcükleri değiştiren şıkkı ara: olumsuz + olumsuz = olumlu (لم يغادر أحدٌ = بقي الجميع).','Niceleyicilere dikkat: كلّ، بعض، معظم، لا أحد.','Sebep-sonuç yönünü ters çeviren şıklar tuzaktır.']},
+ {r:'72–75',t:'Paragrafa cümle getirme',p:['Boşluktan sonraki cümle bir zamir ya da bağlaçla başlıyorsa (ولذلك، وهذا، كما) boşluğa onu karşılayan cümle gelmeli.','Seçtiğin cümleyi yerine koyup paragrafı baştan sona bir kez daha oku.','Konu doğru ama yön yanlış (paragrafın tezinin tersi) olan şıklara dikkat.']},
+ {r:'76–80',t:'Anlam bütünlüğünü bozan cümle',p:['İlk cümle konuyu verir; her cümleyi bu konuyla karşılaştır.','Doğru bilgi veren ama başka konuya geçen cümle cevaptır. “Doğru mu?” değil, “bu paragrafa ait mi?” diye sor.','Zamir ve bağlaç zincirini takip et: bir cümle çıkınca zincir kopmuyorsa o cümle aday.']}
+];
+$('#sList').innerHTML=S.map(s=>`<details class="topic"><summary><span><span class="pill">${s.r}</span> ${esc(s.t)}</span></summary><div class="body"><ul style="margin:0;padding-inline-start:20px">${s.p.map(x=>`<li style="margin-bottom:6px">${esc(x)}</li>`).join('')}</ul></div></details>`).join('');
+
+/* ---------- alıştırma ---------- */
+const QT={kelime:'Sözcük',dilb:'Dil bilgisi',tamam:'Cümle tamamlama',ceviri:'Çeviri',diyalog:'Diyalog',yakin:'Anlamca yakın',paragraf:'Paragraf tamamlama',ilgisiz:'İlgisiz cümle'};
+const Q=[
+ {c:'kelime',s:'ارتفعت أسعارُ النفط ارتفاعًا ---- بعد إغلاق الممرّات البحرية.',o:['ملحوظًا','متقاعدًا','مسترخيًا','متفارقًا','مُهمَلًا'],a:0,e:'Masdar (ارتفاعًا) sonrası onu niteleyen sıfat gelir; “kayda değer bir artış” anlamını yalnız ملحوظًا verir.'},
+ {c:'kelime',s:'أدّى ارتفاعُ درجات الحرارة إلى ---- الأنهار الجليدية.',o:['ذوبان','تجميد','ازدهار','انتصار','تراكم'],a:0,e:'Sıcaklık artışı buzulların erimesine (ذوبان) yol açar. تراكم ve تجميد anlamca ters yöndedir.'},
+ {c:'kelime',s:'لم يتمكّن الباحثون ---- الوصول إلى نتائج حاسمة.',o:['في','من','على','عن','إلى'],a:1,e:'تمكّن fiili من harf-i cerri ile gelir: تمكّن من = -meyi başarmak.'},
+ {c:'dilb',s:'إنّ ---- مخلصون في عملهم.',o:['المعلّمون','المعلّمين','المعلّمان','المعلّمُ','المعلّمتان'],a:1,e:'إنّ ismini nasb eder; haber (مخلصون) cemi olduğu için isim de cemi müzekker mansub: المعلّمين.'},
+ {c:'dilb',s:'كان الجوُّ ---- أمسِ.',o:['جميلٌ','جميلًا','جميلٍ','جمالٌ','أجملُ'],a:1,e:'كان haberini nasb eder: جميلًا.'},
+ {c:'dilb',s:'سافرتُ إلى القاهرة ---- للعلم.',o:['طالبٌ','مطلوبٌ','طلبًا','طلبٌ','يطلبُ'],a:2,e:'Yolculuğun amacını bildiren mansub masdar mef‘ûl-i lehtir: طلبًا للعلم.'},
+ {c:'dilb',s:'اشتريتُ ---- كتبٍ من معرض الكتاب.',o:['ثلاثَ','ثلاثةَ','ثلاثين','الثالثَ','ثالثةَ'],a:1,e:'3–10 arası sayı, sayılanın tekiliyle cinsiyette zıttır. كتاب eril → ثلاثة.'},
+ {c:'dilb',s:'---- الكتابُ في القرن الرابع الهجريّ.',o:['ألَّفَ','أُلِّفَ','مؤلِّفٌ','تأليفُ','يؤلِّفُ'],a:1,e:'Kitap yazan değil yazılandır; merfû الكتابُ nâib-i fail olur, fiil meçhul: أُلِّفَ.'},
+ {c:'dilb',s:'مررتُ بـ---- كثيرةٍ في المدينة القديمة.',o:['مساجدٍ','مساجدَ','مساجدُ','مساجدًا','مساجدِ'],a:1,e:'مساجد (مفاعل vezni) gayr-i munsariftir; nekre iken cerde tenvinsiz fetha alır: بمساجدَ.'},
+ {c:'dilb',s:'يحبّ أخي الرياضةَ، ---- أنا فأفضّل القراءة.',o:['لكنّ','أمّا','إذا','حيث','بل'],a:1,e:'Cevabın başındaki فـ, أمّا … فـ kalıbını gösterir. لكنّ ardından munfasıl zamir أنا gelmez.'},
+ {c:'dilb',s:'لن تنجح في الامتحان ---- تجتهد.',o:['ما لم','لمّا','بينما','إذ','كأنّ'],a:0,e:'ما لم = “-madıkça”. “Çalışmadıkça başaramazsın.”'},
+ {c:'dilb',s:'ذهب الطلّاب إلى المكتبة ---- يستعيروا بعض الكتب.',o:['لأنّ','لكي','لكنّ','إذ','بينما'],a:1,e:'يستعيروا nun’u düşmüş mansub muzaridir; nasb eden amaç edatı لكي.'},
+ {c:'tamam',s:'على الرغم من التقدّم الكبير في مجال الطبّ، ----.',o:['لا تزال بعض الأمراض المزمنة بلا علاج فعّال','فقد تمكّن الأطبّاء من علاج جميع الأمراض','لذلك ازداد عدد المستشفيات الحديثة','لأنّ الأطبّاء يعملون ساعات طويلة','إذ يُعدّ الطبّ من أقدم العلوم'],a:0,e:'على الرغم من zıtlık ister: ilerlemeye rağmen bazı hastalıklar hâlâ tedavisiz.'},
+ {c:'tamam',s:'كلّما زاد اهتمامُ الدولة بالتعليم، ----.',o:['بسبب قلّة الميزانية','لكنّ المدارس قليلة','ارتفع مستوى الوعي في المجتمع','رغم ضعف الاقتصاد','حين كانت المدارس مغلقة'],a:2,e:'كلّما iki mazi fiille orantı kurar: “…arttıkça … yükseldi.”'},
+ {c:'ceviri',s:'لم يكن من السهل على المهاجرين الأوائل أن يتكيّفوا مع ظروف الحياة في البلاد الجديدة.',o:['İlk göçmenlerin yeni ülkedeki yaşam koşullarına uyum sağlaması kolay olmamıştı.','İlk göçmenler yeni ülkedeki yaşam koşullarına kolayca uyum sağlamıştı.','Göçmenlerin çoğu, yeni ülkenin zorlu yaşam koşulları yüzünden geri dönmüştü.','Yeni ülkedeki yaşam koşulları, ilk göçmenler için zamanla kolaylaşmıştı.','İlk göçmenler, yeni ülkeye uyum sağlamak için büyük çaba harcamıştı.'],a:0,tr:true,e:'لم يكن من السهل = kolay olmamıştı. E şıkkı “büyük çaba” bilgisini ekliyor; asıl cümlede yok.'},
+ {c:'ceviri',s:'Araştırmacılar, iklim değişikliğinin tarımsal üretimi olumsuz etkileyeceği konusunda uyarıyor.',o:['يحذّر الباحثون من أنّ التغيّر المناخيّ سيؤثّر سلبًا في الإنتاج الزراعيّ.','يرى الباحثون أنّ التغيّر المناخيّ لن يؤثّر في الإنتاج الزراعيّ.','أثبت الباحثون أنّ الإنتاج الزراعيّ تراجع بسبب التغيّر المناخيّ.','يدعو الباحثون إلى زيادة الإنتاج الزراعيّ لمواجهة التغيّر المناخيّ.','يحذّر الباحثون من أنّ الإنتاج الزراعيّ سيؤثّر في التغيّر المناخيّ.'],a:0,stemTr:true,e:'“uyarıyor” = يحذّر من; gelecek zaman (سيؤثّر) ve etkinin yönü (iklim → üretim) korunmalı. E yönü ters çeviriyor.'},
+ {c:'diyalog',s:'سامي: هل قرأتَ التقرير الذي أرسلتُه إليك أمس؟\nخالد: ----\nسامي: لا بأس، المهمّ أن تقرأه قبل اجتماع الغد.',o:['ليس بعدُ، فقد كنتُ مشغولًا طوال اليوم.','نعم، وقد أعجبني كثيرًا.','أرسلتُه إلى المدير صباحًا.','لا أحبّ الاجتماعات الطويلة.','متى سيُعقد الاجتماع القادم؟'],a:0,e:'Sami’nin “لا بأس… okuman yeter” cevabı, Halid’in raporu henüz okumadığını gösterir.'},
+ {c:'yakin',s:'لم يغادر أحدٌ القاعةَ قبل انتهاء المحاضرة.',o:['بقي الجميع في القاعة حتّى انتهت المحاضرة.','غادر بعض الحاضرين القاعة قبل نهاية المحاضرة.','انتهت المحاضرة قبل أن يصل الجميع إلى القاعة.','لم يحضر أحدٌ المحاضرة في القاعة.','غادر الجميع القاعة بعد بداية المحاضرة مباشرةً.'],a:0,e:'“Kimse ders bitmeden çıkmadı” = “Herkes ders bitene kadar kaldı.” Olumsuz + olumsuz → olumlu.'},
+ {c:'paragraf',s:'يُعدّ النوم من أهمّ العوامل المؤثّرة في صحّة الإنسان. ---- ولذلك ينصح الأطبّاء البالغين بالنوم سبع ساعات على الأقلّ كلّ ليلة.',o:['فقد أثبتت الدراسات أنّ قلّة النوم تُضعف المناعة وتؤثّر في التركيز.','ويُعدّ الشاي من المشروبات المنتشرة في العالم العربيّ.','ولكنّ بعض الناس يفضّلون العمل ليلًا.','أمّا الرياضة فلا علاقة لها بالصحّة.','وقد بُني أوّل مستشفى في بغداد.'],a:0,e:'ولذلك sonrası tavsiye, öncesinde bir gerekçe ister: uykusuzluğun zararını gösteren araştırma.'},
+ {c:'ilgisiz',s:'(I) تُعدّ النخلة من أقدم الأشجار التي زرعها الإنسان في الجزيرة العربية. (II) وقد اعتمد عليها السكّان قديمًا في غذائهم، إذ كان التمر طعامًا أساسيًّا لهم. (III) كما استخدموا جذوعها وسعفها في بناء البيوت وصناعة الأدوات. (IV) وتشتهر مدينة دمشق بأسواقها القديمة ومساجدها التاريخية. (V) ولذلك ارتبطت النخلة في الثقافة العربية بمعاني الكرم والعطاء.',o:['I','II','III','IV','V'],a:3,e:'Paragraf hurma ağacını anlatıyor; IV. cümle doğru bir bilgi ama konu dışı (Şam’ın çarşıları).'}
+];
+Q.forEach((q,i)=>q.id='q'+i);
+let qCat='all',qOrder=[],qPos=0,qAns=null;
+function qList(){return Q.filter(q=>qCat==='all'||q.c===qCat);}
+function renderQCats(){
+  const res=st('qres',{});
+  $('#qCats').innerHTML=[['all','Hepsi'],...Object.entries(QT)].map(([k,n])=>{const L=Q.filter(q=>k==='all'||q.c===k);const d=L.filter(q=>res[q.id]==='ok').length;return `<button class="chip ${qCat===k?'on':''}" data-c="${k}">${n} <span class="muted" style="font-weight:400">${d}/${L.length}</span></button>`;}).join('');
+  $('#qCats').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{qCat=b.dataset.c;startQ();});
+}
+function startQ(){qOrder=qList().map(q=>q.id);qPos=0;qAns=null;renderQCats();renderQ();}
+const LET='ABCDE';
+function renderQ(){
+  const box=$('#qBox');
+  if(qPos>=qOrder.length){const res=st('qres',{});const L=qList();const ok=L.filter(q=>res[q.id]==='ok').length;box.innerHTML=`<div class="card empty"><div class="stat">${ok} / ${L.length}</div>Bu grubu bitirdin.<div style="margin-top:12px"><button class="btn" id="qRe">Baştan çöz</button></div></div>`;$('#qRe').onclick=startQ;return;}
+  const q=Q.find(x=>x.id===qOrder[qPos]);
+  const stemAr=!q.stemTr;
+  box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="pill">${QT[q.c]}</span><span class="small muted">${qPos+1} / ${qOrder.length}</span></div>
+  <div class="q-stem ${stemAr?'ar':''}" style="white-space:pre-line">${esc(q.s)}</div>
+  ${q.o.map((o,i)=>`<button class="opt" data-i="${i}"><span class="L">${LET[i]})</span><span class="${q.tr||q.c==='ilgisiz'?'':'ar'}" style="${q.tr||q.c==='ilgisiz'?'':'font-size:1.1em;flex:1'}">${esc(o)}</span></button>`).join('')}
+  <div id="qExp"></div></div>`;
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q,+b.dataset.i));
+}
+function answer(q,i){
+  if(qAns!==null)return;qAns=i;
+  const res=st('qres',{});const ok=i===q.a;res[q.id]=ok?'ok':'bad';
+  if(!ok){const w=st('wrongs',[]);if(!w.some(x=>x.qid===q.id))w.unshift({qid:q.id,type:q.c,src:'Alıştırma',text:q.s,note:`Doğru cevap: ${LET[q.a]}) ${q.o[q.a]}\n${q.e}`,date:new Date().toISOString().slice(0,10)});}
+  save();
+  document.querySelectorAll('#qBox .opt').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===i)b.classList.add('wrong');});
+  $('#qExp').innerHTML=`<div class="explain"><b>${ok?'Doğru.':'Yanlış, deftere eklendi.'}</b> ${esc(q.e)}</div><div style="margin-top:10px;text-align:end"><button class="btn" id="qNext">Sonraki</button></div>`;
+  $('#qNext').onclick=()=>{qPos++;qAns=null;renderQCats();renderQ();};
+}
+
+/* ---------- yanlış defteri ---------- */
+let wF='all';
+const WT={...QT,cloze:'Cloze',okuma:'Okuma',diger:'Diğer'};
+$('#wType').innerHTML=Object.entries(WT).map(([k,n])=>`<option value="${k}">${n}</option>`).join('');
+$('#wAdd').onclick=()=>{const text=$('#wText').value.trim();if(!text)return toast('Önce soruyu yaz');st('wrongs',[]).unshift({type:$('#wType').value,src:$('#wSrc').value.trim(),text,note:$('#wNote').value.trim(),date:new Date().toISOString().slice(0,10)});save();$('#wText').value='';$('#wNote').value='';$('#wSrc').value='';renderWrongs();toast('Deftere eklendi');};
+function renderWrongs(){
+  const w=st('wrongs',[]);
+  const types=[...new Set(w.map(x=>x.type))];
+  $('#wFilter').innerHTML=w.length?[['all',`Hepsi (${w.length})`],...types.map(t=>[t,`${WT[t]||t} (${w.filter(x=>x.type===t).length})`])].map(([k,n])=>`<button class="chip ${wF===k?'on':''}" data-c="${k}">${n}</button>`).join(''):'';
+  $('#wFilter').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{wF=b.dataset.c;renderWrongs();});
+  const L=w.map((x,i)=>({...x,i})).filter(x=>wF==='all'||x.type===wF);
+  $('#wList').innerHTML=L.length?L.map(x=>`<div class="card"><div class="row" style="justify-content:space-between"><span><span class="pill">${esc(WT[x.type]||x.type)}</span> <span class="small muted">${esc(x.src||'')} · ${esc(x.date)}</span></span><button class="mark" data-d="${x.i}">Öğrendim, sil</button></div><div class="ar" style="white-space:pre-line;margin-top:6px">${esc(x.text)}</div>${x.note?`<div class="explain" style="white-space:pre-line">${esc(x.note)}</div>`:''}</div>`).join(''):'<div class="card empty">Defter boş. Alıştırmada yanlış yaptığın sorular buraya otomatik gelir.</div>';
+  $('#wList').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{w.splice(+b.dataset.d,1);save();renderWrongs();});
+}
+
+/* ---------- plan ---------- */
+const PLAN=[
+ 'Bir çıkmış sınavı (2024-YDS/1) süre tutarak çöz; deneme kaydına bölüm bölüm gir.',
+ 'Yanlış defterini doldur. En zayıf iki bölümün stratejisini oku.',
+ 'Bağlaç & rabıtlar: kart modunda bilmediklerini bitir. Cümle tamamlama alıştırması.',
+ 'Harf-i cerli fiiller + sözcük boşluğu alıştırması. İnne/kâne, nasb-cezm tekrarı.',
+ 'İkinci çıkmış sınav (2023-YDS/1), süre tutarak. Deneme kaydı.',
+ 'Okuma: her parçaya 10 dakika kuralıyla beş parça. Akademik kelimeler kartları.',
+ 'Çeviri ve anlamca yakın cümle: hasr, şart, olumsuzluk kalıplarını tekrar et.',
+ 'Üçüncü çıkmış sınav (2016 Sonbahar). Paragraf ve ilgisiz cümle stratejilerini gözden geçir.',
+ 'Yalnız yanlış defteri ve bilinmeyen kelimeler. Yeni konu yok.',
+ 'Hafif tekrar, erken uyku. Kimlik, sınav giriş belgesi ve kurşun kalemi hazırla.'
+];
+function renderPlan(){
+  const done=st('plan',{});const ex=new Date(st('examDate','2026-11-22')+'T00:00:00');
+  $('#planList').innerHTML=PLAN.map((p,i)=>{const d=new Date(ex);d.setDate(d.getDate()-(PLAN.length-i));const lab=d.toLocaleDateString('tr-TR',{day:'numeric',month:'short',weekday:'short'});return `<label class="plan-day ${done[i]?'done':''}"><input type="checkbox" data-p="${i}" ${done[i]?'checked':''}><div><div class="small muted">${lab}</div><div class="t">${esc(p)}</div></div></label>`;}).join('');
+  $('#planList').querySelectorAll('[data-p]').forEach(c=>c.onchange=()=>{done[c.dataset.p]=c.checked;save();renderPlan();renderStats();});
+}
+
+/* ---------- deneme ---------- */
+$('#dInputs').innerHTML=SECTIONS.map(s=>`<div><label for="d-${s.id}">${s.r} · ${s.name.split(':')[0].split('(')[0].trim()} (/${s.n})</label><input type="number" min="0" max="${s.n}" id="d-${s.id}" inputmode="numeric"></div>`).join('');
+$('#dDate').value=new Date().toISOString().slice(0,10);
+$('#dAdd').onclick=()=>{
+  const sc={};let tot=0;
+  for(const s of SECTIONS){let v=parseInt($('#d-'+s.id).value,10);if(isNaN(v))v=0;v=Math.max(0,Math.min(s.n,v));sc[s.id]=v;tot+=v;}
+  if(!tot)return toast('Doğru sayılarını gir');
+  st('exams',[]).unshift({date:$('#dDate').value,name:$('#dName').value.trim()||'Deneme',sc,tot});save();
+  SECTIONS.forEach(s=>$('#d-'+s.id).value='');$('#dName').value='';renderExams();renderStats();toast('Deneme kaydedildi');
+};
+function renderExams(){
+  const ex=st('exams',[]);
+  $('#dList').innerHTML=ex.length?`<div style="overflow-x:auto"><table><thead><tr><th>Tarih</th><th>Deneme</th><th class="num">Doğru</th><th class="num">Puan</th><th>En zayıf</th><th></th></tr></thead><tbody>${ex.map((e,i)=>{const w=SECTIONS.map(s=>({s,r:e.sc[s.id]/s.n})).sort((a,b)=>a.r-b.r)[0];return `<tr><td class="num">${esc(e.date)}</td><td>${esc(e.name)}</td><td class="num">${e.tot}</td><td class="num"><b>${(e.tot*1.25).toFixed(2).replace('.',',')}</b></td><td class="small">${w.s.r} · ${esc(w.s.name.split(':')[0].split('(')[0].trim())} (%${Math.round(w.r*100)})</td><td><button class="mark" data-x="${i}">Sil</button></td></tr>`;}).join('')}</tbody></table></div>`:'<div class="empty small">Henüz deneme yok.</div>';
+  $('#dList').querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{ex.splice(+b.dataset.x,1);save();renderExams();renderStats();});
+}
+
+/* ---------- istatistik ---------- */
+function renderStats(){
+  const k=Object.keys(known()).length;const res=st('qres',{});const ok=Object.values(res).filter(x=>x==='ok').length;
+  const ex=st('exams',[]);const last=ex[0];const best=ex.reduce((m,e)=>Math.max(m,e.tot),0);
+  const pd=Object.values(st('plan',{})).filter(Boolean).length;
+  const card=(t,v,s,p)=>`<div class="card"><div class="small muted">${t}</div><div class="stat">${v}</div><div class="small muted">${s}</div>${p!=null?`<div class="bar" style="margin-top:8px"><i style="width:${p}%"></i></div>`:''}</div>`;
+  $('#statGrid').innerHTML=
+   card('Son deneme puanı',last?(last.tot*1.25).toFixed(2).replace('.',','):'—',best?`En iyi: ${(best*1.25).toFixed(2).replace('.',',')}`:'Deneme kaydı yok',last?last.tot/80*100:null)+
+   card('Bilinen kelime',`${k} / ${V.length}`,'Kelime & Kalıplar',k/V.length*100)+
+   card('Alıştırma doğru',`${ok} / ${Q.length}`,`Defterde ${st('wrongs',[]).length} yanlış`,ok/Q.length*100)+
+   card('Plan',`${pd} / ${PLAN.length}`,'tamamlanan gün',pd/PLAN.length*100);
+}
+
+/* ---------- yedek ---------- */
+$('#bCopy').onclick=async()=>{try{await navigator.clipboard.writeText(JSON.stringify(mem));toast('Yedek panoya kopyalandı');}catch(e){$('#bLoadBox').style.display='';$('#bText').value=JSON.stringify(mem);$('#bText').select();toast('Metni seçip elle kopyala');}};
+$('#bLoadShow').onclick=()=>{$('#bLoadBox').style.display=$('#bLoadBox').style.display==='none'?'':'none';};
+$('#bLoad').onclick=()=>{try{const d=JSON.parse($('#bText').value);if(typeof d!=='object'||!d)throw 0;mem=d;save();renderAll();toast('Yedek yüklendi');}catch(e){toast('Yedek metni okunamadı');}};
+
+/* ---------- seviyeli soru bankası ---------- */
+const LV={A1:'Başlangıç',A2:'Temel',B1:'Orta',B2:'Orta üstü',C1:'İleri'};
+const BT={kelime:'Kelime',rabit:'Bağlaç',dilb:'Dil bilgisi',tamam:'Cümle tamamlama',ceviri:'Çeviri',diyalog:'Diyalog',yakin:'Anlamca yakın',paragraf:'Paragraf tamamlama',ilgisiz:'İlgisiz cümle',okuma:'Okuma'};
+const B=[
+{lv:'A1',c:'kelime',s:'أشربُ ---- كلَّ صباحٍ.',o:['الحليبَ','الكتابَ','البابَ','القلمَ','الكرسيَّ'],an:'أشربُ (içerim) geçişli bir fiil; boşluk onun mef‘ûlü, yani içilen şey.',st:['Fiili bul: شرب = içmek.','Fiilin istediği nesne türünü belirle: içilebilir bir şey olmalı.','Şıklarda içilebilen tek nesneyi seç.'],w:['Süt içilir; anlam ve i‘rab (mansub mef‘ûl) uyuyor.','Kitap içilmez; anlam uyumsuz.','Kapı içilmez.','Kalem içilmez.','Sandalye içilmez.'],k:'Cümle “Her sabah ___ içerim” diyor. شرب fiilinin nesnesi ancak bir içecek olabilir; şıklardaki tek içecek الحليب (süt).'},
+{lv:'A1',c:'dilb',s:'هذه ---- كبيرةٌ.',o:['مدرسةٌ','بيتٌ','كتابٌ','قلمٌ','بابٌ'],an:'İsim cümlesi: هذه (mübteda, dişil işaret ismi) + haber + sıfat (كبيرةٌ, dişil).',st:['İşaret ismine bak: هذه dişil, هذا eril.','Sıfata bak: كبيرةٌ dişil.','Hem işaret ismine hem sıfata uyan dişil ismi seç.'],w:['مدرسة tâ-i merbûta ile dişil; هذه ve كبيرة ile uyumlu.','بيت eril; هذا بيتٌ كبيرٌ olmalıydı.','كتاب eril.','قلم eril.','باب eril.'],k:'هذه ve كبيرةٌ ikisi de dişil. Arada gelen isim de dişil olmalı; şıklarda dişil tek isim مدرسةٌ.'},
+{lv:'A1',c:'diyalog',s:'– ما اسمُكَ؟\n– ----',o:['اسمي سامي.','أنا من تركيا.','عمري عشرون سنةً.','أسكنُ في دمشقَ.','أدرسُ الطبَّ.'],an:'Soru kelimesi ما + اسمك: “Adın ne?”',st:['Soru edatını ve sorulan şeyi bul: ما اسمك = adın ne?','Cevap aynı konuyu (isim) karşılamalı.','Başka bilgi veren şıkları ele.'],w:['Doğrudan ismi söylüyor.','Memleketi söylüyor (من أين أنت؟ sorusunun cevabı).','Yaşı söylüyor (كم عمرك؟).','Yaşadığı yeri söylüyor (أين تسكن؟).','Okuduğu bölümü söylüyor (ماذا تدرس؟).'],k:'Soru adı soruyor; sadece اسمي سامي adı veriyor. Diğerleri doğru Arapça ama başka sorulara cevap.'},
+{lv:'A1',c:'ceviri',s:'Erkek kardeşim üniversitede okuyor.',stemTr:1,o:['يَدْرُسُ أخي في الجامعةِ.','يُدَرِّسُ أخي في الجامعةِ.','دَرَسَ أخي في المدرسةِ.','أخي يعملُ في الجامعةِ.','أختي تدرسُ في الجامعةِ.'],an:'Türkçe cümle: özne (kardeşim) + yer (üniversitede) + şimdiki zaman fiil (okuyor).',st:['Fiilin zamanını belirle: şimdiki/geniş zaman → muzari.','Fiilin anlamını ayırt et: دَرَسَ (okumak/öğrenmek) ≠ دَرَّسَ (öğretmek).','Özne ve yeri kontrol et: erkek kardeşim = أخي, üniversite = الجامعة.'],w:['Muzari, “okumak” anlamında, özne ve yer doğru.','يُدَرِّسُ “ders veriyor, öğretiyor” demek; anlam farklı.','Mazi (okudu) ve okul (المدرسة); iki hata.','“Çalışıyor” anlamında; okumak değil.','أختي = kız kardeşim; cümle erkek kardeşten söz ediyor.'],k:'Üç unsur birden tutmalı: muzari zaman, “okumak” anlamındaki دَرَسَ ve “üniversite”. Hepsini sadece A şıkkı karşılıyor.'},
+{lv:'A1',c:'rabit',s:'الجوُّ باردٌ، ---- لبستُ المعطفَ.',o:['لذلك','لكنْ','إذا','أو','مع'],an:'İki cümle: “Hava soğuk” (sebep) + “Montumu giydim” (sonuç).',st:['İki cümle arasındaki ilişkiyi bul: soğuk → mont giymek = sebep-sonuç.','Sonuç bildiren bağlacı ara.','Zıtlık, şart, seçenek bildirenleri ele.'],w:['لذلك = bu yüzden; sebep-sonuç ilişkisi.','لكنْ zıtlık bildirir; soğuk olup mont giymek zıt değil.','إذا şart bildirir ve geçmiş olaya uymaz.','أو seçenek bildirir.','مع bir edat; ardından cümle değil isim gelir.'],k:'Soğuk havanın sonucu mont giymek. Sonuç bağlacı لذلك.'},
+{lv:'A2',c:'dilb',s:'ذهبَ الطلّابُ إلى المكتبةِ وقرؤوا كتبًا ----.',o:['كثيرةً','كثيرٌ','كثيرين','الكثيرةُ','كثيرٍ'],an:'كتبًا mef‘ûl, nekre, mansub; ardından gelen kelime onun sıfatı.',st:['Nitelenen ismi bul: كتبًا.','Sıfat; marifelik, i‘rab, cinsiyet ve sayıda uyar.','Akılsız varlıkların çoğulu sıfatta tekil dişil gibi davranır.'],w:['Nekre, mansub, tekil dişil; akılsız çoğula uygun sıfat.','Merfû; كتبًا mansub.','كثيرين akıllı varlıkların çoğulu (eril); kitap için olmaz.','Marife (ال); nitelenen nekre.','Mecrur; kural dışı.'],k:'Sıfat, كتبًا ile nekre ve mansub olarak uyuşmalı. Kitaplar akılsız çoğul olduğundan sıfat tekil dişil: كثيرةً.'},
+{lv:'A2',c:'kelime',s:'المطعمُ ---- يومَ الجمعةِ، فلا نستطيعُ أن نأكلَ فيه.',o:['مغلقٌ','مفتوحٌ','رخيصٌ','جديدٌ','قريبٌ'],an:'İkinci cümle (فـ ile) birincinin sonucu: “orada yemek yiyemiyoruz”.',st:['İkinci cümledeki ipucunu oku: لا نستطيع أن نأكل = yiyemiyoruz.','Yemek yiyememenin sebebini bul.','Sonuca sebep olmayan şıkları ele.'],w:['Kapalı olması yiyememenin sebebi.','Açık olması tersini gerektirir.','Ucuz olması yemeyi engellemez.','Yeni olması engel değil.','Yakın olması engel değil.'],k:'فـ ile gelen “yiyemiyoruz”, boşluğun sebebini açıklıyor. Restoranın kapalı (مغلق) olması tek mantıklı sebep.'},
+{lv:'A2',c:'tamam',s:'لم أذهبْ إلى العملِ اليومَ ----.',o:['لأنّني كنتُ مريضًا','لكنّني ذهبتُ إلى العملِ','وسأذهبُ إليه أمسِ','حتّى أذهبَ إلى العملِ','إذا كنتُ مريضًا'],an:'لم + muzari = geçmiş olumsuz: “Bugün işe gitmedim.” Eksik kısım bir açıklama bekliyor.',st:['Ana cümlenin anlamı: işe gitmedim.','Mantıklı devam: gitmemenin sebebi.','Çelişen ve zamanı uymayan şıkları ele.'],w:['Sebep veriyor: “çünkü hastaydım”.','Ana cümleyle çelişiyor (gitmedim / gittim).','سأذهب (gelecek) ile أمس (dün) çelişiyor.','“gitmek için gitmedim” anlamsız.','Gerçekleşmiş olaya şart cümlesi uymuyor.'],k:'İşe gitmemenin en doğal devamı sebebini söylemek. لأنّ ile kurulan A şıkkı mantık ve zaman bakımından tam uyuyor.'},
+{lv:'A2',c:'dilb',s:'الطالبتانِ ---- في المكتبةِ.',o:['مجتهدتانِ','مجتهدانِ','مجتهداتٌ','مجتهدةٌ','مجتهدتينِ'],an:'İsim cümlesi: الطالبتان mübteda (dişil, ikil, merfû); boşluk haber.',st:['Mübtedanın cinsiyet ve sayısını bul: dişil ikil.','Haber merfû olur ve sayı-cinsiyette uyar.','İkilin merfû eki: ـانِ.'],w:['Dişil, ikil, merfû; tam uyum.','Eril ikil.','Dişil çoğul.','Tekil.','İkil ama mansub/mecrur (ـينِ); haber merfû olmalı.'],k:'Haber, mübtedaya dişil-ikil olarak uyar ve merfû olur. Bu üç şartı yalnız مجتهدتانِ sağlıyor.'},
+{lv:'A2',c:'diyalog',s:'– هل تريدُ أن تشربَ شايًا؟\n– ----\n– حسنًا، سأُعِدُّ لكَ فنجانًا من القهوةِ.',o:['لا، شكرًا، أفضّلُ القهوةَ.','نعم، أحبُّ الشايَ كثيرًا.','أنا لا أشربُ القهوةَ أبدًا.','الشايُ في المطبخِ.','شربتُ الشايَ مع أصدقائي.'],an:'Boşluktan sonraki replik ipucu: “sana bir fincan kahve hazırlayayım”.',st:['Sonraki repliği oku: kahve hazırlanacak.','Boşluk, kahveye geçişi açıklamalı.','Kahveyle çelişen ya da konu dışı şıkları ele.'],w:['Çayı geri çevirip kahve istiyor; sonraki replikle uyumlu.','Çay istiyor; neden kahve yapılsın?','Kahve içmediğini söylüyor; çelişki.','Konuyu değiştiriyor.','Geçmişten söz ediyor; teklife cevap değil.'],k:'Diyalog tamamlamada boşluktan sonraki replik belirleyicidir. Kahve yapılıyorsa konuşan kahve istemiş olmalı: A şıkkı.'},
+{lv:'B1',c:'kelime',s:'يجبُ علينا أن ---- على البيئةِ لأنّها ملكٌ للأجيالِ القادمةِ.',o:['نحافظَ','نقضيَ','نحصلَ','نتعرّفَ','نردَّ'],an:'أن + mansub muzari; fiil على harf-i cerriyle geliyor. Gerekçe: çevre gelecek nesillere ait.',st:['Fiil + harf-i cer kalıbını düşün: …على.','Gerekçeyi oku: gelecek nesillerin malı → korunmalı.','على ile gelen ve “korumak” anlamı veren fiili seç.'],w:['حافظ على = korumak; anlam ve kalıp doğru.','قضى على = yok etmek; anlam ters.','حصل على = elde etmek; çevre “elde edilmez”.','تعرّف على = tanımak; gerekçeyle bağ yok.','ردّ على = cevap vermek; anlamsız.'],k:'Beş şıkkın dördü على ile kullanılabiliyor; ayırt eden anlam. “Gelecek nesillere ait olduğu için” gerekçesi korumayı (حافظ على) gerektiriyor.'},
+{lv:'B1',c:'rabit',s:'تعلّمَ اللغةَ العربيةَ في سنةٍ واحدةٍ ---- أنّه لم يسافرْ إلى أيِّ بلدٍ عربيٍّ.',o:['مع','لأنّ','لذلك','كي','حتّى'],an:'İki bilgi: bir yılda öğrendi + hiç Arap ülkesine gitmedi. İkincisi beklentiye ters.',st:['İki kısım arasındaki ilişkiyi bul: beklenmedik durum → zıtlık/taviz.','أنّه yapısına dikkat: boşluk + أنّ birlikte kalıp oluşturmalı.','مع أنّ = “-diği hâlde”.'],w:['مع أنّ = -diği hâlde; zıtlık ve kalıp doğru.','Gitmemesi öğrenmesinin sebebi olamaz; ayrıca لأنّ + أنّه yan yana gelmez.','Sonuç bildirir; ilişki ters.','كي ardından muzari gelir, أنّ değil.','Gaye/son bildirir; anlam ve yapı uymuyor.'],k:'Hiç Arap ülkesine gitmeden bir yılda öğrenmek beklentiye aykırı; bu bir taviz ilişkisi. Hem anlamı hem أنّه yapısını مع أنّ karşılıyor.'},
+{lv:'B1',c:'dilb',s:'رأيتُ الطالبَ ---- فازَ بالجائزةِ.',o:['الذي','التي','الذين','اللذانِ','ما'],an:'الطالبَ marife, eril, tekil; ardından sıla cümlesi (فاز بالجائزة).',st:['Önceki ismi incele: الطالب (marife, eril, tekil).','Marife isimden sonra ism-i mevsul gelir.','Cinsiyet ve sayıda uyanı seç.'],w:['Eril tekil mevsul; tam uyum.','Dişil.','Eril çoğul.','Eril ikil.','ما akılsızlar için genel mevsul; insan için kullanılmaz.'],k:'Mevsul, önündeki marife isme uyar. الطالب eril ve tekil olduğu için الذي.'},
+{lv:'B1',c:'yakin',s:'ما زالَ الطقسُ باردًا رغمَ أنّنا في فصلِ الربيعِ.',o:['لا يزالُ الطقسُ باردًا مع أنّ الفصلَ ربيعٌ.','أصبحَ الطقسُ دافئًا لأنّ الربيعَ جاءَ.','كانَ الطقسُ باردًا في الشتاءِ فقط.','سيكونُ الطقسُ باردًا في الربيعِ القادمِ.','لم يكنِ الطقسُ باردًا في الربيعِ.'],an:'ما زال = hâlâ; رغم أنّ = -e rağmen. İki bilgi: şu an soğuk + mevsim bahar.',st:['Ana bilgileri çıkar: hâlâ soğuk, bahardayız, zıtlık.','Eş anlamlı yapıları eşleştir: ما زال ≈ لا يزال, رغم أنّ ≈ مع أنّ.','Zamanı veya yönü değiştiren şıkları ele.'],w:['İki bilgi ve zıtlık korunmuş; sadece sözcükler değişmiş.','Havanın ısındığını söylüyor; ters anlam.','Soğuğu kışla sınırlıyor; bilgi değişmiş.','Geleceğe taşıyor.','Soğuk olmadığını söylüyor; ters.'],k:'Anlamca en yakın cümle, bilgileri ve aralarındaki ilişkiyi koruyup sadece sözcükleri değiştirir. A şıkkı ما زال yerine لا يزال, رغم أنّ yerine مع أنّ kullanıyor.'},
+{lv:'B1',c:'ilgisiz',s:'(I) يُعدّ الماءُ ضروريًّا لحياةِ جميعِ الكائناتِ الحيّةِ. (II) فهو يشكّلُ نحوَ ستّين بالمئةِ من جسمِ الإنسانِ البالغِ. (III) ويحتاجُ الإنسانُ إلى شربِ كميّةٍ كافيةٍ منه كلَّ يومٍ. (IV) وتُعدّ القهوةُ العربيةُ رمزًا للضيافةِ في الباديةِ. (V) لذلك ينصحُ الأطبّاءُ بشربِ الماءِ بانتظامٍ.',o:['I','II','III','IV','V'],an:'Konu cümlesi (I): suyun canlılar için önemi. Zincir: فهو (II) → ويحتاج (III) → لذلك (V).',st:['İlk cümleden konuyu çıkar: su.','Her cümlenin bu konuya bağlı olup olmadığına bak.','Çıkarınca zincirin kopmadığı cümleyi bul.'],w:['Konuyu açan cümle.','فهو zamiri suya dönüyor; konu içinde.','Su ihtiyacını anlatıyor; konu içinde.','Kahve ve misafirperverlik; konu dışı.','لذلك önceki cümlelerin sonucunu bağlıyor; konu içinde.'],k:'Paragraf su hakkında. IV. cümle doğru bir bilgi ama kahveden söz ediyor; çıkarıldığında III’ten V’e geçiş hâlâ akıcı.'},
+{lv:'B2',c:'kelime',s:'أدّت الأزمةُ الاقتصاديةُ إلى ---- معدّلاتِ البطالةِ في كثيرٍ من الدولِ.',o:['ارتفاعِ','انخفاضِ','انقراضِ','استقرارِ','ازدهارِ'],an:'أدّى إلى = yol açmak; boşluk إلى’dan sonra mecrur masdar; sebep: ekonomik kriz.',st:['Sebebi oku: ekonomik kriz (olumsuz).','Sonucun yönünü belirle: işsizlik oranları artar.','Kelimenin collocation’ını kontrol et: معدّلات + ارتفاع.'],w:['Kriz → işsizlik artışı; anlam ve kalıp doğru.','İşsizliğin azalması krizle çelişir.','انقراض canlıların nesli için kullanılır.','İstikrar, krizin sonucu değil.','ازدهار (gelişme) olumlu; işsizliğe ve krize uymaz.'],k:'Kriz olumsuz bir sebep, işsizlik de olumsuz bir gösterge; olumsuz sebep olumsuz göstergeyi artırır. Oranlarla kullanılan doğru kelime ارتفاع.'},
+{lv:'B2',c:'dilb',s:'لن ينجحَ المشروعُ ---- تتعاونْ جميعُ الأطرافِ.',o:['ما لم','حتّى','لأنّ','لو','كي'],an:'تتعاونْ sükûnla bitiyor: meczum muzari. Boşluğa cezmeden bir edat gelmeli.',st:['Boşluktan sonraki fiilin i‘rabına bak: تتعاونْ meczum.','Cezmeden edatları düşün: لم، لمّا، ما لم، لا الناهية، إنْ…','Anlamla birleştir: “bütün taraflar iş birliği yapmadıkça”.'],w:['ما لم fiili cezmeder ve “-madıkça” anlamı verir.','حتّى fiili nasb eder (تتعاونَ); ayrıca anlam zayıf.','لأنّ ardından isim/zamir gelir, fiil değil.','لو cezmetmez ve mazi ister.','كي nasb eder (تتعاونَ).'],k:'İki ipucu birlikte çalışıyor: fiilin sonundaki sükûn cezm istiyor, cümle de şart-kayıt anlamı (“-madıkça”) taşıyor. İkisini de ما لم karşılıyor.'},
+{lv:'B2',c:'tamam',s:'كلّما تقدّمت التكنولوجيا، ----.',o:['ازدادت حاجةُ الإنسانِ إلى مهاراتٍ جديدةٍ','لأنّ الحواسيبَ أصبحت رخيصةً','رغمَ قلّةِ المخترعين','بينما كانت الحياةُ بسيطةً','إذا استخدمها الناسُ بحكمةٍ'],an:'كلّما + mazi … + mazi: orantı (“…dıkça …”). İkinci kısım bir mazi fiil cümlesi olmalı.',st:['Bağlacın kalıbını hatırla: كلّما iki mazi cümle ister.','Anlam: teknoloji ilerledikça bir şey değişir.','Bağlaçla başlayan şıkları (لأنّ، رغم، بينما، إذا) ele.'],w:['Mazi fiille başlıyor ve orantılı bir sonuç veriyor.','Sebep cümlesi; كلّما’nın cevabı olamaz.','Zıtlık kalıbı; cevap cümlesi değil.','Zaman/zıtlık bağlacı; cevap değil.','Yeni bir şart açıyor.'],k:'كلّما’nın cevabı bağlaçsız bir mazi cümlesidir ve birinci kısımla orantılı olmalıdır. “Teknoloji ilerledikçe yeni becerilere ihtiyaç arttı” bu kalıbı tam karşılıyor.'},
+{lv:'B2',c:'ceviri',s:'لا يكفي أن نعرفَ قواعدَ اللغةِ، بل لا بدَّ من ممارستِها يوميًّا.',o:['Dilin kurallarını bilmek yetmez; onu her gün uygulamak da şarttır.','Dilin kurallarını bilmek, onu her gün kullanmaktan daha önemlidir.','Dilin kurallarını bilmeden her gün pratik yapmak yeterli değildir.','Dilin kurallarını her gün tekrar etmek gerekir.','Dil öğrenmek için kuralları bilmeye gerek yoktur.'],an:'لا يكفي (yetmez) + بل (bilakis, aksine) + لا بدّ من (şarttır). ممارستها: onu (dili) uygulamak.',st:['Olumsuz kısmı bul: kuralları bilmek yetmez.','بل ile gelen düzeltmeyi bul: her gün uygulamak şart.','İki kısmı ve aralarındaki ilişkiyi koruyan şıkkı seç.'],w:['İki kısım ve “yetmez… şart” ilişkisi korunmuş.','Karşılaştırma ekliyor; asıl cümlede “daha önemli” yok.','“Bilmeden” diyerek ilişkiyi tersine çeviriyor.','Kuralları tekrar etmekten söz ediyor; uygulama değil, “yetmez” kısmı da yok.','Asıl cümlenin tersini söylüyor.'],k:'Çeviride her öğe karşılanmalı: لا يكفي → yetmez, بل → (aksine/ayrıca), لا بدّ من → şarttır, ممارستها يوميًّا → her gün uygulamak. Hepsini sadece A şıkkı veriyor.'},
+{lv:'B2',c:'paragraf',s:'انتشرت القراءةُ الإلكترونيةُ انتشارًا واسعًا في السنواتِ الأخيرةِ. ---- ومع ذلك ما زالَ كثيرٌ من القرّاءِ يفضّلون الكتابَ الورقيَّ.',o:['إذ أصبحَ من السهلِ حملُ مئاتِ الكتبِ في جهازٍ واحدٍ.','ولذلك اختفت المكتباتُ من المدنِ.','وقد كانَ الورقُ يُصنعُ قديمًا من البرديِّ.','فالكتابُ الورقيُّ أرخصُ دائمًا.','لكنّ أحدًا لم يعد يقرأُ.'],an:'1. cümle: e-okuma yayıldı. Boşluk. 3. cümle ومع ذلك (buna rağmen) ile zıt bir bilgi veriyor.',st:['Önceki cümle: e-okumanın yaygınlaşması.','Sonraki cümle ومع ذلك ile başlıyor: boşluk e-okumayı destekleyen bir bilgi olmalı ki “buna rağmen kâğıt tercih ediliyor” denebilsin.','Akışı bozan, abartılı ya da konu dışı şıkları ele.'],w:['Yaygınlaşmanın sebebini açıklıyor (إذ); “buna rağmen” geçişini hazırlıyor.','Abartılı ve sonraki cümleyle çelişiyor.','Tarih bilgisi; akışa katkısı yok.','Kâğıdı öne çıkarıyor; ومع ذلك zıtlığını boşa çıkarır.','Kimsenin okumadığını söylüyor; hem 1. hem 3. cümleyle çelişiyor.'],k:'Boşluk iki cümle arasında köprü: önce e-okumayı destekleyen bir gerekçe gelmeli ki ومع ذلك ile kâğıda dönülebilsin. A şıkkı bu köprüyü kuruyor.'},
+{lv:'C1',c:'kelime',s:'لم تكن تلكَ الإصلاحاتُ سوى حلولٍ ---- لم تعالجْ جذورَ المشكلةِ.',o:['مؤقّتةٍ','جذريّةٍ','دائمةٍ','شاملةٍ','حاسمةٍ'],an:'لم تكن … سوى = “… -den başka bir şey değildi” (hasr). حلولٍ mecrur; sıfat da mecrur. Ek bilgi: kökleri çözmedi.',st:['Hasr yapısını tanı: لم تكن سوى → küçümseyen bir değerlendirme.','Sonraki sıfat cümlesini oku: لم تعالج جذور المشكلة.','Bu iki ipucuyla uyumlu, olumsuz çağrışımlı sıfatı seç.'],w:['Geçici çözümler kökü çözmez; hasr ve bağlamla uyumlu.','Köklü çözüm “kökleri çözmedi” ile çelişir.','Kalıcı çözüm de çelişir.','Kapsamlı çözüm kökleri çözerdi; çelişki.','Kesin/belirleyici çözüm de çelişir.'],k:'Cümle reformları küçümsüyor (sadece … idi) ve kökleri çözmediklerini söylüyor. Bu iki ipucuna tek uyan sıfat مؤقّتة (geçici); diğer dördü olumlu ve bağlamla çelişiyor.'},
+{lv:'C1',c:'dilb',s:'ما ازدهرت الحضارةُ الأندلسيّةُ ---- بفضلِ التسامحِ والانفتاحِ على الثقافاتِ الأخرى.',o:['إلّا','لكنّ','بل','حتّى','لمّا'],an:'Olumsuz ما + fiil + boşluk + gerekçe: hasr (yalnızca … sayesinde) yapısı.',st:['Cümlenin başındaki olumsuzluğu fark et: ما ازدهرت.','Olumsuz cümlenin anlamı kopuk: “gelişmedi … sayesinde” → kısıtlama gerekiyor.','ما … إلّا = yalnızca, ancak.'],w:['ما … إلّا hasr kurar: “Ancak hoşgörü sayesinde gelişti.”','لكنّ ardından mansub isim ve haber gelir; burada harf-i cer var.','بل düzeltme yapar; “gelişmedi, bilakis hoşgörü sayesinde” anlamsız.','حتّى burada anlam vermez.','لمّا zaman/olumsuzluk bildirir; hasr değil.'],k:'Olumsuz cümle tek başına “gelişmedi” diyerek tarihe ters düşüyor. Anlam ancak hasrla düzelir: ما … إلّا = “yalnızca … sayesinde gelişti”. Çeviri sorularında bu yapı “sadece/ancak” ile karşılanır.'},
+{lv:'C1',c:'yakin',s:'لولا دعمُ المؤسّساتِ العلميّةِ لَما تمكّنَ الباحثُ من إتمامِ مشروعِه.',o:['تمكّنَ الباحثُ من إتمامِ مشروعِه بفضلِ دعمِ المؤسّساتِ العلميّةِ.','لم يتمكّنِ الباحثُ من إتمامِ مشروعِه رغمَ دعمِ المؤسّساتِ.','أتمَّ الباحثُ مشروعَه دونَ أيِّ دعمٍ.','رفضت المؤسّساتُ العلميّةُ دعمَ مشروعِ الباحثِ.','سيتمكّنُ الباحثُ من إتمامِ مشروعِه إذا دعمته المؤسّساتُ.'],an:'لولا + isim … لما + fiil: “… olmasaydı … yapamazdı”. Gerçekte destek VAR ve proje TAMAMLANDI.',st:['لولا’nın mantığını çöz: destek olmasaydı tamamlayamazdı → destek oldu, tamamlandı.','Olumsuz yüzeye aldanma: gerçek anlam olumlu.','Destek ile tamamlanma arasında sebep ilişkisi kuran şıkkı seç.'],w:['Gerçek durumu ve sebep ilişkisini veriyor: destek sayesinde tamamladı.','Tamamlayamadığını söylüyor; ters.','Desteği yok sayıyor; ters.','Desteğin reddedildiğini söylüyor; ters.','Geleceğe ve şarta taşıyor; asıl cümle geçmişte gerçekleşmiş bir durumu anlatıyor.'],k:'لولا… لما… iki olumsuz katman taşır: “destek olmasaydı tamamlayamazdı”. İki olumsuz birbirini götürür: destek oldu ve tamamladı. A şıkkı bunu olumlu olarak, sebebiyle birlikte söylüyor.'},
+{lv:'C1',c:'ceviri',s:'Bu çalışmanın önemi, yalnızca yeni veriler sunmasından değil, aynı zamanda eski görüşleri de sorgulamasından kaynaklanıyor.',o:['لا تكمنُ أهميّةُ هذه الدراسةِ في تقديمِها بياناتٍ جديدةً فحسب، بل في مساءلتِها الآراءَ القديمةَ أيضًا.','تكمنُ أهميّةُ هذه الدراسةِ في تقديمِها بياناتٍ جديدةً لا في مساءلةِ الآراءِ القديمةِ.','لا تقدّمُ هذه الدراسةُ بياناتٍ جديدةً، بل تكتفي بمساءلةِ الآراءِ القديمةِ.','تنبعُ أهميّةُ الآراءِ القديمةِ من البياناتِ الجديدةِ التي قدّمتها هذه الدراسةُ.','لم تتمكّنْ هذه الدراسةُ من مساءلةِ الآراءِ القديمةِ رغمَ بياناتِها الجديدةِ.'],stemTr:1,an:'“yalnızca … değil, aynı zamanda … de” kalıbı = ليس/لا … فحسب، بل … أيضًا. Önemin iki kaynağı var.',st:['Kalıbı eşleştir: yalnızca … değil, … de → لا … فحسب، بل … أيضًا.','Özneyi ve iki kaynağı kontrol et: çalışmanın önemi ← yeni veri + eski görüşleri sorgulama.','Kaynaklardan birini düşüren ya da ilişkiyi ters çeviren şıkları ele.'],w:['Kalıp, özne ve iki kaynak birebir karşılanmış.','İkinci kaynağı reddediyor (لا في…).','Çalışmanın yeni veri sunmadığını söylüyor.','Özneyi değiştirmiş: önem eski görüşlere aitmiş gibi.','Sorgulayamadığını söylüyor; ters.'],k:'Türkçedeki “yalnızca … değil, aynı zamanda … de” yapısının Arapça karşılığı لا … فحسب، بل … أيضًا. A şıkkı bu yapıyı, özneyi ve önemin iki kaynağını eksiksiz veriyor.'},
+{lv:'C1',c:'diyalog',s:'الصحفيّ: يرى بعضُ النقّادِ أنّ روايتَكَ الأخيرةَ تفتقرُ إلى حبكةٍ متماسكةٍ، فما ردُّك؟\nالكاتب: ----\nالصحفيّ: إذن فالتفكّكُ مقصودٌ ويخدمُ فكرةَ الروايةِ.',o:['لم أسعَ أصلًا إلى حبكةٍ تقليديّةٍ؛ فالتشظّي في البناءِ يعكسُ تشظّي الشخصيّاتِ نفسِها.','أشكرُ النقّادَ على اهتمامِهم بروايتي الأولى.','أكتبُ عادةً في الصباحِ الباكرِ.','أعترفُ بأنّني كتبتُها على عجلٍ ولم أراجعْها.','ستصدرُ روايتي القادمةُ في العامِ المقبلِ.'],an:'Gazeteci eleştiriyi aktarıyor; sonraki replik إذن ile bir sonuç çıkarıyor: “Demek ki dağınıklık kasıtlı.”',st:['Son repliği oku: إذن = demek ki; yazarın söylediğinden çıkarılan sonuç.','Yazar dağınıklığın bilinçli olduğunu söylemiş olmalı.','Sonuçla çelişen ya da konu dışı şıkları ele.'],w:['Dağınıklığı bilinçli bir tercih olarak açıklıyor; إذن ile çıkarılan sonuç buna dayanıyor.','“Son” roman sorulmuşken “ilk” roman diyor; eleştiriye de cevap vermiyor.','Konu dışı.','Dağınıklığı aceleye bağlıyor; “kasıtlı” sonucuyla çelişiyor.','Konu dışı.'],k:'Gazetecinin إذن ile vardığı sonuç (“dağınıklık kasıtlı”) ancak yazar bunu bilinçli yaptığını söylediyse kurulabilir. A şıkkı bunu söylüyor; D şıkkı ise tam tersini.'}
+];
+B.forEach((q,i)=>{q.id='b'+i;if(q.a==null)q.a=0;});
+let bLv='all',bCat='all',bPos=0,bOrder=[],bAns=null,bShuf=null;
+const gen=()=>st('genQ',[]);
+function bPool(){return [...B,...gen()].filter(q=>(bLv==='all'||q.lv===bLv)&&(bCat==='all'||q.c===bCat));}
+function chipRow(el,items,cur,cb){el.innerHTML=items.map(([k,n])=>`<button class="chip ${cur===k?'on':''}" data-c="${k}">${n}</button>`).join('');el.querySelectorAll('.chip').forEach(b=>b.onclick=()=>cb(b.dataset.c));}
+function renderBChips(){
+  chipRow($('#bLv'),[['all','Tüm seviyeler'],...Object.entries(LV).map(([k,n])=>[k,`${k} · ${n}`])],bLv,c=>{bLv=c;bStart();});
+  const cats=[...new Set([...B,...gen()].map(q=>q.c))];
+  chipRow($('#bCat'),[['all','Tüm türler'],...Object.entries(BT).filter(([k])=>cats.includes(k))],bCat,c=>{bCat=c;bStart();});
+  $('#gLv').innerHTML=Object.entries(LV).map(([k,n])=>`<option value="${k}" ${k===(bLv==='all'?'B1':bLv)?'selected':''}>${k} · ${n}</option>`).join('');
+  $('#gCat').innerHTML=Object.entries(BT).map(([k,n])=>`<option value="${k}" ${k===(bCat==='all'?'kelime':bCat)?'selected':''}>${n}</option>`).join('');
+}
+function bStart(){bOrder=bPool().map(q=>q.id);bPos=0;bAns=null;renderBChips();renderB();}
+function findB(id){return B.find(q=>q.id===id)||gen().find(q=>q.id===id);}
+function renderB(){
+  const box=$('#bBox');
+  if(!bOrder.length){box.innerHTML='<div class="card empty">Bu seviye ve türde henüz soru yok. Aşağıdan Claude’a ürettirebilirsin.</div>';return;}
+  if(bPos>=bOrder.length){box.innerHTML=`<div class="card empty">Bu setteki ${bOrder.length} soruyu bitirdin.<div style="margin-top:12px"><button class="btn" id="bRe">Baştan çöz</button></div></div>`;$('#bRe').onclick=bStart;return;}
+  const q=findB(bOrder[bPos]);
+  bShuf=[0,1,2,3,4].sort(()=>Math.random()-.5);
+  if(q.c==='ilgisiz')bShuf=[0,1,2,3,4];
+  const arOpt=!(q.tr||q.c==='ilgisiz');
+  box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span><span class="pill gold">${q.lv}</span> <span class="pill">${BT[q.c]||q.c}</span>${q.gen?' <span class="pill" style="background:var(--gold-soft);color:var(--gold)">Claude üretti</span>':''}</span><span class="small muted">${bPos+1} / ${bOrder.length}</span></div>
+  <div class="q-stem ${q.stemTr?'':'ar'}" style="white-space:pre-line">${esc(q.s)}</div>
+  ${bShuf.map((oi,i)=>`<button class="opt" data-o="${oi}"><span class="L">${LET[i]})</span><span class="${arOpt?'ar':''}" style="${arOpt?'font-size:1.1em;flex:1':''}">${esc(q.o[oi])}</span></button>`).join('')}
+  <div id="bExp"></div></div>`;
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>bAnswer(q,+b.dataset.o));
+}
+function bAnswer(q,oi){
+  if(bAns!==null)return;bAns=oi;const ok=oi===q.a;
+  const res=st('bres',{});res[q.id]=ok?'ok':'bad';
+  const corrL=LET[bShuf.indexOf(q.a)];
+  if(!ok){const w=st('wrongs',[]);if(!w.some(x=>x.qid===q.id))w.unshift({qid:q.id,type:q.c==='rabit'?'dilb':q.c,src:'Soru bankası '+q.lv,text:q.s,note:`Doğru cevap: ${q.o[q.a]}\n${q.k}`,date:new Date().toISOString().slice(0,10)});}
+  save();
+  document.querySelectorAll('#bBox .opt').forEach(b=>{const o=+b.dataset.o;b.disabled=true;if(o===q.a)b.classList.add('right');else if(o===oi)b.classList.add('wrong');});
+  const arOpt=!(q.tr||q.c==='ilgisiz');
+  $('#bExp').innerHTML=`<div class="explain"><b>${ok?'Doğru.':'Yanlış, deftere eklendi.'}</b> Doğru cevap: <b>${corrL}</b></div>
+  <div class="card" style="margin-top:10px;box-shadow:none;background:var(--bg)">
+   <h3>1. Cümleyi çöz</h3><p style="margin:0 0 10px">${esc(q.an)}</p>
+   <h3>2. Adım adım çözüm</h3><ol style="margin:0 0 10px;padding-inline-start:20px">${q.st.map(x=>`<li style="margin-bottom:4px">${esc(x)}</li>`).join('')}</ol>
+   <h3>3. Şıkları tek tek değerlendir</h3>${bShuf.map((o,i)=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)"><b style="white-space:nowrap;min-width:38px;color:${o===q.a?'var(--ok)':'var(--bad)'}">${LET[i]}) ${o===q.a?'✓':'✗'}</b><div><div class="${arOpt?'ar':''}" style="${arOpt?'font-size:1rem':''}">${esc(q.o[o])}</div><div class="small">${esc(q.w[o])}</div></div></div>`).join('')}
+   <div class="tip" style="margin-top:12px"><b>Bu şık neden doğru?</b> ${esc(q.k)}</div>
+  </div>
+  <div style="margin-top:10px;text-align:end"><button class="btn" id="bNext">Sonraki</button></div>`;
+  $('#bNext').onclick=()=>{bPos++;bAns=null;renderB();window.scrollTo({top:$('#bBox').offsetTop-70});};
+}
+/* Claude ile soru üretme */
+let sampleFn=null;
+(async()=>{
+  $('#genOff').textContent='Soru üretme bağlantısı hazırlanıyor…';
+  for(let i=0;i<40&&!(window.claude&&window.claude.use);i++)await new Promise(r=>setTimeout(r,250));
+  try{if(window.claude&&window.claude.use){sampleFn=await window.claude.use('sample');}}catch(e){}
+  $('#genBox').style.display=sampleFn?'':'none';$('#genOff').style.display=sampleFn?'none':'';
+  if(!sampleFn)$('#genOff').textContent='Yeni soru üretme yalnızca sayfa claude.ai içinde açıkken çalışır (indirilen dosyada ya da başka sitede çalışmaz).';
+})();
+const LVDESC={A1:'çok temel kelimeler, kısa basit cümleler, isim cümlesi, işaret isimleri, temel fiiller',A2:'günlük konular, sıfat-mevsuf uyumu, temel bağlaçlar, mazi/muzari, ikil ve çoğul',B1:'harf-i cerli fiiller, mevsuller, مع أنّ / رغم gibi bağlaçlar, orta uzunlukta cümleler',B2:'akademik kelimeler, nasb/cezm edatları, كلّما, لا يكفي … بل gibi kalıplar, haber/bilim metinleri',C1:'hasr (ما … إلّا), لولا/لو, ileri akademik kelime dağarcığı, uzun ve iç içe cümleler; gerçek YDS üst düzey zorluğu'};
+function genPrompt(lv,c,n){return `Sen ÖSYM YDS Arapça sınavı için soru yazan uzman bir Arap dili öğretmenisin. ${n} adet ÖZGÜN (hiçbir kitaptan, çıkmış sınavdan alınmamış) YDS tarzı soru yaz.
+Seviye: ${lv} (${LVDESC[lv]}).
+Soru türü: ${BT[c]}.
+Tür kuralları:
+- kelime/rabit/dilb: tek Arapça cümle, boşluk "----", 5 kısa Arapça şık.
+- tamam: yarım Arapça cümle + "----", 5 Arapça tamamlayıcı şık.
+- ceviri: Arapça cümle ve 5 Türkçe şık (tr:true) YA DA Türkçe cümle ve 5 Arapça şık (stemTr:true).
+- diyalog: iki kişilik 3 replikli Arapça diyalog, ortadaki replik "----", satırları \\n ile ayır.
+- yakin: bir Arapça cümle, anlamca en yakın 5 Arapça şık.
+- paragraf: 2-3 cümlelik Arapça paragrafta bir cümle yerine "----", 5 Arapça cümle şık.
+- ilgisiz: (I)…(V) numaralı 5 cümlelik Arapça paragraf, şıklar ["I","II","III","IV","V"].
+- okuma: 5-7 cümlelik Arapça parça + "\\n\\n" + Arapça soru kökü, 5 Arapça şık.
+Kurallar: Fasih ve doğru Arapça; gerektiği yerde hareke koy (özellikle i‘rab ipucu olan yerlerde). Tek bir şık kesinlikle doğru olsun, diğer dördü inandırıcı çeldirici olsun. Doğru şıkkın yerini rastgele seç (0-4).
+Açıklamalar Türkçe, öğretici ve gerekçeli olsun:
+- an: cümlenin yapısı ve anlam ilişkisi analizi (1-2 cümle)
+- st: çözüm adımları dizisi (3-4 adım)
+- w: 5 öğe, her şık için neden doğru/yanlış olduğu (şık sırasıyla)
+- k: "Bu şık neden doğru?" sorusuna net, mantığı öğreten cevap (2-3 cümle)
+SADECE şu biçimde geçerli JSON döndür, başka metin yazma:
+{"questions":[{"s":"...","o":["","","","",""],"a":0,"tr":false,"stemTr":false,"an":"...","st":["..."],"w":["","","","",""],"k":"..."}]}`;}
+function validQ(q){return q&&typeof q.s==='string'&&Array.isArray(q.o)&&q.o.length===5&&q.o.every(x=>typeof x==='string')&&Number.isInteger(q.a)&&q.a>=0&&q.a<5&&Array.isArray(q.w)&&q.w.length===5&&Array.isArray(q.st)&&typeof q.k==='string'&&typeof q.an==='string';}
+let genBusy=false;
+$('#genBtn').onclick=async()=>{
+  if(!sampleFn||genBusy)return;genBusy=true;
+  const lv=$('#gLv').value,c=$('#gCat').value,n=+$('#gN').value;
+  $('#genBtn').disabled=true;$('#genMsg').textContent='Claude soruları yazıyor… (yarım dakika kadar sürebilir)';
+  try{
+    let v;
+    try{v=await sampleFn.json(genPrompt(lv,c,n),{modelTier:'complex'});}
+    catch(e){if(e&&(e.code==='not_granted'||e.code==='rate_limited'))throw e;const r=await sampleFn(genPrompt(lv,c,n),{modelTier:'complex'});const m=(r.text||'').match(/\{[\s\S]*\}/);v=m?JSON.parse(m[0]):null;}
+    const arr=(v&&v.questions)||(Array.isArray(v)?v:[]);
+    const ok=arr.filter(validQ).map((q,i)=>({...q,lv,c,gen:1,id:'g'+Date.now()+'_'+i,st:q.st.map(String),w:q.w.map(String)}));
+    if(!ok.length)throw {message:'Geçerli soru gelmedi'};
+    const g=gen();g.push(...ok);save();
+    bLv=lv;bCat=c;bOrder=bPool().map(q=>q.id);bPos=bOrder.indexOf(ok[0].id);bAns=null;renderBChips();renderB();
+    $('#genMsg').textContent=`${ok.length} yeni soru eklendi. Sorular bu tarayıcıda saklanır.`;
+    window.scrollTo({top:$('#bBox').offsetTop-70});
+  }catch(e){$('#genMsg').textContent=e&&e.code==='rate_limited'?'Şu an çok fazla istek var; biraz sonra tekrar dene.':(e&&e.code==='not_granted'?'İzin verilmedi. Tekrar denersen izin penceresi yeniden açılır.':'Soru üretilemedi: '+((e&&(e.message||e.code))||'bilinmeyen hata'));}
+  finally{genBusy=false;$('#genBtn').disabled=false;}
+};
+$('#genClear').onclick=()=>{mem.genQ=[];save();bStart();$('#genMsg').textContent='Üretilen sorular silindi.';};
+
+/* ---------- oyunlar ---------- */
+const stripH=s=>String(s).replace(/[ً-ْٰـ]/g,'');
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+const isArOnly=s=>/[؀-ۿ]/.test(s)&&!/[A-Za-zğüşıöçĞÜŞİÖÇ…—]/.test(s);
+const best=()=>st('gameBest',{});
+function setBest(k,v,higher=true){const b=best();if(b[k]==null||(higher?v>b[k]:v<b[k])){b[k]=v;save();return true;}return false;}
+let gTimer=null;function stopTimer(){if(gTimer){clearInterval(gTimer);gTimer=null;}}
+const GAMES=[
+ {id:'eslestir',n:'Eşleştirme',d:'6 Arapça kelimeyi Türkçe anlamlarıyla eşleştir. Hata yapmadan ve hızlı bitirmeye çalış.'},
+ {id:'hizli',n:'Hızlı Doğru-Yanlış',d:'60 saniye: kelime ve anlam doğru eşleşmiş mi? Art arda doğrular puanını katlar.'},
+ {id:'asmaca',n:'Kelime Avı',d:'Türkçe anlamdan Arapça kelimeyi harf harf bul. 6 hata hakkın var.'},
+ {id:'cumle',n:'Cümle Kur',d:'Karışık kelimeleri doğru sıraya dizerek Arapça cümleyi kur.'}
+];
+let curGame=null;
+function renderGameMenu(){
+  stopTimer();curGame=null;const b=best();
+  $('#gameBox').innerHTML=`<div class="grid">${GAMES.map(g=>`<div class="card"><h3>${g.n}</h3><p class="small muted" style="margin:0 0 10px">${g.d}</p><div class="row" style="justify-content:space-between"><span class="small muted">${b[g.id]!=null?({eslestir:'En iyi süre: ',hizli:'Rekor: ',asmaca:'Bulunan kelime: ',cumle:'Kurulan cümle: '})[g.id]+'<b>'+(g.id==='eslestir'?b[g.id]+' sn':b[g.id])+'</b>':''}</span><button class="btn small" data-g="${g.id}">Oyna</button></div></div>`).join('')}</div>`;
+  $('#gameBox').querySelectorAll('[data-g]').forEach(x=>x.onclick=()=>startGame(x.dataset.g));
+}
+function gHead(title,extra=''){return `<div class="row" style="justify-content:space-between;margin-bottom:10px"><button class="btn ghost small" id="gBack">← Oyunlar</button><b>${title}</b><span id="gStat" class="small">${extra}</span></div>`;}
+function bindBack(){$('#gBack').onclick=renderGameMenu;}
+function startGame(id){stopTimer();curGame=id;({eslestir:gMatch,hizli:gTF,asmaca:gHang,cumle:gOrder})[id]();}
+function gEnd(msg,again){$('#gArea').innerHTML=`<div class="card empty"><div class="stat">${msg}</div><div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="gAgain">Tekrar oyna</button></div></div>`;$('#gAgain').onclick=again;}
+const gPool=()=>{const k=known();const un=V.filter(v=>!k[v.id]);return un.length>=8?un:V;};
+
+/* 1. Eşleştirme */
+function gMatch(){
+  const set=shuffle(gPool()).slice(0,6);let sel=null,done=0,errs=0;const t0=Date.now();
+  $('#gameBox').innerHTML=gHead('Eşleştirme','<span id="gT">0 sn</span>')+`<div id="gArea"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div id="mL"></div><div id="mR"></div></div><p class="small muted" style="margin-top:8px">Hata: <b id="mE">0</b></p></div>`;bindBack();
+  gTimer=setInterval(()=>{const e=$('#gT');if(e)e.textContent=Math.round((Date.now()-t0)/1000)+' sn';},500);
+  const btn=(v,side)=>`<button class="opt" data-id="${v.id}" data-s="${side}" style="justify-content:center;min-height:54px;margin:0 0 8px">${side==='L'?`<span class="ar" style="font-size:1.15rem">${esc(v[1])}</span>`:`<span class="small">${esc(v[2])}</span>`}</button>`;
+  $('#mL').innerHTML=shuffle(set).map(v=>btn(v,'L')).join('');$('#mR').innerHTML=shuffle(set).map(v=>btn(v,'R')).join('');
+  $('#gArea').querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(b.disabled)return;
+    if(!sel||sel.dataset.s===b.dataset.s){if(sel)sel.style.outline='';sel=b;b.style.outline='2px solid var(--accent)';return;}
+    if(sel.dataset.id===b.dataset.id){[sel,b].forEach(x=>{x.disabled=true;x.classList.add('right');x.style.outline='';});done++;sel=null;
+      if(done===6){stopTimer();const s=Math.round((Date.now()-t0)/1000)+errs*5;const nb=setBest('eslestir',s,false);setTimeout(()=>gEnd(`${s} sn${nb?' · yeni rekor!':''}`,gMatch),400);$('#gArea').insertAdjacentHTML('beforeend',`<p class="small muted">Süre + her hata için 5 sn ceza.</p>`);}}
+    else{errs++;$('#mE').textContent=errs;const a=sel;[a,b].forEach(x=>x.classList.add('wrong'));setTimeout(()=>{[a,b].forEach(x=>{x.classList.remove('wrong');x.style.outline='';});},450);sel=null;}
+  });
+}
+
+/* 2. Hızlı doğru-yanlış */
+function gTF(){
+  let score=0,combo=0,left=60,cur=null,truth=false,count=0;const pool=gPool();
+  $('#gameBox').innerHTML=gHead('Hızlı Doğru-Yanlış','<span id="gT">60</span> sn · <b id="gS">0</b> puan')+`<div id="gArea"><div class="card flash" style="cursor:default"><div class="ar" id="tfA"></div><div id="tfB" style="margin-top:8px;font-size:1.1rem"></div><div class="small muted" id="tfC" style="margin-top:6px"></div></div><div class="row" style="justify-content:center"><button class="btn bad" id="tfN" style="min-width:120px">✗ Yanlış</button><button class="btn" id="tfY" style="min-width:120px">✓ Doğru</button></div></div>`;bindBack();
+  function next(){cur=pool[Math.random()*pool.length|0];truth=Math.random()<.5;let m=cur;if(!truth){do{m=pool[Math.random()*pool.length|0];}while(m===cur||m[2]===cur[2]);}$('#tfA').textContent=cur[1];$('#tfB').textContent=m[2];count++;}
+  function ans(y){if(!cur)return;const ok=y===truth;if(ok){combo++;score+=10*Math.min(1+Math.floor(combo/3),4);}else{combo=0;}
+    $('#tfC').innerHTML=ok?`<span style="color:var(--ok)">Doğru! ${combo>=3?'Kombo x'+Math.min(1+Math.floor(combo/3),4):''}</span>`:`<span style="color:var(--bad)">Yanlış: ${esc(cur[1])} = ${esc(cur[2])}</span>`;$('#gS').textContent=score;next();}
+  $('#tfY').onclick=()=>ans(true);$('#tfN').onclick=()=>ans(false);next();
+  gTimer=setInterval(()=>{left--;const e=$('#gT');if(e)e.textContent=left;if(left<=0){stopTimer();const nb=setBest('hizli',score);gEnd(`${score} puan${nb?' · yeni rekor!':''}`,gTF);}},1000);
+}
+
+/* 3. Kelime avı (adam asmaca) */
+const AR_KEYS='ا أ إ آ ء ؤ ئ ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ى ة'.split(' ');
+function gHang(){
+  const cand=V.filter(v=>v[0]!=='rabit'&&!/[\s\/…]/.test(stripH(v[1])));
+  const v=cand[Math.random()*cand.length|0];const word=[...stripH(v[1])];const got=new Set();let miss=0;let won=st('gameWins',{});
+  $('#gameBox').innerHTML=gHead('Kelime Avı','Hata: <b id="hM">0</b>/6')+`<div id="gArea"><div class="card" style="text-align:center"><div class="small muted">Anlamı</div><div style="font-size:1.15rem;font-weight:600;margin:4px 0 12px">${esc(v[2])}</div><div id="hW" class="ar" style="font-size:2rem;letter-spacing:6px;direction:rtl"></div><div class="bar" style="margin-top:12px"><i id="hBar" style="width:0%;background:var(--bad)"></i></div></div><div id="hK" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;direction:rtl"></div></div>`;bindBack();
+  const draw=()=>{$('#hW').textContent=word.map(c=>got.has(c)?c:'_').join(' ');};
+  $('#hK').innerHTML=AR_KEYS.map(k=>`<button class="opt ar" data-k="${k}" style="justify-content:center;margin:0;padding:6px 0;font-size:1.3rem">${k}</button>`).join('');
+  $('#hK').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{const k=b.dataset.k;b.disabled=true;
+    if(word.includes(k)){got.add(k);b.classList.add('right');draw();if(word.every(c=>got.has(c))){const w=(best().asmaca||0)+1;const b2=best();b2.asmaca=w;save();setTimeout(()=>gEnd(`Buldun: ${v[1]}`,gHang),500);}}
+    else{miss++;b.classList.add('wrong');$('#hM').textContent=miss;$('#hBar').style.width=(miss/6*100)+'%';if(miss>=6){$('#hW').textContent=word.join(' ');setTimeout(()=>gEnd(`Kelime: ${v[1]}`,gHang),900);}}});
+  draw();
+}
+
+/* 4. Cümle kur */
+function gOrder(){
+  const pool=[...V.map(v=>v[3]),...G.flatMap(g=>g.ex)].filter(s=>isArOnly(s)).map(s=>s.replace(/[.،؟!]$/,'').trim()).filter(s=>{const n=s.split(/\s+/).length;return n>=3&&n<=8;});
+  const s=pool[Math.random()*pool.length|0];const words=s.split(/\s+/);let mix=shuffle(words.map((w,i)=>({w,i})));if(words.length>1)while(mix.every((x,i)=>x.i===i))mix=shuffle(mix);
+  let picked=[];let score=st('gameBest',{}).cumle||0;
+  $('#gameBox').innerHTML=gHead('Cümle Kur',`Toplam: <b id="cS">${score}</b>`)+`<div id="gArea"><div class="card"><div class="small muted">Kelimelere sırayla dokun (sağdan sola).</div><div id="cOut" class="ar" style="min-height:58px;border-bottom:2px dashed var(--line);margin:8px 0 12px;font-size:1.4rem"></div><div id="cIn" class="row" style="direction:rtl;gap:6px"></div><div class="row" style="margin-top:12px"><button class="btn ghost small" id="cUndo">Geri al</button><button class="btn" id="cCheck">Kontrol et</button></div><div id="cMsg" style="margin-top:8px"></div></div></div>`;bindBack();
+  const draw=()=>{$('#cOut').textContent=picked.map(x=>x.w).join(' ');$('#cIn').innerHTML=mix.map((x,k)=>picked.includes(x)?'':`<button class="chip ar" data-k="${k}" style="font-size:1.2rem;padding:6px 14px">${esc(x.w)}</button>`).join('');$('#cIn').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{picked.push(mix[+b.dataset.k]);draw();});};
+  $('#cUndo').onclick=()=>{picked.pop();draw();};
+  $('#cCheck').onclick=()=>{if(picked.length<words.length){$('#cMsg').innerHTML='<span class="small muted">Önce bütün kelimeleri yerleştir.</span>';return;}
+    const ok=picked.map(x=>x.w).join(' ')===words.join(' ');
+    if(ok){const b=best();b.cumle=(b.cumle||0)+1;save();}
+    $('#cMsg').innerHTML=(ok?'<div class="explain"><b>Doğru!</b></div>':`<div class="explain"><b>Olmadı.</b> Doğrusu: <span class="ar">${esc(s)}</span></div>`)+'<div style="margin-top:8px;text-align:end"><button class="btn" id="cNext">Sonraki cümle</button></div>';$('#cNext').onclick=gOrder;$('#cCheck').disabled=true;};
+  draw();
+}
+
+/* ---------- Kalıp Avcısı (kaynak: Enes Özdemir, ÖSYM Arapça YDS 2018–2025 sıklık dosyası) ---------- */
+const KD={"fiil":[{"n":1,"v":"يؤدي","p":"إلى","m":"أدى","tr":"-e yol açmak","s":15,"t":87,"k":0},{"n":2,"v":"يتمكن","p":"من","m":"تمكن","tr":"-i başarmak, -ebilmek","s":14,"t":36,"k":0},{"n":3,"v":"يعاني","p":"من","m":"عانى","tr":"-den muzdarip olmak","s":13,"t":46,"k":1},{"n":4,"v":"يشير","p":"إلى","m":"أشار","tr":"-e işaret etmek","s":13,"t":30,"k":1},{"n":5,"v":"يقوم","p":"بـ","m":"قام","tr":"-i yapmak, gerçekleştirmek","s":12,"t":30,"k":0},{"n":6,"v":"يصل","p":"إلى","m":"وصل","tr":"-e ulaşmak","s":12,"t":29,"k":0},{"n":7,"v":"يؤثر","p":"على","m":"أثر","tr":"-i etkilemek","s":12,"t":28,"k":0},{"n":8,"v":"يساعد","p":"على","m":"ساعد","tr":"-e yardım etmek","s":11,"t":33,"k":2},{"n":9,"v":"يعتمد","p":"على","m":"اعتمد","tr":"-e dayanmak","s":11,"t":32,"k":0},{"n":10,"v":"يحتوي","p":"على","m":"احتوى","tr":"-i içermek","s":11,"t":24,"k":0},{"n":11,"v":"يحتاج","p":"إلى","m":"احتاج","tr":"-e ihtiyaç duymak","s":11,"t":20,"k":0},{"n":12,"v":"يعود","p":"إلى","m":"عاد","tr":"-e dönmek; -e dayanmak","s":11,"t":19,"k":0},{"n":13,"v":"يطلق","p":"على","m":"أطلق","tr":"-e ad vermek","s":11,"t":17,"k":2},{"n":14,"v":"يساهم","p":"في","m":"ساهم","tr":"-e katkıda bulunmak","s":10,"t":22,"k":0},{"n":15,"v":"يتوصل","p":"إلى","m":"توصل","tr":"-e ulaşmak","s":9,"t":23,"k":1},{"n":16,"v":"يهتم","p":"بـ","m":"اهتم","tr":"-e ilgi göstermek","s":9,"t":20,"k":0},{"n":17,"v":"يعمل","p":"على","m":"عمل","tr":"-e çalışmak, -i sağlamaya uğraşmak","s":9,"t":19,"k":2},{"n":18,"v":"يساعد","p":"في","m":"ساعد","tr":"-de yardımcı olmak","s":9,"t":13,"k":0},{"n":19,"v":"يشعر","p":"بـ","m":"شعر","tr":"-i hissetmek","s":9,"t":13,"k":0},{"n":20,"v":"ينتج","p":"عن","m":"نتج","tr":"-den kaynaklanmak","s":9,"t":10,"k":0},{"n":21,"v":"يستفيد","p":"من","m":"استفاد","tr":"-den yararlanmak","s":9,"t":9,"k":0},{"n":22,"v":"يرتبط","p":"بـ","m":"ارتبط","tr":"-e bağlı olmak","s":8,"t":11,"k":0},{"n":23,"v":"يتسبب","p":"في","m":"تسبب","tr":"-e sebep olmak","s":7,"t":14,"k":0},{"n":24,"v":"يحصل","p":"على","m":"حصل","tr":"-i elde etmek","s":7,"t":13,"k":0},{"n":25,"v":"يرجع","p":"إلى","m":"رجع","tr":"-e dönmek; -e dayanmak","s":7,"t":12,"k":0},{"n":26,"v":"يختلف","p":"عن","m":"اختلف","tr":"-den farklı olmak","s":7,"t":11,"k":0},{"n":27,"v":"يدل","p":"على","m":"دل","tr":"-e delalet etmek","s":7,"t":10,"k":1},{"n":28,"v":"يحافظ","p":"على","m":"حافظ","tr":"-i korumak","s":7,"t":9,"k":2},{"n":29,"v":"يقلل","p":"من","m":"قلل","tr":"-i azaltmak","s":7,"t":9,"k":0},{"n":30,"v":"يحرص","p":"على","m":"حرص","tr":"-e özen göstermek","s":7,"t":7,"k":1},{"n":31,"v":"يتميز","p":"بـ","m":"تميز","tr":"ile öne çıkmak, ayırt edilmek","s":6,"t":11,"k":0},{"n":32,"v":"يؤثر","p":"في","m":"أثر","tr":"-i etkilemek","s":6,"t":10,"k":0},{"n":33,"v":"يعبر","p":"عن","m":"عبر","tr":"-i ifade etmek","s":6,"t":10,"k":0},{"n":34,"v":"يبدأ","p":"في","m":"بدأ","tr":"-e başlamak","s":6,"t":10,"k":0},{"n":35,"v":"يتأثر","p":"بـ","m":"تأثر","tr":"-den etkilenmek","s":6,"t":9,"k":0},{"n":36,"v":"يضر","p":"بـ","m":"أضر","tr":"-e zarar vermek","s":6,"t":9,"k":0},{"n":37,"v":"ينظر","p":"إلى","m":"نظر","tr":"-e bakmak","s":6,"t":8,"k":0},{"n":38,"v":"يستند","p":"إلى","m":"استند","tr":"-e dayanmak","s":6,"t":8,"k":0},{"n":39,"v":"يتمتع","p":"بـ","m":"تمتع","tr":"-e sahip olmak","s":6,"t":8,"k":0},{"n":40,"v":"ينتمي","p":"إلى","m":"انتمى","tr":"-e ait olmak","s":6,"t":7,"k":0},{"n":41,"v":"يركز","p":"على","m":"ركز","tr":"-e odaklanmak","s":6,"t":6,"k":0},{"n":42,"v":"يكمن","p":"في","m":"كمن","tr":"-de yatmak, gizli olmak","s":6,"t":6,"k":1},{"n":43,"v":"يتألف","p":"من","m":"تألف","tr":"-den oluşmak","s":5,"t":11,"k":0},{"n":44,"v":"ينتقل","p":"إلى","m":"انتقل","tr":"-e geçmek, taşınmak","s":5,"t":11,"k":0},{"n":45,"v":"يتحول","p":"إلى","m":"تحول","tr":"-e dönüşmek","s":5,"t":10,"k":0},{"n":46,"v":"يشارك","p":"في","m":"شارك","tr":"-e katılmak","s":5,"t":10,"k":0},{"n":47,"v":"يتكون","p":"من","m":"تكون","tr":"-den oluşmak","s":5,"t":7,"k":1},{"n":48,"v":"يبتعد","p":"عن","m":"ابتعد","tr":"-den uzaklaşmak","s":5,"t":7,"k":0},{"n":49,"v":"يقتصر","p":"على","m":"اقتصر","tr":"-le sınırlı kalmak","s":5,"t":6,"k":0},{"n":50,"v":"يتحدث","p":"عن","m":"تحدث","tr":"-den bahsetmek","s":5,"t":6,"k":0},{"n":51,"v":"يهدف","p":"إلى","m":"هدف","tr":"-i amaçlamak","s":5,"t":6,"k":0},{"n":52,"v":"يرغب","p":"في","m":"رغب","tr":"-i istemek","s":5,"t":6,"k":0},{"n":53,"v":"يمتاز","p":"بـ","m":"امتاز","tr":"ile temayüz etmek","s":4,"t":12,"k":0},{"n":54,"v":"يسعى","p":"إلى","m":"سعى","tr":"-e çabalamak","s":4,"t":7,"k":0},{"n":55,"v":"يسمح","p":"لـ","m":"سمح","tr":"-e izin vermek","s":4,"t":6,"k":0},{"n":56,"v":"يلجأ","p":"إلى","m":"لجأ","tr":"-e başvurmak","s":4,"t":5,"k":0},{"n":57,"v":"ينقسم","p":"إلى","m":"انقسم","tr":"-e ayrılmak","s":4,"t":5,"k":0},{"n":58,"v":"ينجح","p":"في","m":"نجح","tr":"-de başarılı olmak","s":4,"t":5,"k":0},{"n":59,"v":"يقع","p":"في","m":"وقع","tr":"-de bulunmak; -e düşmek","s":4,"t":5,"k":0},{"n":60,"v":"يتسم","p":"بـ","m":"اتسم","tr":"ile nitelenmek","s":4,"t":5,"k":0},{"n":61,"v":"يتعرض","p":"لـ","m":"تعرض","tr":"-e maruz kalmak","s":4,"t":5,"k":0},{"n":62,"v":"ينحدر","p":"من","m":"انحدر","tr":"-in soyundan gelmek","s":4,"t":4,"k":0},{"n":63,"v":"يفكر","p":"في","m":"فكر","tr":"-i düşünmek","s":4,"t":4,"k":0},{"n":64,"v":"يسمح","p":"بـ","m":"سمح","tr":"-e izin vermek","s":4,"t":4,"k":0},{"n":65,"v":"يحظى","p":"بـ","m":"حظي","tr":"-e nail olmak","s":4,"t":4,"k":0},{"n":66,"v":"يتعامل","p":"مع","m":"تعامل","tr":"ile başa çıkmak, muamele etmek","s":4,"t":4,"k":1},{"n":67,"v":"يكشف","p":"عن","m":"كشف","tr":"-i ortaya çıkarmak","s":3,"t":7,"k":0},{"n":68,"v":"يتعلق","p":"بـ","m":"تعلق","tr":"ile ilgili olmak","s":3,"t":6,"k":0},{"n":69,"v":"يقضي","p":"على","m":"قضى","tr":"-i yok etmek","s":3,"t":5,"k":0},{"n":70,"v":"يضيف","p":"إلى","m":"أضاف","tr":"-e eklemek","s":3,"t":5,"k":0},{"n":71,"v":"يستمر","p":"في","m":"استمر","tr":"-e devam etmek","s":3,"t":5,"k":0},{"n":72,"v":"يسيطر","p":"على","m":"سيطر","tr":"-i kontrol altına almak","s":3,"t":4,"k":1},{"n":73,"v":"يتخلص","p":"من","m":"تخلص","tr":"-den kurtulmak","s":3,"t":4,"k":1},{"n":74,"v":"يبحث","p":"عن","m":"بحث","tr":"-i aramak, araştırmak","s":3,"t":4,"k":1},{"n":75,"v":"يفتقر","p":"إلى","m":"افتقر","tr":"-den yoksun olmak","s":3,"t":4,"k":0},{"n":76,"v":"يميل","p":"إلى","m":"مال","tr":"-e meyletmek","s":3,"t":4,"k":0},{"n":77,"v":"يسهم","p":"في","m":"أسهم","tr":"-e katkıda bulunmak","s":3,"t":4,"k":0},{"n":78,"v":"يتعرف","p":"على","m":"تعرف","tr":"-i tanımak","s":3,"t":3,"k":0},{"n":79,"v":"يتفوق","p":"على","m":"تفوق","tr":"-e üstün gelmek","s":3,"t":3,"k":0},{"n":80,"v":"يقبل","p":"على","m":"أقبل","tr":"-e yönelmek, rağbet etmek","s":3,"t":3,"k":0},{"n":81,"v":"يخفف","p":"من","m":"خفف","tr":"-i hafifletmek","s":3,"t":3,"k":0},{"n":82,"v":"ينجم","p":"عن","m":"نجم","tr":"-den kaynaklanmak","s":3,"t":3,"k":0},{"n":83,"v":"يدعو","p":"إلى","m":"دعا","tr":"-e çağırmak","s":3,"t":3,"k":0},{"n":84,"v":"يتطرق","p":"إلى","m":"تطرق","tr":"-e değinmek","s":3,"t":3,"k":0},{"n":85,"v":"يتناسب","p":"مع","m":"تناسب","tr":"ile orantılı/uyumlu olmak","s":2,"t":3,"k":0},{"n":86,"v":"يشجع","p":"على","m":"شجع","tr":"-e teşvik etmek","s":2,"t":2,"k":0},{"n":87,"v":"يؤكد","p":"على","m":"أكد","tr":"-i vurgulamak","s":2,"t":2,"k":0},{"n":88,"v":"يخاف","p":"من","m":"خاف","tr":"-den korkmak","s":2,"t":2,"k":0},{"n":89,"v":"يستغني","p":"عن","m":"استغنى","tr":"-den vazgeçmek, -e ihtiyaç duymamak","s":2,"t":2,"k":0},{"n":90,"v":"يشتهر","p":"بـ","m":"اشتهر","tr":"ile ünlü olmak","s":2,"t":2,"k":0},{"n":91,"v":"يؤمن","p":"بـ","m":"آمن","tr":"-e inanmak","s":2,"t":2,"k":0},{"n":92,"v":"يتكيف","p":"مع","m":"تكيف","tr":"-e uyum sağlamak","s":2,"t":2,"k":0},{"n":93,"v":"يتفق","p":"مع","m":"اتفق","tr":"ile aynı fikirde olmak","s":2,"t":2,"k":0}],"edat":[{"n":1,"ar":"في","tr":"-de/-da, içinde; hakkında","tur":"harf-i cer","s":15,"t":2812,"k":46},{"n":2,"ar":"من","tr":"-den/-dan; (مَن) kim, kim ki","tur":"harf-i cer / mevsul","s":15,"t":2347,"k":65},{"n":3,"ar":"لـ","tr":"için, -e ait; -mek için","tur":"harf-i cer (bitişik)","s":15,"t":1652,"k":40},{"n":4,"ar":"بـ","tr":"ile, vasıtasıyla; -de","tur":"harf-i cer (bitişik)","s":15,"t":1437,"k":36},{"n":5,"ar":"على","tr":"üzerinde; -e; -e karşı","tur":"harf-i cer","s":15,"t":1350,"k":51},{"n":6,"ar":"أن / أنّ","tr":"-dığı, -mesi (cümleyi isimleştirir)","tur":"tekid / masdar","s":15,"t":1043,"k":9},{"n":7,"ar":"إلى","tr":"-e/-a, -e doğru","tur":"harf-i cer","s":15,"t":993,"k":42},{"n":8,"ar":"التي","tr":"ki o (dişil tekil; akılsız çoğul)","tur":"ism-i mevsul","s":15,"t":750,"k":23},{"n":9,"ar":"لا","tr":"hayır; -me (olumsuzluk)","tur":"nefy","s":15,"t":699,"k":13},{"n":10,"ar":"عن","tr":"-den/-dan; hakkında","tur":"harf-i cer","s":15,"t":569,"k":42},{"n":11,"ar":"ما","tr":"ne; şey ki; değil","tur":"mevsul / istifham / nefy","s":15,"t":476,"k":28},{"n":12,"ar":"إنّ","tr":"şüphesiz, muhakkak ki (cümle başında)","tur":"tekid (inne)","s":15,"t":469,"k":2},{"n":13,"ar":"قد","tr":"(+mazi) zaten, -mış; (+muzari) -ebilir","tur":"tahkik / taklil","s":15,"t":343,"k":1},{"n":14,"ar":"لأن","tr":"çünkü","tur":"ta'lil","s":15,"t":319,"k":9},{"n":15,"ar":"الذي","tr":"ki o (eril tekil)","tur":"ism-i mevsul","s":15,"t":313,"k":30},{"n":16,"ar":"هذا","tr":"bu (eril)","tur":"ism-i işaret","s":15,"t":305,"k":1},{"n":17,"ar":"بين","tr":"arasında","tur":"zarf","s":15,"t":283,"k":5},{"n":18,"ar":"هذه","tr":"bu (dişil)","tur":"ism-i işaret","s":15,"t":267,"k":3},{"n":19,"ar":"لم","tr":"-medi (geçmiş olumsuz)","tur":"nefy (cezm)","s":15,"t":230,"k":9},{"n":20,"ar":"مع","tr":"ile, beraber","tur":"zarf","s":15,"t":227,"k":14},{"n":21,"ar":"بعد","tr":"sonra","tur":"zarf","s":15,"t":206,"k":5},{"n":22,"ar":"هناك","tr":"orada; ... vardır","tur":"işaret zarfı","s":15,"t":163,"k":0},{"n":23,"ar":"أي / أية","tr":"hangi; herhangi; (أي) yani","tur":"istifham / tefsir","s":15,"t":155,"k":1},{"n":24,"ar":"ذلك","tr":"şu, o (eril)","tur":"ism-i işaret","s":15,"t":155,"k":0},{"n":25,"ar":"قبل","tr":"önce","tur":"zarf","s":15,"t":133,"k":3},{"n":26,"ar":"غير","tr":"başka; -sız, gayri","tur":"istisna / nefy","s":15,"t":132,"k":1},{"n":27,"ar":"بسبب","tr":"yüzünden, sebebiyle","tur":"edat","s":15,"t":130,"k":1},{"n":28,"ar":"ليست / ليس","tr":"değil","tur":"nefy (nakıs fiil)","s":15,"t":129,"k":2},{"n":29,"ar":"كـ","tr":"gibi","tur":"harf-i cer (bitişik)","s":15,"t":128,"k":4},{"n":30,"ar":"بشكل / بصورة (+ sıfat)","tr":"... biçimde, -ce","tur":"edat grubu","s":15,"t":127,"k":1},{"n":31,"ar":"لقد","tr":"gerçekten, şüphesiz (+mazi)","tur":"tekid","s":15,"t":103,"k":0},{"n":32,"ar":"حتى","tr":"-e kadar; hatta; (+fiil) -sin diye","tur":"harf-i cer / bağlaç","s":15,"t":101,"k":7},{"n":33,"ar":"من دون / بدون / دون","tr":"-sız, olmaksızın","tur":"zarf","s":15,"t":99,"k":4},{"n":34,"ar":"مثل","tr":"gibi","tur":"edat","s":15,"t":98,"k":0},{"n":35,"ar":"الذين","tr":"ki onlar (eril çoğul)","tur":"ism-i mevsul","s":15,"t":98,"k":20},{"n":36,"ar":"عند","tr":"yanında; -dığı zaman","tur":"zarf","s":15,"t":91,"k":0},{"n":37,"ar":"هل","tr":"mı? (soru)","tur":"istifham","s":15,"t":83,"k":0},{"n":38,"ar":"منذ","tr":"-den beri","tur":"harf-i cer","s":15,"t":82,"k":0},{"n":39,"ar":"إذا","tr":"-dığında, eğer","tur":"şart (zaman)","s":15,"t":79,"k":7},{"n":40,"ar":"إلا","tr":"-den başka; ancak","tur":"istisna","s":15,"t":77,"k":9},{"n":41,"ar":"حول","tr":"etrafında; hakkında","tur":"zarf","s":15,"t":74,"k":1},{"n":42,"ar":"من خلال","tr":"vasıtasıyla, aracılığıyla","tur":"zarf grubu","s":15,"t":73,"k":2},{"n":43,"ar":"بحسب / حسب","tr":"-e göre","tur":"edat","s":15,"t":61,"k":2},{"n":44,"ar":"لماذا","tr":"niçin?","tur":"istifham","s":15,"t":51,"k":0},{"n":45,"ar":"كيف","tr":"nasıl?","tur":"istifham","s":15,"t":45,"k":0},{"n":46,"ar":"لأجل / من أجل","tr":"için, uğruna","tur":"edat grubu","s":15,"t":44,"k":2},{"n":47,"ar":"خلال","tr":"süresince, boyunca","tur":"zarf","s":14,"t":63,"k":1},{"n":48,"ar":"لدى","tr":"-de, yanında (sahiplik)","tur":"zarf","s":14,"t":59,"k":2},{"n":49,"ar":"تلك","tr":"şu, o (dişil)","tur":"ism-i işaret","s":14,"t":57,"k":0},{"n":50,"ar":"أثناء","tr":"esnasında","tur":"zarf","s":14,"t":50,"k":0},{"n":51,"ar":"نحو","tr":"-e doğru; yaklaşık","tur":"zarf","s":14,"t":36,"k":0},{"n":52,"ar":"عبر","tr":"aracılığıyla; boyunca, -den geçerek","tur":"zarf","s":14,"t":36,"k":1},{"n":53,"ar":"لا بد","tr":"mutlaka, kaçınılmaz","tur":"nefy kalıbı","s":14,"t":35,"k":0},{"n":54,"ar":"لو","tr":"eğer (farazi)","tur":"şart","s":13,"t":32,"k":5},{"n":55,"ar":"وفق / وفقا لـ","tr":"-e göre, uyarınca","tur":"edat","s":13,"t":23,"k":2},{"n":56,"ar":"ماذا","tr":"ne?","tur":"istifham","s":12,"t":49,"k":0},{"n":57,"ar":"تحت","tr":"altında","tur":"zarf","s":12,"t":30,"k":0},{"n":58,"ar":"رغم","tr":"rağmen","tur":"edat","s":12,"t":30,"k":5},{"n":59,"ar":"مهما","tr":"ne olursa olsun, her ne kadar","tur":"şart","s":12,"t":25,"k":1},{"n":60,"ar":"على الرغم من / بالرغم من","tr":"-e rağmen","tur":"edat grubu","s":12,"t":24,"k":1},{"n":61,"ar":"عن طريق","tr":"yoluyla","tur":"edat grubu","s":11,"t":35,"k":2},{"n":62,"ar":"اللائي / اللاتي / اللواتي","tr":"ki onlar (dişil çoğul)","tur":"ism-i mevsul","s":11,"t":17,"k":12},{"n":63,"ar":"طيلة / طوال","tr":"boyunca","tur":"zarf","s":11,"t":16,"k":0},{"n":64,"ar":"ضمن","tr":"içinde, kapsamında","tur":"zarf","s":10,"t":29,"k":0},{"n":65,"ar":"لن","tr":"-meyecek (gelecek olumsuz)","tur":"nefy (nasb)","s":10,"t":22,"k":1},{"n":66,"ar":"أمام","tr":"önünde","tur":"zarf","s":10,"t":21,"k":0},{"n":67,"ar":"إنما","tr":"ancak, sadece","tur":"hasr","s":10,"t":17,"k":2},{"n":68,"ar":"داخل","tr":"içinde","tur":"zarf","s":9,"t":18,"k":0},{"n":69,"ar":"سوى","tr":"-den başka","tur":"istisna","s":9,"t":18,"k":1},{"n":70,"ar":"اللذين / اللذان","tr":"ki o ikisi (eril)","tur":"ism-i mevsul","s":9,"t":14,"k":14},{"n":71,"ar":"لعل","tr":"belki, umulur ki","tur":"tereccî","s":9,"t":10,"k":1},{"n":72,"ar":"ثمة","tr":"orada; ... vardır","tur":"işaret zarfı","s":9,"t":9,"k":1},{"n":73,"ar":"بالنسبة لـ","tr":"-e göre; için","tur":"edat grubu","s":8,"t":24,"k":1},{"n":74,"ar":"بواسطة","tr":"vasıtasıyla","tur":"edat","s":8,"t":15,"k":0},{"n":75,"ar":"من بين","tr":"arasından, ... arasında","tur":"zarf grubu","s":8,"t":12,"k":1},{"n":76,"ar":"إلى جانب","tr":"yanında; -e ek olarak","tur":"edat grubu","s":8,"t":12,"k":0},{"n":77,"ar":"كم","tr":"kaç?; ne kadar çok","tur":"istifham / haber","s":7,"t":17,"k":0},{"n":78,"ar":"نظرا لـ","tr":"-den dolayı","tur":"edat","s":7,"t":14,"k":0},{"n":79,"ar":"حوالي","tr":"yaklaşık","tur":"zarf","s":7,"t":9,"k":1},{"n":80,"ar":"اللتين / اللتان","tr":"ki o ikisi (dişil)","tur":"ism-i mevsul","s":7,"t":7,"k":7},{"n":81,"ar":"بفضل","tr":"sayesinde","tur":"edat","s":6,"t":16,"k":0},{"n":82,"ar":"خارج","tr":"dışında","tur":"zarf","s":6,"t":14,"k":0},{"n":83,"ar":"ضد","tr":"karşı","tur":"zarf","s":6,"t":14,"k":0},{"n":84,"ar":"هنا","tr":"burada","tur":"işaret zarfı","s":6,"t":10,"k":0},{"n":85,"ar":"هكذا","tr":"böylece, bu şekilde","tur":"işaret zarfı","s":6,"t":8,"k":0},{"n":86,"ar":"أين","tr":"nerede?","tur":"istifham","s":6,"t":7,"k":1},{"n":87,"ar":"هؤلاء","tr":"bunlar","tur":"ism-i işaret","s":6,"t":7,"k":1},{"n":88,"ar":"سوف","tr":"-ecek (gelecek)","tur":"istikbal","s":5,"t":9,"k":0},{"n":89,"ar":"متى","tr":"ne zaman?","tur":"istifham","s":5,"t":7,"k":1},{"n":90,"ar":"كأن","tr":"sanki","tur":"teşbih","s":5,"t":5,"k":1},{"n":91,"ar":"نتيجة لـ","tr":"sonucunda","tur":"edat","s":4,"t":4,"k":0},{"n":92,"ar":"بالقرب من","tr":"yakınında","tur":"zarf grubu","s":3,"t":4,"k":0},{"n":93,"ar":"فوق","tr":"üstünde","tur":"zarf","s":2,"t":4,"k":0},{"n":94,"ar":"فيما يتعلق بـ","tr":"ile ilgili olarak","tur":"edat grubu","s":2,"t":2,"k":0},{"n":95,"ar":"ليت","tr":"keşke","tur":"temennî","s":2,"t":2,"k":2}],"bag":[{"n":1,"ar":"و","tr":"ve; (hâl vavı) -iken","tur":"atıf","s":15,"t":4246,"k":21},{"n":2,"ar":"فـ","tr":"ve hemen; böylece; o halde","tur":"atıf / sebep","s":15,"t":477,"k":4},{"n":3,"ar":"أو","tr":"veya, ya da","tur":"atıf","s":15,"t":294,"k":0},{"n":4,"ar":"ولكن / لكن / لكنّ","tr":"fakat, ama","tur":"istidrak","s":15,"t":166,"k":8},{"n":5,"ar":"كما","tr":"ayrıca; -dığı gibi","tur":"atıf / teşbih","s":15,"t":149,"k":9},{"n":6,"ar":"حيث","tr":"-dığı yerde; çünkü; öyle ki","tur":"zarf / ta'lil","s":15,"t":112,"k":14},{"n":7,"ar":"لهذا / لذا / لذلك","tr":"bu yüzden","tur":"sonuç","s":15,"t":104,"k":3},{"n":8,"ar":"بل","tr":"bilakis, hatta","tur":"atıf (idrâb)","s":15,"t":94,"k":4},{"n":9,"ar":"ثم","tr":"sonra, ardından","tur":"atıf","s":15,"t":73,"k":5},{"n":10,"ar":"عندما","tr":"-dığı zaman","tur":"zaman","s":15,"t":65,"k":6},{"n":11,"ar":"مما","tr":"ki bu da (sonuç)","tur":"sonuç","s":15,"t":56,"k":6},{"n":12,"ar":"إذ","tr":"çünkü; o zaman ki","tur":"ta'lil / zaman","s":14,"t":56,"k":2},{"n":13,"ar":"رغم أن / مع أن","tr":"-e rağmen, her ne kadar","tur":"taviz","s":14,"t":36,"k":3},{"n":14,"ar":"كذلك","tr":"ayrıca; aynı şekilde","tur":"atıf / teşbih","s":14,"t":32,"k":2},{"n":15,"ar":"بينما","tr":"-iken; oysa","tur":"zaman / karşıtlık","s":14,"t":25,"k":12},{"n":16,"ar":"لكي / كي","tr":"-sın diye, -mek için","tur":"ta'lil (nasb)","s":14,"t":25,"k":2},{"n":17,"ar":"إلا أن","tr":"ancak, fakat","tur":"istidrak","s":13,"t":64,"k":4},{"n":18,"ar":"فـ... أما","tr":"...'e gelince","tur":"tafsil","s":13,"t":39,"k":1},{"n":19,"ar":"بالإضافة إلى","tr":"-e ek olarak, ayrıca","tur":"ilave","s":13,"t":34,"k":3},{"n":20,"ar":"حين / حينما","tr":"-dığı zaman","tur":"zaman","s":13,"t":24,"k":6},{"n":21,"ar":"كلما","tr":"her ne zaman ... -dıkça","tur":"zaman / şart","s":13,"t":24,"k":1},{"n":22,"ar":"لما","tr":"-ınca, -dığında","tur":"zaman","s":12,"t":27,"k":9},{"n":23,"ar":"أم","tr":"yoksa, veya (soru cümlesinde)","tur":"atıf","s":12,"t":24,"k":0},{"n":24,"ar":"بيد أن / غير أن","tr":"ancak, ne var ki","tur":"istidrak","s":11,"t":16,"k":9},{"n":25,"ar":"بحيث","tr":"öyle ki, ... şekilde","tur":"sonuç","s":11,"t":14,"k":7},{"n":26,"ar":"إذ إن","tr":"çünkü","tur":"ta'lil","s":11,"t":12,"k":0},{"n":27,"ar":"مع ذلك","tr":"buna rağmen, yine de","tur":"taviz","s":11,"t":12,"k":2},{"n":28,"ar":"أو... سواء","tr":"ister ... ister","tur":"tesviye","s":10,"t":20,"k":1},{"n":29,"ar":"بذلك","tr":"böylece, bununla","tur":"sonuç","s":9,"t":15,"k":0},{"n":30,"ar":"بعد أن / بعدما","tr":"-dıktan sonra","tur":"zaman","s":9,"t":13,"k":1},{"n":31,"ar":"ولا سيما / لا سيما","tr":"özellikle","tur":"tahsis","s":8,"t":11,"k":1},{"n":32,"ar":"من ثم","tr":"bu nedenle, sonra","tur":"sonuç","s":7,"t":12,"k":2},{"n":33,"ar":"بالتالي","tr":"dolayısıyla","tur":"sonuç","s":7,"t":11,"k":1},{"n":34,"ar":"قبل أن","tr":"-meden önce","tur":"zaman","s":7,"t":9,"k":0},{"n":35,"ar":"إذن","tr":"o halde","tur":"sonuç","s":5,"t":7,"k":0},{"n":36,"ar":"حيث إن","tr":"çünkü, -dığı için","tur":"ta'lil","s":5,"t":6,"k":0},{"n":37,"ar":"في حين","tr":"-iken, oysa","tur":"karşıtlık","s":4,"t":5,"k":0},{"n":38,"ar":"بما أن","tr":"-dığına göre, madem","tur":"ta'lil","s":4,"t":5,"k":1},{"n":39,"ar":"منذ أن","tr":"-dığından beri","tur":"zaman","s":4,"t":4,"k":0},{"n":40,"ar":"علاوة على","tr":"buna ilaveten","tur":"ilave","s":2,"t":3,"k":0},{"n":41,"ar":"فضلا عن","tr":"... bir yana, ayrıca","tur":"ilave","s":2,"t":2,"k":1},{"n":42,"ar":"أو... إما","tr":"ya ... ya da","tur":"tafsil","s":2,"t":2,"k":0}]};
+const KW={"kel":[[1,"عربي","Arap, Arapça (sıfat)","sıfat",15,288,0],[2,"اللغة","dil","isim",15,258,1],[3,"بعض","bazı, bir kısmı","isim",15,233,2],[4,"أخرى/ آخر","diğer, başka","sıfat",15,229,5],[5,"العالم","dünya, âlem","isim",15,211,0],[6,"كثير","çok, birçok","sıfat",15,204,0],[7,"الإنسان","insan","isim",15,199,0],[8,"كل","her, bütün","isim",15,199,2],[9,"الحياة","hayat, yaşam","isim",15,198,1],[10,"الأعمال/ العمل","iş, çalışma; eser","isim/mastar",15,188,9],[11,"المياه/ الماء","su","isim",15,187,0],[12,"كبير","büyük","sıfat",15,186,2],[13,"العلوم/ العلم","ilim, bilim","isim",15,181,1],[14,"أكثر","daha çok, en çok","ism-i tafdil",15,171,1],[15,"الدراسة","araştırma, çalışma, inceleme","mastar",15,171,2],[16,"أولى/ أول","ilk, birinci","sıfat",15,163,2],[17,"الدول/ الدولة","devlet; ülke","isim",15,158,0],[18,"التاريخ","tarih","isim",15,142,1],[19,"الأنواع/ النوع","tür, çeşit","isim",15,142,1],[20,"الأيام/ اليوم","gün; (اليوم) bugün","isim",15,136,0],[21,"عام/ عام","genel / yıl","sıfat/isim",15,133,1],[22,"الجسم","vücut, cisim","isim",15,133,0],[23,"البلاد/ البلدان/ البلد","ülke, memleket","isim",15,131,0],[24,"المجتمع","toplum","isim",15,124,1],[25,"الأسباب/ السبب","sebep","isim",15,122,4],[26,"مختلف","farklı, çeşitli","sıfat",15,121,0],[27,"العلماء","bilginler, bilim insanları","isim",15,120,0],[28,"الأمراض/ المرض","hastalık","isim",15,115,0],[29,"السنوات/ السنة","yıl","isim",15,113,0],[30,"جديد","yeni","sıfat",15,111,0],[31,"الناس","insanlar","isim",15,111,0],[32,"خاصة/ خاص","özel / özellikle","sıfat/zarf",15,111,1],[33,"الأمور/ الأمر","iş, mesele; emir","isim",15,107,1],[34,"الحالة/ الحال","durum, hal","isim",15,105,2],[35,"حديث","modern, yeni; söz, hadis","sıfat/isim",15,102,1],[36,"المواد/ المادة","madde, malzeme","isim",15,99,0],[37,"العدد","sayı","isim",15,98,0],[38,"أساسي/ الأساس","temel, esas","isim/sıfat",15,98,2],[39,"جميع","bütün, tüm","isim",15,97,0],[40,"عديد","birçok, çok sayıda","sıfat",15,95,0],[41,"العصر","çağ, asır; ikindi","isim",15,94,1],[42,"إحدى/ أحد","biri, bir tanesi","isim",15,87,0],[43,"الوقت","vakit, zaman","isim",15,87,0],[44,"الأشياء/ الشيء","şey","isim",15,85,0],[45,"الأماكن/ المكان","yer, mekân","isim",15,85,1],[46,"معظم","çoğu, büyük kısmı","isim",15,80,0],[47,"التأثير","etki","mastar",15,76,3],[48,"البشرية/ بشري","beşerî, insani / insanlık","sıfat",15,75,0],[49,"الباحث","araştırmacı","isim",15,74,0],[50,"الشكل","şekil, biçim","isim",15,73,1],[51,"هام/ مهم","önemli","sıfat",15,72,1],[52,"الطعام","yemek, gıda","isim",15,72,1],[53,"العمر","yaş, ömür","isim",15,71,0],[54,"عدم","yokluk, -memek (olumsuz mastar)","mastar",15,69,1],[55,"الصحة","sağlık; doğruluk","isim",15,68,0],[56,"قديم","eski","sıfat",15,68,0],[57,"الدور","rol","isim",15,68,1],[58,"أيضا","ayrıca, de/da","zarf",15,68,0],[59,"الأشخاص/ الشخص","kişi, şahıs","isim",15,66,3],[60,"عالمي","küresel, dünya çapında","sıfat",15,65,1],[61,"المعلومات","bilgiler","isim",15,65,0],[62,"واحد","bir, tek","isim",15,64,0],[63,"الأهمية","önem","isim",15,60,0],[64,"العبارة","ifade, ibare","isim",15,60,0],[65,"موجود","mevcut, var olan","sıfat",15,57,0],[66,"الثاني/ ثان","ikinci","sıfat",15,57,0],[67,"الوسائل/ الوسيلة","araç, vasıta","isim",15,57,0],[68,"الفكرة/ الفكر","düşünce, fikir","isim",15,56,2],[69,"الزيادة","artış, fazlalık","mastar",15,53,0],[70,"عدة","birkaç, birçok","isim",15,49,0],[71,"المشاعر/ الشعور","duygu, his","mastar",15,47,0],[72,"الصورة","resim; biçim, surette","isim",15,44,0],[73,"التقدم","ilerleme, gelişme","mastar",15,41,1],[74,"إنساني","insani","sıfat",15,40,0],[75,"صغير","küçük","sıfat",15,40,0],[76,"التالي","sonraki, aşağıdaki","sıfat",15,38,0],[77,"عالية/ عال","yüksek","sıfat",15,34,1],[78,"صحيح","doğru, sahih","sıfat",15,29,0],[79,"الأطفال/ الطفل","çocuk","isim",14,144,2],[80,"المدينة","şehir","isim",14,138,0],[81,"الاستخدام","kullanım, kullanma","mastar",14,126,3],[82,"المجال","alan, saha","isim",14,125,0],[83,"الكتب/ الكتاب","kitap","isim",14,114,1],[84,"الأرض","yer, toprak; Dünya","isim",14,112,1],[85,"النظام","sistem, düzen","isim",14,111,2],[86,"التطور","gelişme, evrim","mastar",14,110,2],[87,"المشاكل/ المشكلة","sorun, problem","isim",14,100,0],[88,"الفترة","dönem, süre","isim",14,96,1],[89,"الحضارة","medeniyet, uygarlık","isim",14,94,1],[90,"البيئة","çevre","isim",14,90,0],[91,"القرن","yüzyıl, asır","isim",14,88,0],[92,"الكلمات/ الكلمة","kelime, söz","isim",14,88,0],[93,"علمي","bilimsel","sıfat",14,87,0],[94,"الأبحاث/ البحث","araştırma","mastar",14,85,0],[95,"العرب","Araplar","isim",14,84,0],[96,"المنطقة","bölge","isim",14,83,0],[97,"غذائي/ الغذاء","gıda, besin","isim/sıfat",14,80,0],[98,"اجتماعي","sosyal, toplumsal","sıfat",14,79,0],[99,"أهم","en önemli","ism-i tafdil",14,77,0],[100,"النفس","nefis; kendi; aynı","isim",14,71,0],[101,"الأفراد/ الفرد","birey, fert","isim",14,68,0],[102,"الكائنات/ الكائن","varlık, canlı","isim",14,66,1],[103,"الآلاف/ الألف","bin","isim",14,66,3],[104,"الأجهزة/ الجهاز","cihaz; sistem (vücut)","isim",14,64,0],[105,"الأمم/ الأمة","ümmet, millet","isim",14,63,0],[106,"الوجود","varlık, mevcudiyet","mastar",14,62,1],[107,"طويل","uzun","sıfat",14,62,1],[108,"المستوى","seviye, düzey","isim",14,61,0],[109,"المعارف/ المعرفة","bilgi, marifet","mastar",14,61,1],[110,"الحركة","hareket","isim",14,60,0],[111,"العلاقة","ilişki","isim",14,59,0],[112,"القراءة","okuma","mastar",14,56,0],[113,"الأخيرة/ أخير","son; (أخيرا) nihayet","sıfat",14,56,1],[114,"الأطباء/ الطبيب","doktor, hekim","isim",14,55,0],[115,"ذات","sahip, -li; (ذاته) kendisi","isim",14,55,2],[116,"جدا","çok","zarf",14,54,0],[117,"فقط","sadece","zarf",14,53,0],[118,"الطريق","yol; yöntem","isim",14,51,1],[119,"كبرى/ أكبر","daha büyük, en büyük","ism-i tafdil",14,51,1],[120,"التغير","değişim, değişme","mastar",14,49,0],[121,"التعلم","öğrenme","mastar",14,47,1],[122,"القيم/ القيمة","değer","isim",14,45,1],[123,"يوميا/ يومي","günlük / her gün","sıfat",14,45,0],[124,"المحافظة/ الحفاظ","koruma (على)","mastar",14,45,0],[125,"الاهتمام","ilgi, önem verme","mastar",14,44,2],[126,"الانتشار","yayılma","mastar",14,43,0],[127,"الأجزاء/ الجزء","parça, kısım","isim",14,41,1],[128,"فكري","düşünsel, fikrî","sıfat",14,39,0],[129,"المرة","kez, defa","isim",14,33,0],[130,"العوامل/ العامل","faktör, etken; işçi","isim",14,33,0],[131,"كاف","yeterli","sıfat",14,32,0],[132,"دائم/ دائما","her zaman / kalıcı","zarf/sıfat",14,32,1],[133,"جيد","iyi","sıfat",14,27,0],[134,"المؤسسة","kurum","isim",14,27,0],[135,"إسلامي","İslami","sıfat",13,73,1],[136,"العملية","işlem, süreç; ameliyat","isim",13,71,1],[137,"الحيوان","hayvan","isim",13,69,0],[138,"الأدب","edebiyat","isim",13,66,0],[139,"المجموعة","grup, topluluk","isim",13,64,0],[140,"الإنتاج","üretim","mastar",13,61,0],[141,"النساء/ المرأة","kadın","isim",13,60,1],[142,"المرحلة","aşama, evre","isim",13,59,1],[143,"الفنون/ الفن","sanat","isim",13,58,2],[144,"طبيعي","doğal","sıfat",13,53,0],[145,"جوي","havaya ait, atmosferik","sıfat",13,53,0],[146,"التعليم","eğitim, öğretim","mastar",13,52,0],[147,"الأعضاء/ العضو","üye; organ","isim",13,52,0],[148,"القدرات/ القدرة","yetenek, güç","isim",13,52,2],[149,"الكمية","miktar","isim",13,48,0],[150,"الدرجة","derece","isim",13,47,2],[151,"المحل","yer, mahal (محل اهتمام: ilgi odağı)","isim",13,45,0],[152,"اقتصادي","ekonomik","sıfat",13,44,0],[153,"الصناعة","sanayi; yapım","isim",13,43,0],[154,"الوضع","durum; koyma","isim",13,42,0],[155,"الدماغ","beyin","isim",13,41,0],[156,"الطبيعة","doğa, tabiat","isim",13,40,0],[157,"الشعوب/ الشعب","halk","isim",13,40,0],[158,"البداية","başlangıç","isim",13,39,0],[159,"تاريخي","tarihî","sıfat",13,39,0],[160,"النقل","taşıma, aktarma","mastar",13,39,1],[161,"النسبة","oran; (بالنسبة لـ) -e göre","isim",13,38,1],[162,"الظروف","şartlar, koşullar","isim",13,38,1],[163,"الكون","evren; (كونه) olması","isim/mastar",13,38,0],[164,"السكان","nüfus, sakinler","isim",13,37,0],[165,"التطوير","geliştirme","mastar",13,37,1],[166,"الشعراء/ الشاعر","şair","isim",13,35,0],[167,"الفهم","anlama, kavrayış","mastar",13,34,0],[168,"المليون","milyon","isim",13,34,0],[169,"الواقع","gerçek, vakıa; (في الواقع) aslında","isim",13,31,1],[170,"السطح","yüzey","isim",13,31,0],[171,"الشرب","içme","mastar",13,31,0],[172,"الشأن","iş, mesele; (من شأنه) -ebilecek","isim",13,30,0],[173,"الحصول","elde etme (على)","mastar",13,29,0],[174,"التعبير","ifade etme, anlatım","mastar",13,28,0],[175,"المستقبل","gelecek","isim",13,26,0],[176,"الأنشطة/ النشاط","faaliyet, etkinlik","isim",13,26,0],[177,"شديد","şiddetli, yoğun","sıfat",13,25,0],[178,"النظر","bakış, görüş; (نظرا لـ) -den dolayı","mastar",13,23,3],[179,"الممارسة","uygulama, pratik","mastar",13,23,0],[180,"مجرد","sadece, salt","sıfat",13,22,1],[181,"متنوع","çeşitli","sıfat",13,21,2],[182,"باستمرار/ الاستمرار","süreklilik / sürekli olarak","mastar",13,21,0],[183,"الأحياء/ حي","canlı; mahalle","sıfat",12,69,0],[184,"الشمس","güneş","isim",12,68,1],[185,"الاسم","isim, ad","isim",12,61,0],[186,"الآثار/ الأثر","iz, eser; etki","isim",12,60,3],[187,"الطاقة","enerji","isim",12,58,3],[188,"المصادر/ المصدر","kaynak","isim",12,58,0],[189,"البحر","deniz","isim",12,56,1],[190,"التقنية/ تقني","teknik / teknoloji","sıfat/isim",12,55,0],[191,"التجارب/ التجربة","deney, tecrübe","isim",12,53,0],[192,"صحي","sağlıklı, sağlıkla ilgili","sıfat",12,49,0],[193,"الإصابة","(hastalığa) yakalanma, yaralanma","mastar",12,48,1],[194,"الآلة","alet, makine","isim",12,48,0],[195,"العلاج","tedavi","mastar",12,46,0],[196,"الأحداث","olaylar","isim",12,45,0],[197,"الحروب/ الحرب","savaş","isim",12,45,1],[198,"سياسي","siyasi","sıfat",12,44,1],[199,"الأبناء/ الابن","oğul, çocuk","isim",12,44,0],[200,"الخط","çizgi, hat","isim",12,43,0],[201,"الرجال/ الرجل","adam, erkek","isim",12,43,1],[202,"الثقافة","kültür","isim",12,40,1],[203,"غني","zengin","sıfat",12,40,1],[204,"المخاطر/ الخطر","tehlike, risk","isim",12,40,0],[205,"عادة/ العادة","âdet, alışkanlık / genellikle","isim/zarf",12,40,1],[206,"الظاهرة","olgu, fenomen","isim",12,39,1],[207,"أحيانا","bazen (في بعض الأحيان)","zarf",12,39,0],[208,"الحقائق/ الحقيقة","gerçek, hakikat","isim",12,39,0],[209,"الحلول/ الحل","çözüm","isim",12,38,1],[210,"التكنولوجيا","teknoloji","isim",12,37,1],[211,"المدى","kapsam, ölçü, menzil","isim",12,35,2],[212,"حقيقي","gerçek","sıfat",12,35,0],[213,"الفوائد/ الفائدة","fayda","isim",12,35,1],[214,"السرطان","kanser","isim",12,34,0],[215,"الأهداف/ الهدف","amaç, hedef","isim",12,34,1],[216,"البناء","inşa, yapı","mastar",12,33,0],[217,"النهاية","son, nihayet","isim",12,32,3],[218,"بعيد","uzak","sıfat",12,32,1],[219,"العناصر/ العنصر","unsur, öğe","isim",12,32,0],[220,"حاليا/ حالي","şimdiki / şu anda","sıfat/zarf",12,31,0],[221,"النباتات/ النبات","bitki","isim",12,31,0],[222,"الغاية","amaç; (للغاية) son derece","isim",12,30,1],[223,"القلب","kalp","isim",12,30,0],[224,"الحاجة","ihtiyaç","isim",12,28,0],[225,"الإبداع","yaratıcılık","mastar",12,27,0],[226,"دقيق","hassas, ince; (دقيقة) dakika","sıfat",12,27,1],[227,"الحدود/ الحد","sınır, had","isim",12,26,0],[228,"العاصمة","başkent","isim",12,25,0],[229,"مناسب","uygun","sıfat",12,25,0],[230,"الناحية","yön, taraf","isim",12,25,0],[231,"القول","söz, söyleme","mastar",12,25,0],[232,"صعب","zor","sıfat",12,24,1],[233,"الكاتب","yazar","isim",12,24,0],[234,"سلبي","olumsuz","sıfat",12,24,3],[235,"معروف","bilinen, tanınan","sıfat",12,23,0],[236,"أقل","daha az, en az","ism-i tafdil",12,22,0],[237,"الاعتماد","dayanma, güvenme","mastar",12,21,1],[238,"قائم","dayanan, mevcut; (قائمة) liste","sıfat",12,18,0],[239,"الإعادة","yeniden yapma, iade","mastar",12,17,0],[240,"الرواية","roman; rivayet","isim",11,68,0],[241,"الخلايا/ الخلية","hücre","isim",11,59,0],[242,"الترجمة","çeviri","mastar",11,57,0],[243,"غربي/ الغرب","batı / batılı","isim/sıfat",11,55,0],[244,"ثقافي","kültürel","sıfat",11,54,0],[245,"عثماني","Osmanlı","sıfat",11,50,0],[246,"الشعر","şiir","isim",11,50,0],[247,"المحيط","okyanus; çevre","isim",11,47,0],[248,"الأدوية/ الدواء","ilaç","isim",11,45,0],[249,"الأساليب/ الأسلوب","üslup, yöntem","isim",11,44,0],[250,"العين","göz; kaynak","isim",11,43,0],[251,"الموضوع","konu","isim",11,41,0],[252,"البيت","ev","isim",11,40,0],[253,"البشر","insanlar, beşer","isim",11,39,0],[254,"التواصل","iletişim","mastar",11,38,1],[255,"المسلم","Müslüman","isim",11,38,0],[256,"التغيير","değiştirme, değişiklik","mastar",11,37,1],[257,"المفاهيم/ المفهوم","kavram","isim",11,37,0],[258,"التحقيق","gerçekleştirme; soruşturma","mastar",11,35,0],[259,"الاكتشاف","keşif","mastar",11,35,0],[260,"شرقي/ الشرق","doğu / doğulu","isim/sıfat",11,35,1],[261,"الحرارة","sıcaklık, ısı","isim",11,34,0],[262,"نفسي","psikolojik, ruhsal","sıfat",11,32,0],[263,"الجوانب/ الجانب","yan, taraf, yön","isim",11,31,2],[264,"الرئيس","başkan","isim",11,30,0],[265,"الخصائص","özellikler","isim",11,30,0],[266,"الظهور","ortaya çıkış, görünme","mastar",11,29,0],[267,"أنحاء","taraflar, bölgeler (جميع أنحاء العالم: dünyanın her yeri)","isim",11,29,0],[268,"الزمن","zaman","isim",11,29,0],[269,"البرامج/ البرنامج","program","isim",11,29,1],[270,"المعالجة","tedavi; işleme, ele alma","mastar",11,28,0],[271,"واسع","geniş","sıfat",11,28,1],[272,"المهارة","beceri","isim",11,28,0],[273,"الضرورة","gereklilik, zaruret","isim",11,28,0],[274,"القيام","kalkma; (القيام بـ) yapma","mastar",11,27,4],[275,"التنمية","kalkınma, geliştirme","mastar",11,27,1],[276,"الأصول/ الأصل","köken, asıl","isim",11,27,1],[277,"طبي","tıbbi","sıfat",11,26,0],[278,"التحديد","belirleme","mastar",11,26,1],[279,"مناخي/ المناخ","iklim / iklimsel","isim/sıfat",11,26,0],[280,"التقليل","azaltma","mastar",11,25,1],[281,"الأسواق/ السوق","pazar, piyasa","isim",11,25,0],[282,"الكرة","top; küre","isim",11,25,0],[283,"معين","belirli","sıfat",11,24,0],[284,"التربية","eğitim, terbiye, yetiştirme","mastar",11,24,0],[285,"قوي","güçlü","sıfat",11,24,1],[286,"الحقوق/ الحق","hak","isim",11,24,0],[287,"سابق","önceki","sıfat",11,23,0],[288,"ممكن","mümkün","sıfat",11,22,0],[289,"المنزل","ev","isim",11,22,0],[290,"قريب","yakın","sıfat",11,22,1],[291,"معاصر","çağdaş","sıfat",11,21,0],[292,"المزيد","daha fazlası","isim",11,21,1],[293,"الألم","acı, ağrı","isim",11,21,1],[294,"الشك","şüphe","isim",11,20,0],[295,"الحدوث","meydana gelme","mastar",11,20,0],[296,"مبكر","erken","sıfat",11,20,0],[297,"جميل","güzel","sıfat",11,20,0],[298,"المقارنة","karşılaştırma","mastar",11,18,0],[299,"الدين","din","isim",11,18,0],[300,"المظاهر/ المظهر","görünüm","isim",11,18,0],[301,"خارجي","dış, harici","sıfat",11,17,1],[302,"رياضي","sportif; matematiksel","sıfat",10,46,0],[303,"أدبي","edebî","sıfat",10,42,0],[304,"اللون","renk","isim",10,42,0],[305,"الماضي","geçmiş","sıfat/isim",10,40,0],[306,"الآراء/ الرأي","görüş, fikir","isim",10,39,0],[307,"القوة","güç, kuvvet","isim",10,37,0],[308,"السرعة","hız","isim",10,36,2],[309,"المسرح","tiyatro","isim",10,36,0],[310,"بيئي","çevresel","sıfat",10,35,0],[311,"جغرافي","coğrafi","sıfat",10,34,0],[312,"بحري","denizel","sıfat",10,34,0],[313,"الغاز","gaz","isim",10,34,0],[314,"المؤلفات/ المؤلف","yazar / eserler","isim",10,33,0],[315,"الشركة","şirket","isim",10,33,0],[316,"تركي","Türk","sıfat",10,32,0],[317,"الرؤية","görme; görüş, vizyon","mastar",10,31,1],[318,"الشخصية/ شخصي","kişisel / kişilik","sıfat/isim",10,31,0],[319,"الأجيال/ الجيل","nesil, kuşak","isim",10,31,5],[320,"متعدد","çok sayıda, çok yönlü","sıfat",10,30,5],[321,"الارتفاع","yükselme, yükseklik","mastar",10,30,2],[322,"الخبير","uzman","isim",10,30,1],[323,"فني","sanatsal; teknik","sıfat",10,30,0],[324,"التعرض","maruz kalma","mastar",10,29,1],[325,"التراث","miras, kültürel miras","isim",10,29,0],[326,"الرياضة","spor","isim",10,28,0],[327,"خطير","tehlikeli, ciddi","sıfat",10,28,0],[328,"ضروري","gerekli, zorunlu","sıfat",10,28,1],[329,"الأضرار/ الضرر","zarar","isim",10,28,1],[330,"الإنترنت","internet","isim",10,27,0],[331,"أفضل","daha iyi, en iyi","ism-i tafdil",10,27,1],[332,"الأرضية/ أرضي","yer küreye ait / zemin","sıfat",10,26,0],[333,"الاتصال","iletişim, bağlantı","mastar",10,25,1],[334,"القضايا/ القضية","mesele; dava","isim",10,24,1],[335,"اليد","el","isim",10,24,1],[336,"النتائج/ النتيجة","sonuç","isim",10,23,0],[337,"عصبي","sinirsel","sıfat",10,23,0],[338,"الأهل","aile, ehil","isim",10,23,0],[339,"النمو","büyüme","mastar",10,22,0],[340,"القلق","kaygı, endişe","isim",10,22,1],[341,"قصير","kısa","sıfat",10,22,0],[342,"الاختراع","icat","mastar",10,22,0],[343,"قادر","muktedir, yapabilen","sıfat",10,22,0],[344,"الوصف","betimleme, tasvir","mastar",10,21,1],[345,"واضح","açık, belirgin","sıfat",10,21,0],[346,"الأدلة/ الدليل","delil, kanıt; rehber","isim",10,21,0],[347,"الوجه","yüz; yön","isim",10,20,0],[348,"القضاء","yok etme (القضاء على); yargı","mastar",10,20,0],[349,"تماما","tamamen","zarf",10,20,0],[350,"الازدياد","artış","mastar",10,20,0],[351,"متزايد","artan","sıfat",10,20,0],[352,"أبرز","en belirgin, en önde gelen","ism-i tafdil",10,19,1],[353,"الجفاف","kuraklık; susuzluk","isim",10,19,0],[354,"التغذية","beslenme","mastar",10,19,0],[355,"المعنى","anlam","isim",10,19,0],[356,"بسيط","basit","sıfat",10,19,0],[357,"التعامل","muamele, başa çıkma","mastar",10,18,0],[358,"مباشرة/ مباشر","doğrudan / hemen","sıfat/zarf",10,18,0],[359,"ثابت","sabit","sıfat",10,18,0],[360,"البقاء","kalma, hayatta kalma","mastar",10,17,0],[361,"الاستعمال","kullanma","mastar",10,17,0],[362,"رائع","harika","sıfat",10,17,1],[363,"الحكم","hüküm; yönetim","isim",10,16,1],[364,"الشباب","gençler, gençlik","isim",10,16,0],[365,"شائع","yaygın","sıfat",10,15,0],[366,"كامل","tam, bütün","sıfat",10,13,0],[367,"محتمل","muhtemel","sıfat",10,12,0]],"fi":[[1,"كان – يكون","olmak (kâne)",15,525,2],[2,"أمكن – يمكن","mümkün olmak; (يمكن) -ebilir",15,290,2],[3,"أدى – يؤدي","yol açmak (إلى); yerine getirmek",15,120,1],[4,"اعتبر – يعتبر","saymak, kabul etmek; (يعتبر) sayılmak",15,111,0],[5,"عد – يعد","saymak; (يعد) sayılmak",15,105,2],[6,"وجب – يجب","gerekmek; (يجب أن) -meli",15,103,0],[7,"تم – يتم","tamamlanmak; (يتم + mastar) yapılmak",15,100,1],[8,"تناول – يتناول","ele almak, işlemek; yemek (yiyecek)",15,98,1],[9,"ظهر – يظهر","ortaya çıkmak, görünmek; (أظهر) göstermek",15,95,1],[10,"قام – يقوم","kalkmak; (قام بـ) yapmak, gerçekleştirmek",15,91,3],[11,"عرف – يعرف","bilmek, tanımak; (يعرف) bilinmek",15,88,1],[12,"حدث – يحدث","meydana gelmek, olmak",15,87,1],[13,"وجد – يوجد","bulmak; (يوجد) bulunmak, var olmak",15,86,4],[14,"عاش – يعيش","yaşamak",15,77,0],[15,"قال – يقول","demek, söylemek",15,77,1],[16,"استطاع – يستطيع","-ebilmek, gücü yetmek",15,75,0],[17,"استخدم – يستخدم","kullanmak",15,69,4],[18,"ساعد – يساعد","yardım etmek (على)",15,69,12],[19,"جعل – يجعل","kılmak, -e dönüştürmek",15,64,3],[20,"عنى – يعني","anlamına gelmek, kastetmek",15,44,1],[21,"تميز – يتميز","ayırt edilmek, öne çıkmak (بـ)",15,44,3],[22,"رأى – يرى","görmek; düşünmek",15,36,0],[23,"أصبح – يصبح","olmak, hâline gelmek",14,87,0],[24,"عانى – يعاني","muzdarip olmak, çekmek (من)",14,72,4],[25,"وصل – يصل","ulaşmak, varmak (إلى)",14,54,2],[26,"زاد – يزيد","artmak, artırmak",14,52,0],[27,"أثر – يؤثر","etkilemek (على / في)",14,50,2],[28,"تمكن – يتمكن","başarmak, -ebilmek (من)",14,46,2],[29,"بدا – يبدو","görünmek, gibi gelmek",14,45,0],[30,"عاد – يعود","dönmek; (يعود إلى) -e dayanmak",14,45,0],[31,"أخذ – يأخذ","almak",14,41,1],[32,"احتاج – يحتاج","ihtiyaç duymak (إلى)",14,38,1],[33,"شكل – يشكل","oluşturmak; (تشكل) oluşmak",14,37,0],[34,"اهتم – يهتم","ilgilenmek, önem vermek (بـ)",14,32,1],[35,"حاول – يحاول","denemek, uğraşmak",14,32,1],[36,"أكد – يؤكد","vurgulamak, teyit etmek",14,22,0],[37,"دل – يدل","delalet etmek, göstermek (على)",14,21,1],[38,"عمل – يعمل","çalışmak, yapmak; (عمل على) uğraşmak",13,57,2],[39,"سبب – يسبب","sebep olmak, yol açmak (تسبب في)",13,56,0],[40,"بدأ – يبدأ","başlamak",13,56,0],[41,"اعتمد – يعتمد","dayanmak, güvenmek (على)",13,48,1],[42,"أشار – يشير","işaret etmek, belirtmek (إلى)",13,47,1],[43,"احتوى – يحتوي","içermek (على)",13,45,4],[44,"زال – يزال","(لا يزال / ما زال) hâlâ ...mekte",13,45,2],[45,"بلغ – يبلغ","ulaşmak, varmak",13,41,3],[46,"حمل – يحمل","taşımak",13,33,0],[47,"ساهم – يساهم","katkıda bulunmak (في)",13,33,1],[48,"استنتج – يستنتج","sonuç çıkarmak (من)",13,32,0],[49,"شهد – يشهد","tanık olmak, sahne olmak",13,28,0],[50,"شمل – يشمل","kapsamak, içine almak",13,26,1],[51,"لعب – يلعب","oynamak; (لعب دورا) rol oynamak",13,26,0],[52,"بقي – يبقى","kalmak",13,25,1],[53,"جاء – يجيء","gelmek",13,17,0],[54,"انتشر – ينتشر","yayılmak",12,39,0],[55,"كشف – يكشف","ortaya çıkarmak (عن)",12,35,0],[56,"أطلق – يطلق","salıvermek, başlatmak; (أطلق على) ad vermek",12,34,2],[57,"ازداد – يزداد","artmak, çoğalmak",12,29,0],[58,"اختلف – يختلف","farklı olmak (عن); anlaşmazlığa düşmek",12,28,0],[59,"شعر – يشعر","hissetmek (بـ)",12,27,0],[60,"ارتبط – يرتبط","bağlı olmak (بـ)",12,26,0],[61,"منع – يمنع","engellemek",12,26,1],[62,"اعتقد – يعتقد","inanmak, sanmak",12,25,0],[63,"مثل – يمثل","temsil etmek; (تمثل في) -de somutlaşmak",12,24,0],[64,"ذكر – يذكر","anmak, belirtmek",12,24,0],[65,"وقع – يقع","düşmek; bulunmak (يقع في)",12,24,3],[66,"أفاد – يفيد","fayda sağlamak; bildirmek",12,23,1],[67,"فعل – يفعل","yapmak, etmek",12,21,0],[68,"أعطى – يعطي","vermek",12,20,0],[69,"أجرى – يجري","yapmak (araştırma vb.); (جرى) akmak, cereyan",11,45,3],[70,"سمى – يسمي","adlandırmak; (يسمى) adlandırılmak",11,34,0],[71,"نشأ – ينشأ","doğmak, ortaya çıkmak, yetişmek",11,34,1],[72,"ترك – يترك","bırakmak",11,30,1],[73,"دخل – يدخل","girmek",11,29,0],[74,"تجاوز – يتجاوز","aşmak, geçmek",11,29,4],[75,"انتقل – ينتقل","geçmek, taşınmak (إلى)",11,27,0],[76,"سعى – يسعى","çabalamak, gayret etmek (إلى)",11,26,0],[77,"قدم – يقدم","sunmak, takdim etmek",11,25,0],[78,"تطلب – يتطلب","gerektirmek",11,23,5],[79,"جمع – يجمع","toplamak, bir araya getirmek",11,23,1],[80,"حصل – يحصل","elde etmek (على); meydana gelmek",11,23,0],[81,"ارتفع – يرتفع","yükselmek",11,18,3],[82,"واجه – يواجه","karşılaşmak, yüzleşmek",10,34,1],[83,"ضم – يضم","içermek, bünyesinde barındırmak",10,29,0],[84,"فهم – يفهم","anlamak",10,24,0],[85,"تطور – يتطور","gelişmek",10,22,0],[86,"تغير – يتغير","değişmek",10,20,0],[87,"رجع – يرجع","dönmek; (يرجع إلى) -e dayanmak",10,19,0],[88,"اشتهر – يشتهر","ünlü olmak (بـ)",10,18,1],[89,"دعا – يدعو","çağırmak, davet etmek (إلى); (يدعى) adlandırılmak",10,18,0],[90,"هدف – يهدف","amaçlamak (إلى)",10,17,0],[91,"بين – يبين","açıklamak, göstermek; (تبين) anlaşılmak",10,17,1],[92,"تضمن – يتضمن","içermek, kapsamak",10,17,2],[93,"وفر – يوفر","sağlamak, temin etmek",10,17,0],[94,"استمر – يستمر","devam etmek",10,17,1],[95,"صار – يصير","olmak, hâline gelmek",10,17,0],[96,"حقق – يحقق","gerçekleştirmek, elde etmek",10,16,0],[97,"انبغى – ينبغي","gerekmek; (ينبغي أن) -meli",10,16,0],[98,"سمح – يسمح","izin vermek (بـ / لـ)",10,15,1],[99,"أتاح – يتيح","imkân tanımak, sağlamak",10,15,0],[100,"سبق – يسبق","önce gelmek; (سبق أن) daha önce ...mış olmak",10,15,2],[101,"اتبع – يتبع","izlemek, uymak",10,14,1],[102,"لقي – يلقى","karşılaşmak, görmek; (ألقى) atmak",10,14,0],[103,"استفاد – يستفيد","yararlanmak (من)",10,13,0],[104,"توصل – يتوصل","ulaşmak, varmak (إلى)",9,27,3],[105,"تحول – يتحول","dönüşmek (إلى)",9,27,1],[106,"نتج – ينتج","ortaya çıkmak (عن); (أنتج) üretmek",9,26,0],[107,"أصاب – يصيب","isabet etmek; (أصيب بـ) yakalanmak",9,24,4],[108,"ولد – يولد","doğmak",9,24,0],[109,"تعرض – يتعرض","maruz kalmak (لـ)",9,21,1],[110,"تكون – يتكون","oluşmak (من)",9,19,1],[111,"هدد – يهدد","tehdit etmek",9,16,0],[112,"منح – يمنح","vermek, bahşetmek",9,16,0],[113,"عبر – يعبر","ifade etmek (عن)",9,15,0],[114,"أثار – يثير","uyandırmak, harekete geçirmek",9,15,3],[115,"دفع – يدفع","itmek, sevk etmek; ödemek",9,15,1],[116,"وضع – يضع","koymak",9,15,0],[117,"ظل – يظل","-meye devam etmek, kalmak",9,15,1],[118,"استند – يستند","dayanmak (إلى)",9,14,0],[119,"عكس – يعكس","yansıtmak",9,14,0],[120,"تعلم – يتعلم","öğrenmek",9,13,1],[121,"أتى – يأتي","gelmek",9,13,0],[122,"قلل – يقلل","azaltmak (من)",9,12,0],[123,"تمتع – يتمتع","sahip olmak, yararlanmak (بـ)",9,12,0],[124,"دار – يدور","dönmek; (يدور حول) etrafında dönmek",8,22,0],[125,"صنع – يصنع","yapmak, üretmek",8,19,0],[126,"امتاز – يمتاز","temayüz etmek, öne çıkmak (بـ)",8,18,0],[127,"قضى – يقضي","geçirmek (vakit); (قضى على) yok etmek",8,18,0],[128,"تأثر – يتأثر","etkilenmek (بـ)",8,18,1],[129,"تحدث – يتحدث","konuşmak, bahsetmek (عن)",8,15,1],[130,"أكل – يأكل","yemek",8,15,0],[131,"قرأ – يقرأ","okumak",8,15,0],[132,"ميز – يميز","ayırt etmek",8,13,1],[133,"كسب – يكسب","kazanmak",8,13,0],[134,"حافظ – يحافظ","korumak (على)",8,12,2],[135,"نما – ينمو","büyümek, gelişmek",8,12,1],[136,"تعلق – يتعلق","ilgili olmak (بـ)",8,11,0],[137,"تجنب – يتجنب","kaçınmak",8,11,1],[138,"قصد – يقصد","kastetmek, amaçlamak",8,11,0],[139,"كمن – يكمن","gizli olmak, yatmak (في)",8,10,1],[140,"حظي – يحظى","nail olmak, elde etmek (بـ)",8,10,0],[141,"اتفق – يتفق","anlaşmak, uyuşmak (على / مع)",8,10,1],[142,"انتمى – ينتمي","ait olmak, mensup olmak (إلى)",8,9,0],[143,"انتهى – ينتهي","sona ermek",8,8,0],[144,"امتد – يمتد","uzanmak",7,20,0],[145,"مارس – يمارس","uygulamak, yapmak",7,17,0],[146,"فاق – يفوق","aşmak, geçmek",7,16,1],[147,"استعمل – يستعمل","kullanmak",7,16,1],[148,"شبه – يشبه","benzemek",7,15,0],[149,"رصد – يرصد","gözlemlemek, tespit etmek",7,15,0],[150,"تألف – يتألف","oluşmak (من)",7,14,0],[151,"نصح – ينصح","tavsiye etmek",7,14,5],[152,"امتلك – يمتلك","sahip olmak",7,14,0],[153,"خرج – يخرج","çıkmak",7,13,0],[154,"فقد – يفقد","kaybetmek",7,12,0],[155,"نقل – ينقل","taşımak, aktarmak",7,12,0],[156,"انقسم – ينقسم","bölünmek (إلى)",7,12,1],[157,"احتل – يحتل","işgal etmek; (مكانة) yer edinmek",7,12,1],[158,"أضاف – يضيف","eklemek (إلى)",7,11,0],[159,"نظر – ينظر","bakmak (إلى)",7,10,0],[160,"لاحظ – يلاحظ","fark etmek, gözlemlemek",7,10,4],[161,"لجأ – يلجأ","başvurmak, sığınmak (إلى)",7,10,2],[162,"أضر – يضر","zarar vermek (بـ)",7,10,0],[163,"اقتصر – يقتصر","sınırlı kalmak (على)",7,9,0],[164,"توقع – يتوقع","beklemek, öngörmek",7,9,1],[165,"فكر – يفكر","düşünmek (في)",7,9,0],[166,"فضل – يفضل","tercih etmek",7,8,0],[167,"صعب – يصعب","zor olmak",7,8,2],[168,"كاد – يكاد","neredeyse ...mek",7,8,0],[169,"نجح – ينجح","başarmak (في)",7,8,0],[170,"أدرك – يدرك","idrak etmek, kavramak",7,8,0],[171,"غلب – يغلب","galip gelmek, baskın olmak",7,7,0],[172,"حرص – يحرص","özen göstermek (على)",7,7,1],[173,"أراد – يريد","istemek",6,17,0],[174,"اكتشف – يكتشف","keşfetmek",6,15,0],[175,"نجم – ينجم","kaynaklanmak (عن)",6,14,5],[176,"انعكس – ينعكس","yansımak (على)",6,13,0],[177,"حمى – يحمي","korumak",6,12,0],[178,"درس – يدرس","incelemek, okumak (ders)",6,12,0],[179,"شارك – يشارك","katılmak (في)",6,12,1],[180,"أسهم – يسهم","katkıda bulunmak (في)",6,11,5],[181,"افتقر – يفتقر","yoksun olmak (إلى)",6,10,0],[182,"كفى – يكفي","yetmek",6,10,0],[183,"تراجع – يتراجع","gerilemek, geri çekilmek",6,10,1],[184,"نظم – ينظم","düzenlemek",6,9,0],[185,"روى – يروي","anlatmak, rivayet etmek; sulamak",6,9,1],[186,"اتسم – يتسم","nitelenmek (بـ)",6,9,0],[187,"آمن – يؤمن","inanmak (بـ)",6,7,0],[188,"صدر – يصدر","çıkmak, yayımlanmak",6,7,0],[189,"انخفض – ينخفض","düşmek, azalmak",6,7,0],[190,"ركز – يركز","odaklanmak, yoğunlaşmak (على)",6,6,0],[191,"سهل – يسهل","kolaylaştırmak",6,6,0],[192,"تعامل – يتعامل","muamele etmek, başa çıkmak (مع)",6,6,1],[193,"ذهب – يذهب","gitmek",6,6,0],[194,"توقف – يتوقف","durmak; (يتوقف على) -e bağlı olmak",5,14,0],[195,"رغب – يرغب","istemek, arzu etmek (في)",5,14,0],[196,"ساد – يسود","hâkim olmak, yaygın olmak",5,10,1],[197,"عرض – يعرض","sunmak, sergilemek",5,9,1],[198,"عالج – يعالج","tedavi etmek; ele almak",5,9,1],[199,"خفف – يخفف","hafifletmek, azaltmak (من)",5,8,0],[200,"أعاد – يعيد","yeniden yapmak, iade etmek",5,8,2],[201,"عزز – يعزز","güçlendirmek",5,7,0],[202,"قدر – يقدر","takdir etmek, tahmin etmek",5,7,0],[203,"تحمل – يتحمل","katlanmak, üstlenmek",5,7,0],[204,"ابتعد – يبتعد","uzaklaşmak (عن)",5,7,0],[205,"تحسن – يتحسن","iyileşmek",5,7,1],[206,"مال – يميل","meyletmek, eğilim göstermek (إلى)",5,7,0],[207,"وصف – يصف","betimlemek, nitelemek",5,7,2],[208,"أسس – يؤسس","kurmak",5,7,0],[209,"تطرق – يتطرق","değinmek (إلى)",5,7,1],[210,"ناسب – يناسب","uygun olmak",5,6,0],[211,"بحث – يبحث","araştırmak, aramak (عن)",5,6,1],[212,"حدد – يحدد","belirlemek",5,5,0],[213,"أحاط – يحيط","kuşatmak (بـ)",5,5,2],[214,"أقبل – يقبل","yönelmek, rağbet etmek (على)",5,5,0]]};
+const KWK={kel:KW.kel.map(r=>({n:r[0],ar:r[1],tr:r[2],tur:r[3],s:r[4],t:r[5],k:r[6],id:'k'+r[0]})),fi:KW.fi.map(r=>({n:r[0],ar:r[1],tr:r[2],s:r[3],t:r[4],k:r[5],id:'f'+r[0]}))};
+const arWrap=t=>esc(t).replace(/([\u0600-\u06FF][\u0600-\u06FF ـ\/+:]*[\u0600-\u06FF]|[\u0600-\u06FF])/g,'<span class="ar" dir="rtl" style="font-size:1.05em">$1</span>');
+const shortTr=t=>t.replace(/\(.*?\)/g,'').split(';')[0].replace(/\s+/g,' ').trim()||t;
+let kwSet='kel',kwF='top',kwQ='';
+const KPREPS=['إلى','على','من','في','عن','بـ','لـ','مع'];
+const kKnown=()=>st('kalipKnown',{});
+const wpick=(arr,wf)=>{const w=arr.map(wf);let r=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<arr.length;i++){r-=w[i];if(r<=0)return arr[i];}return arr[arr.length-1];};
+const multiMap=(()=>{const g={};KD.fiil.forEach(x=>{(g[x.m]=g[x.m]||[]).push(x);});const o={};Object.values(g).forEach(L=>{if(new Set(L.map(y=>y.p)).size>1)L.forEach(y=>o[y.n]=L);});return o;})();
+let kTab='liste',kFilter='top',kQ='',kSort='k',kType='edat',kTag='all',kTimer=null,kMode='fiil',kRound=null;
+function kStop(){if(kTimer){clearInterval(kTimer);kTimer=null;}}
+function renderKalip(){
+  kStop();
+  chipRow($('#kTabs'),[['liste','Fiil + harf-i cer'],['refleks','Refleks antrenmanı'],['siklik','Edat ve bağlaç sıklığı'],['kelime','Sık kelime ve fiil']],kTab,c=>{kTab=c;renderKalip();});
+  $('#kListe').style.display=kTab==='liste'?'':'none';$('#kRef').style.display=kTab==='refleks'?'':'none';$('#kSik').style.display=kTab==='siklik'?'':'none';$('#kKel').style.display=kTab==='kelime'?'':'none';
+  if(kTab==='liste')renderKList();else if(kTab==='refleks')renderKRefMenu();else if(kTab==='kelime')renderKWords();else renderKSik();
+}
+/* 1. Fiil + harf-i cer listesi */
+function renderKList(){
+  const kk=kKnown();
+  const filters=[['top','Öncelik: ilk 20'],['all','Hepsi (93)'],['multi','Çift kalıplı (tuzak)'],...KPREPS.map(p=>['p:'+p,p])];
+  chipRow($('#kFilters'),filters,kFilter,c=>{kFilter=c;renderKList();});
+  let L=KD.fiil.filter(x=>kFilter==='all'||(kFilter==='top'&&x.n<=20)||(kFilter==='multi'&&multiMap[x.n])||(kFilter.startsWith('p:')&&x.p===kFilter.slice(2)));
+  const q=kQ.trim().toLowerCase();if(q)L=L.filter(x=>(x.v+' '+x.p+' '+x.m+' '+x.tr).toLowerCase().includes(q));
+  const n=KD.fiil.filter(x=>kk[x.n]).length;
+  $('#kProg').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${KD.fiil.length}</span><span class="small muted">%${Math.round(n/KD.fiil.length*100)}</span></div><div class="bar" style="margin-top:6px"><i style="width:${n/KD.fiil.length*100}%"></i></div>`;
+  $('#kItems').innerHTML=L.length?L.map(x=>`<div class="vocab"><div><div class="tr">${esc(x.tr)}</div><div class="small muted">${x.s}/15 sınav · metinde ${x.t}${multiMap[x.n]?' · <span class="pill gold">çift kalıplı</span>':''}</div><button class="mark ${kk[x.n]?'known':''}" data-k="${x.n}" style="margin-top:4px">${kk[x.n]?'✓ Biliyorum':'Biliyorum'}</button></div><div style="text-align:right;flex:0 0 auto"><div class="ar" style="font-size:1.5rem">${esc(x.v+' '+x.p)}</div><div class="ar small muted" style="font-size:1rem">${esc(x.m)}</div></div></div>`).join(''):'<div class="empty">Sonuç yok.</div>';
+  $('#kItems').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{const m=kKnown();const i=b.dataset.k;if(m[i])delete m[i];else m[i]=true;save();renderKList();});
+}
+/* 1b. Sık kelime ve fiil listesi */
+function renderKWords(){
+  const kk=st('kwKnown',{});const L0=KWK[kwSet];
+  chipRow($('#kwSet'),[['kel','Kelimeler (367)'],['fi','Fiiller (214)']],kwSet,c=>{kwSet=c;kwF='top';renderKWords();});
+  chipRow($('#kwFil'),[['top','İlk 50'],['all','Hepsi'],['sikta','Şıkta çıkanlar'],['unk','Bilmediklerim']],kwF,c=>{kwF=c;renderKWords();});
+  let L=L0.filter(x=>kwF==='all'||(kwF==='top'&&x.n<=50)||(kwF==='sikta'&&x.k>=2)||(kwF==='unk'&&!kk[x.id]));
+  if(kwF==='sikta')L=[...L].sort((a,b)=>b.k-a.k||a.n-b.n);
+  const q=kwQ.trim();if(q)L=L0.filter(x=>(x.ar+' '+x.tr).includes(q)||(x.ar+' '+x.tr).toLowerCase().includes(q.toLowerCase()));
+  const n=L0.filter(x=>kk[x.id]).length;
+  $('#kwProg').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${L0.length}</span><span class="small muted">%${Math.round(n/L0.length*100)}</span></div><div class="bar" style="margin-top:6px"><i style="width:${n/L0.length*100}%"></i></div>`;
+  $('#kwItems').innerHTML=L.length?L.map(x=>`<div class="vocab"><div style="flex:1 1 auto;min-width:0"><div class="tr">${arWrap(x.tr)}</div><div class="small muted">${x.tur?esc(x.tur)+' · ':''}${x.s}/15 sınav · metinde ${x.t}${x.k?' · <b style="color:var(--gold)">şıkta '+x.k+'</b>':''}</div><button class="mark ${kk[x.id]?'known':''}" data-w="${x.id}" style="margin-top:4px">${kk[x.id]?'✓ Biliyorum':'Biliyorum'}</button></div><div class="ar" style="font-size:1.5rem;text-align:right;flex:0 0 auto;max-width:46%">${esc(x.ar)}</div></div>`).join(''):'<div class="empty">Sonuç yok.</div>';
+  $('#kwItems').querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{const m=st('kwKnown',{});const i=b.dataset.w;if(m[i])delete m[i];else m[i]=true;save();renderKWords();});
+}
+/* 2. Refleks antrenmanı */
+function renderKRefMenu(){
+  kStop();
+  const b=st('kalipBest',{});
+  $('#kRefBox').innerHTML=`<div class="grid"><div class="card"><h3>Fiil → harf-i cer</h3><p class="small muted" style="margin:0 0 10px">Fiili gör, doğru harf-i ceri 6 saniyede seç. 10 soru. Sınavda en çok çıkan kalıplar daha sık gelir.</p><div class="row" style="justify-content:space-between"><span class="small muted">${b.fiil!=null?'Rekor: <b>'+b.fiil+'</b>':''}</span><button class="btn small" data-m="fiil">Başla</button></div></div><div class="card"><h3>Bağlaç → anlam</h3><p class="small muted" style="margin:0 0 10px">Bağlacı gör, anlamını 6 saniyede seç. Sınavda şıkta sık çıkan bağlaçlar öne gelir.</p><div class="row" style="justify-content:space-between"><span class="small muted">${b.bag!=null?'Rekor: <b>'+b.bag+'</b>':''}</span><button class="btn small" data-m="bag">Başla</button></div></div><div class="card"><h3>Sık kelime → anlam</h3><p class="small muted" style="margin:0 0 10px">ÖSYM'nin en çok kullandığı 367 kelime. Bilmediklerin öne gelir.</p><div class="row" style="justify-content:space-between"><span class="small muted">${b.kel!=null?'Rekor: <b>'+b.kel+'</b>':''}</span><button class="btn small" data-m="kel">Başla</button></div></div><div class="card"><h3>Sık fiil → anlam</h3><p class="small muted" style="margin:0 0 10px">En çok kullanılan 214 fiil (mazi – muzari).</p><div class="row" style="justify-content:space-between"><span class="small muted">${b.fi!=null?'Rekor: <b>'+b.fi+'</b>':''}</span><button class="btn small" data-m="fi">Başla</button></div></div></div>`;
+  $('#kRefBox').querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>startKRound(x.dataset.m));
+}
+function kPool(mode){
+  if(mode==='fiil'){const kk=kKnown();const un=KD.fiil.filter(x=>!kk[x.n]);return un.length>=10?un:KD.fiil;}
+  if(mode==='kel'||mode==='fi'){const kk=st('kwKnown',{});const un=KWK[mode].filter(x=>!kk[x.id]);return un.length>=10?un:KWK[mode];}
+  return KD.bag;
+}
+function startKRound(mode){
+  kMode=mode;const pool=[...kPool(mode)];const qs=[];
+  while(qs.length<10&&pool.length){const x=wpick(pool,y=>mode==='fiil'?y.s:mode==='bag'?y.s+y.k:y.s+y.k*2+1);pool.splice(pool.indexOf(x),1);qs.push(x);}
+  kRound={qs,i:0,score:0,ok:0,combo:0,ans:null,left:6};nextKQ();
+}
+function nextKQ(){
+  kStop();const R=kRound;
+  if(R.i>=R.qs.length){
+    const b=st('kalipBest',{});const nb=b[kMode]==null||R.score>b[kMode];if(nb){b[kMode]=R.score;save();}
+    $('#kRefBox').innerHTML=`<div class="card empty"><div class="stat">${R.ok} / ${R.qs.length} doğru · ${R.score} puan</div>${nb?'<div>Yeni rekor!</div>':''}<div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="kAgain">Tekrar</button><button class="btn ghost" id="kMenu">Menü</button></div></div>`;
+    $('#kAgain').onclick=()=>startKRound(kMode);$('#kMenu').onclick=renderKRefMenu;return;}
+  const x=R.qs[R.i];R.ans=null;R.left=6;
+  let opts,correct,stem;
+  if(kMode==='fiil'){
+    const same=multiMap[x.n]?multiMap[x.n].map(y=>y.p):[x.p];correct=[...new Set(same)];
+    const dis=shuffle(KPREPS.filter(p=>!correct.includes(p))).slice(0,5-correct.length);opts=shuffle([...correct,...dis]);
+    stem=`<div class="ar" style="font-size:2.2rem">${esc(x.v)} ____</div><div class="ar muted" style="font-size:1.1rem">${esc(x.m)}</div>`;
+  }else if(kMode==='kel'||kMode==='fi'){
+    const ans=shortTr(x.tr);correct=[ans];
+    const dis=shuffle(KWK[kMode].filter(y=>shortTr(y.tr)!==ans)).map(y=>shortTr(y.tr)).filter((v,i,a)=>a.indexOf(v)===i&&v.length<40).slice(0,3);
+    opts=shuffle([ans,...dis]);stem=`<div class="ar" style="font-size:2.2rem">${esc(x.ar)}</div>`;
+  }else{
+    const dis=shuffle(KD.bag.filter(y=>y.tr!==x.tr)).filter((y,i,a)=>a.findIndex(z=>z.tr===y.tr)===i).slice(0,3).map(y=>y.tr);
+    correct=[x.tr];opts=shuffle([x.tr,...dis]);
+    stem=`<div class="ar" style="font-size:2.2rem">${esc(x.ar)}</div>`;
+  }
+  R.cur={x,opts,correct};
+  $('#kRefBox').innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:8px"><button class="btn ghost small" id="kBack">← Menü</button><span class="small">Soru ${R.i+1}/${R.qs.length} · <b>${R.score}</b> puan${R.combo>=3?' · seri x'+R.combo:''}</span></div><div class="card" style="text-align:center"><div class="bar" style="margin-bottom:12px"><i id="kBar" style="width:100%;background:var(--gold);transition:width 1s linear"></i></div>${stem}<div id="kOpts" style="margin-top:14px;display:grid;grid-template-columns:${kMode==='fiil'?'repeat(auto-fit,minmax(70px,1fr))':'1fr'};gap:8px">${opts.map(o=>`<button class="opt" data-o="${esc(o)}" style="justify-content:center;margin:0;${kMode==='fiil'?'':'text-align:center'}"><span class="${kMode==='fiil'?'ar':''}" style="${kMode==='fiil'?'font-size:1.6rem':''}">${esc(o)}</span></button>`).join('')}</div><div id="kFb" style="margin-top:12px;text-align:start"></div></div>`;
+  $('#kBack').onclick=renderKRefMenu;
+  $('#kOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>kAnswer(b.dataset.o));
+  requestAnimationFrame(()=>{const bar=$('#kBar');if(bar)bar.style.width='0%';});
+  kTimer=setInterval(()=>{R.left--;if(R.left<=0)kAnswer(null);},1000);
+}
+function kAnswer(o){
+  const R=kRound;if(R.ans!==null&&R.ans!==undefined)return;R.ans=o===null?'__timeout':o;kStop();
+  const {x,correct}=R.cur;const ok=o!==null&&correct.includes(o);
+  if(ok){R.ok++;R.combo++;R.score+=10+Math.max(0,R.left)*2+Math.min(R.combo-1,5);}else R.combo=0;
+  document.querySelectorAll('#kOpts .opt').forEach(b=>{b.disabled=true;const v=b.dataset.o;if(correct.includes(v))b.classList.add('right');else if(v===o)b.classList.add('wrong');});
+  let info;
+  if(kMode==='fiil'){const L=multiMap[x.n]||[x];info=L.map(y=>`<div><span class="ar" style="font-size:1.2rem">${esc(y.v+' '+y.p)}</span> <span class="small">${esc(y.tr)}</span> <span class="small muted">· ${y.s}/15 sınav</span></div>`).join('')+(multiMap[x.n]?'<div class="small" style="margin-top:4px"><b>Çift kalıplı fiil:</b> ikisi de ÖSYM metinlerinde geçiyor; şıklarda ikisi birden varsa anlama ve cümleye bak.</div>':'');}
+  else if(kMode==='kel'||kMode==='fi')info=`<div class="small">${arWrap(x.tr)} · ${x.s}/15 sınav · metinde ${x.t}</div>`;
+  else info=`<div class="small">${esc(x.tr)} · <span class="pill">${esc(x.tur)}</span> · ${x.s}/15 sınav · şıkta ${x.k}</div>`;
+  $('#kFb').innerHTML=`<div class="explain"><b>${ok?'Doğru':(o===null?'Süre doldu':'Yanlış')}.</b> ${info}</div><div style="margin-top:8px;text-align:end"><button class="btn" id="kNext">${R.i+1>=R.qs.length?'Bitir':'Sonraki'}</button></div>`;
+  if(!ok){const w=st('wrongs',[]);const qid='k'+kMode+x.n;const isW=kMode==='kel'||kMode==='fi';if(!w.some(z=>z.qid===qid))w.unshift({qid,type:'dilb',src:'Kalıp Avcısı',text:kMode==='fiil'?x.v+' ____':x.ar,note:kMode==='fiil'?'Doğru: '+(multiMap[x.n]||[x]).map(y=>y.v+' '+y.p+' ('+y.tr+')').join(' / '):'Anlamı: '+x.tr+(x.tur?' ('+x.tur+')':''),date:new Date().toISOString().slice(0,10)});save();}
+  $('#kNext').onclick=()=>{R.i++;nextKQ();};
+}
+/* 3. Edat ve bağlaç sıklığı */
+const tagsOf=x=>[...new Set(x.tur.split('/').map(s=>s.replace(/\(.*?\)/g,'').trim()).filter(Boolean))];
+function renderKSik(){
+  chipRow($('#kSikType'),[['edat','Edatlar (95)'],['bag','Bağlaçlar (42)']],kType,c=>{kType=c;kTag='all';renderKSik();});
+  const L0=KD[kType];const tc={};L0.forEach(x=>tagsOf(x).forEach(t=>tc[t]=(tc[t]||0)+1));
+  const tags=Object.entries(tc).filter(([,n])=>n>=2).sort((a,b)=>b[1]-a[1]);
+  chipRow($('#kSikTag'),[['all','Hepsi'],...tags.map(([t,n])=>[t,t+' ('+n+')'])],kTag,c=>{kTag=c;renderKSik();});
+  chipRow($('#kSikSort'),[['k','Şıkta çıkan'],['s','Kaç sınavda'],['t','Metinde toplam']],kSort,c=>{kSort=c;renderKSik();});
+  const top=[...L0].sort((a,b)=>b.k-a.k).slice(0,8);
+  $('#kTop').innerHTML=`<div class="small muted" style="margin-bottom:6px">Şıklarda en çok sorulan ${kType==='edat'?'edatlar':'bağlaçlar'}:</div><div class="row" style="gap:6px">${top.map(x=>`<span class="pill gold" style="font-size:.95rem"><span class="ar" style="font-size:1.1rem">${esc(x.ar)}</span> · ${x.k}</span>`).join('')}</div>`;
+  const L=L0.filter(x=>kTag==='all'||tagsOf(x).includes(kTag)).sort((a,b)=>b[kSort]-a[kSort]||b.t-a.t);
+  const mx=Math.max(...L.map(x=>x[kSort]),1);
+  $('#kSikList').innerHTML=L.map(x=>`<div class="vocab"><div style="flex:1 1 auto"><div class="tr">${esc(x.tr)}</div><div class="small muted"><span class="pill">${esc(x.tur)}</span> ${x.s}/15 sınav · metinde ${x.t} · <b style="color:${x.k>=10?'var(--gold)':'inherit'}">şıkta ${x.k}</b></div><div class="bar" style="margin-top:6px;height:5px"><i style="width:${x[kSort]/mx*100}%;background:${kSort==='k'?'var(--gold)':'var(--accent)'}"></i></div></div><div class="ar" style="font-size:1.4rem;text-align:right;flex:0 0 auto;max-width:48%">${esc(x.ar)}</div></div>`).join('');
+}
+$('#kSearch').oninput=e=>{kQ=e.target.value;renderKList();};
+$('#kwSearch').oninput=e=>{kwQ=e.target.value;renderKWords();};
+
+/* ---------- yönlendirme ---------- */
+const VIEWS=['sinav','kelime','dilbilgisi','strateji','kalip','banka','alistirma','oyunlar','yanlis','takip'];
+function route(){
+  const h=(location.hash||'').slice(1);const v=VIEWS.includes(h)?h:'sinav';
+  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
+  document.querySelectorAll('#tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));
+  if(v==='yanlis')renderWrongs();if(v==='kalip')renderKalip();if(v!=='kalip')kStop();if(v==='oyunlar'&&!curGame)renderGameMenu();if(v!=='oyunlar'){stopTimer();curGame=null;}if(v==='takip'){renderStats();renderPlan();renderExams();}
+  const a=document.querySelector(`#tabs a[data-v="${v}"]`);if(a&&a.scrollIntoView)a.scrollIntoView({block:'nearest',inline:'center'});
+}
+window.addEventListener('hashchange',()=>{route();window.scrollTo(0,0);});
+function renderAll(){renderCountdown();renderSources();renderVCats();renderVocab();startQ();bStart();renderWrongs();renderPlan();renderExams();renderStats();route();}
+renderAll();
+})();
+</script>
+</body>
+</html>
