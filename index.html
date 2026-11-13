@@ -280,18 +280,26 @@ button.btn,a.btn{border-radius:999px}
   <div class="chips" id="kTabs" style="margin-top:12px"></div>
   <div id="kListe">
     <div class="card" style="padding:10px 16px" id="kProg"></div>
-    <input type="search" id="kSearch" placeholder="Fiil, harf-i cer ya da Türkçe ara…" style="margin-bottom:10px">
+    <div class="row" style="margin-bottom:10px">
+      <input type="search" id="kSearch" placeholder="Fiil, harf-i cer ya da Türkçe ara…" style="flex:1 1 220px">
+      <button class="btn ghost" id="kMode">Kart moduna geç</button>
+    </div>
     <div class="chips" id="kFilters"></div>
     <div class="card" id="kItems"></div>
+    <div id="kFlash" style="display:none"></div>
   </div>
   <div id="kRef" style="display:none"><div id="kRefBox"></div></div>
   <div id="kKel" style="display:none">
     <div class="tip small" style="margin-bottom:10px">ÖSYM'nin 15 sınavında en çok geçen kelime ve fiiller. Sıra: önce kaç sınavda çıktığı, eşitlikte toplam geçiş. Üst sıralardakiler hemen her sınavda karşına çıkar.</div>
     <div class="chips" id="kwSet"></div>
     <div class="card" style="padding:10px 16px" id="kwProg"></div>
-    <input type="search" id="kwSearch" placeholder="Arapça ya da Türkçe ara…" style="margin-bottom:10px">
+    <div class="row" style="margin-bottom:10px">
+      <input type="search" id="kwSearch" placeholder="Arapça ya da Türkçe ara…" style="flex:1 1 220px">
+      <button class="btn ghost" id="kwMode">Kart moduna geç</button>
+    </div>
     <div class="chips" id="kwFil"></div>
     <div class="card" id="kwItems"></div>
+    <div id="kwFlash" style="display:none"></div>
   </div>
   <div id="kSik" style="display:none">
     <div class="card small" style="margin-bottom:10px">Harf-i cer sorularında fiil soru kökünde, harf-i cer şıkta olur. Bu yüzden en iyi kanıt, edatların <b>şıkta</b> sütunudur: من, على, في, إلى, عن ve لـ / بـ en çok şık olarak çıkanlar. Fiil + harf-i cer çiftleri ise çoğunlukla parçaların içinde geçtiği için onlar için "metinde" sayısı daha anlamlıdır.</div>
@@ -1167,6 +1175,7 @@ function renderKList(){
   $('#kProg').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${KD.fiil.length}</span><span class="small muted">%${Math.round(n/KD.fiil.length*100)}</span></div><div class="bar" style="margin-top:6px"><i style="width:${n/KD.fiil.length*100}%"></i></div>`;
   $('#kItems').innerHTML=L.length?L.map(x=>`<div class="vocab"><div><div class="tr">${esc(x.tr)}</div><div class="small muted">${x.s}/15 sınav · metinde ${x.t}${multiMap[x.n]?' · <span class="pill gold">çift kalıplı</span>':''}</div><button class="mark ${kk[x.n]?'known':''}" data-k="${x.n}" style="margin-top:4px">${kk[x.n]?'✓ Biliyorum':'Biliyorum'}</button></div><div style="text-align:right;flex:0 0 auto"><div class="ar" style="font-size:1.5rem">${esc(x.v+' '+x.p)}</div><div class="ar small muted" style="font-size:1rem">${esc(x.m)}</div></div></div>`).join(''):'<div class="empty">Sonuç yok.</div>';
   $('#kItems').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{const m=kKnown();const i=b.dataset.k;if(m[i])delete m[i];else m[i]=true;save();renderKList();});
+  kFlashSync('k',L);
 }
 /* 1b. Sık kelime ve fiil listesi */
 function renderKWords(){
@@ -1180,6 +1189,7 @@ function renderKWords(){
   $('#kwProg').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${L0.length}</span><span class="small muted">%${Math.round(n/L0.length*100)}</span></div><div class="bar" style="margin-top:6px"><i style="width:${n/L0.length*100}%"></i></div>`;
   $('#kwItems').innerHTML=L.length?L.map(x=>`<div class="vocab"><div style="flex:1 1 auto;min-width:0"><div class="tr">${arWrap(x.tr)}</div><div class="small muted">${x.tur?esc(x.tur)+' · ':''}${x.s}/15 sınav · metinde ${x.t}${x.k?' · <b style="color:var(--gold)">şıkta '+x.k+'</b>':''}</div><button class="mark ${kk[x.id]?'known':''}" data-w="${x.id}" style="margin-top:4px">${kk[x.id]?'✓ Biliyorum':'Biliyorum'}</button></div><div class="ar" style="font-size:1.5rem;text-align:right;flex:0 0 auto;max-width:46%">${esc(x.ar)}</div></div>`).join(''):'<div class="empty">Sonuç yok.</div>';
   $('#kwItems').querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{const m=st('kwKnown',{});const i=b.dataset.w;if(m[i])delete m[i];else m[i]=true;save();renderKWords();});
+  kFlashSync('kw',L);
 }
 /* 2. Refleks antrenmanı */
 function renderKRefMenu(){
@@ -1253,6 +1263,45 @@ function renderKSik(){
   const mx=Math.max(...L.map(x=>x[kSort]),1);
   $('#kSikList').innerHTML=L.map(x=>`<div class="vocab"><div style="flex:1 1 auto"><div class="tr">${esc(x.tr)}</div><div class="small muted"><span class="pill">${esc(x.tur)}</span> ${x.s}/15 sınav · metinde ${x.t} · <b style="color:${x.k>=10?'var(--gold)':'inherit'}">şıkta ${x.k}</b></div><div class="bar" style="margin-top:6px;height:5px"><i style="width:${x[kSort]/mx*100}%;background:${kSort==='k'?'var(--gold)':'var(--accent)'}"></i></div></div><div class="ar" style="font-size:1.4rem;text-align:right;flex:0 0 auto;max-width:48%">${esc(x.ar)}</div></div>`).join('');
 }
+
+/* 1c. Kalıp Avcısı kart modu (fiil + harf-i cer ve sık kelime/fiil listeleri) */
+const KF={
+  k:{on:false,list:'#kItems',box:'#kFlash',btn:'#kMode',
+     known:()=>kKnown(),id:x=>x.n,
+     front:x=>`<div class="ar">${esc(x.v)} <span style="color:var(--gold)">… ؟</span></div><div class="small muted" style="margin-top:4px">Hangi harf-i cer?</div>`,
+     back:x=>`<div class="ar" style="font-size:1.6rem;color:var(--accent)">${esc(x.v+' '+x.p)}</div><b style="color:var(--ink)">${esc(x.tr)}</b><br><span class="small">Mâzi: <bdi class="ar" dir="rtl" style="font-size:1rem">${esc(x.m)}</bdi> · ${x.s}/15 sınav${multiMap[x.n]?' · <span class="pill gold">çift kalıplı</span>':''}</span>`,
+     after:()=>renderKList()},
+  kw:{on:false,list:'#kwItems',box:'#kwFlash',btn:'#kwMode',
+     known:()=>st('kwKnown',{}),id:x=>x.id,
+     front:x=>`<div class="ar">${esc(x.ar)}</div>`,
+     back:x=>`<b style="color:var(--ink)">${arWrap(x.tr)}</b><br><span class="small">${x.tur?esc(x.tur)+' · ':''}${x.s}/15 sınav${x.k?' · şıkta '+x.k:''}</span>`,
+     after:()=>renderKWords()}
+};
+const kfState={};
+function kFlashSync(key,L){
+  const c=KF[key];
+  $(c.list).style.display=c.on?'none':'';$(c.box).style.display=c.on?'':'none';
+  $(c.btn).textContent=c.on?'Liste moduna geç':'Kart moduna geç';
+  if(!c.on)return;
+  const kk=c.known();
+  kfState[key]={q:shuffle(L.filter(x=>!kk[c.id(x)])),i:0,show:false};
+  kFlashDraw(key);
+}
+function kFlashDraw(key){
+  const c=KF[key],S=kfState[key],box=$(c.box);
+  if(!S.q.length||S.i>=S.q.length){box.innerHTML=`<div class="card flash"><div class="empty">Bu gruptaki tüm kartları bitirdin. 🎉<br><span class="small">Başka bir filtre seç ya da liste moduna dönüp işaretleri değiştir.</span></div></div>`;return;}
+  const x=S.q[S.i];
+  box.innerHTML=`<div class="card flash" data-flip="1"><div class="small muted">${S.i+1} / ${S.q.length}</div>${x?c.front(x):''}${S.show?`<div class="back">${c.back(x)}</div>`:'<div class="back small">Cevabı görmek için dokun</div>'}</div><div class="row" style="justify-content:center"><button class="btn bad" data-a="again">Tekrar et</button><button class="btn" data-a="know">Biliyorum</button></div>`;
+  box.querySelector('[data-flip]').onclick=()=>{S.show=!S.show;kFlashDraw(key);};
+  box.querySelector('[data-a="again"]').onclick=()=>{S.q.push(x);S.i++;S.show=false;kFlashDraw(key);};
+  box.querySelector('[data-a="know"]').onclick=()=>{const m=c.known();m[c.id(x)]=true;save();S.i++;S.show=false;kFlashProg(key);kFlashDraw(key);};
+}
+function kFlashProg(key){
+  if(key==='k'){const kk=kKnown(),n=KD.fiil.filter(x=>kk[x.n]).length,t=KD.fiil.length;$('#kProg').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${t}</span><span class="small muted">%${Math.round(n/t*100)}</span></div><div class="bar" style="margin-top:6px"><i style="width:${n/t*100}%"></i></div>`;}
+  else{const kk=st('kwKnown',{}),L0=KWK[kwSet],n=L0.filter(x=>kk[x.id]).length,t=L0.length;$('#kwProg').innerHTML=`<div class="row" style="justify-content:space-between"><span class="small">Bildiğin: <b>${n}</b> / ${t}</span><span class="small muted">%${Math.round(n/t*100)}</span></div><div class="bar" style="margin-top:6px"><i style="width:${n/t*100}%"></i></div>`;}
+}
+$('#kMode').onclick=()=>{KF.k.on=!KF.k.on;renderKList();};
+$('#kwMode').onclick=()=>{KF.kw.on=!KF.kw.on;renderKWords();};
 $('#kSearch').oninput=e=>{kQ=e.target.value;renderKList();};
 $('#kwSearch').oninput=e=>{kwQ=e.target.value;renderKWords();};
 
