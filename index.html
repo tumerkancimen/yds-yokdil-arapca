@@ -101,6 +101,14 @@ a{color:var(--accent)}
 .toast.on{opacity:1}
 .sec-inputs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .sec-inputs label{font-size:.82rem;color:var(--muted)}
+
+footer.site{max-width:920px;margin:28px auto 0;padding:18px 18px 30px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.9rem}
+footer.site .ttl{font-weight:600;color:var(--ink);margin:0 0 10px}
+footer.site .links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+footer.site a{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;font-size:.9rem}
+footer.site a:hover{border-color:var(--accent);color:var(--accent)}
+footer.site svg{width:17px;height:17px;flex:none;fill:currentColor}
+footer.site .by{margin:12px 0 0;font-size:.82rem}
 </style>
 </head>
 <body>
@@ -299,6 +307,18 @@ a{color:var(--accent)}
   </div>
 </section>
 </main>
+<footer class="site">
+  <p class="ttl">İletişim</p>
+  <div class="links">
+    <a id="mailLink" href="#" rel="nofollow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2.2V17h16V7.2l-8 5.3-8-5.3zM5.4 7 12 11.4 18.6 7H5.4z"/></svg><span>E-posta</span></a>
+    <a href="https://www.instagram.com/tmrkncmn/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.3a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg><span>Instagram</span></a>
+    <a href="https://x.com/Tmrkncmn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg><span>X (Twitter)</span></a>
+    <a href="https://github.com/tumerkancimen" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.7.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a>
+    <a href="https://linktr.ee/Tumerkancimen" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 6.6 16.6 3l2 2-3.6 3.4H20v2.8h-5l3.6 3.5-2 2-4.6-4.7-4.6 4.7-2-2L7 11.2H2V8.4h5L3.4 5l2-2 3.4 3.6V1h2.8v5.6h1.6zM10.6 15h2.8v8h-2.8v-8z"/></svg><span>Linktree</span></a>
+  </div>
+  <p class="by">Hazırlayan: Cevdet Tümerkan Çimen</p>
+</footer>
+<script>(function(){var u='tcimen.jo',d='gmail.com',a=document.getElementById('mailLink');if(a){a.href='mailto:'+u+'@'+d;a.title=u+'@'+d;a.querySelector('span').textContent=u+'@'+d;}})();</script>
 <div class="toast" id="toast"></div>
 
 <script>
