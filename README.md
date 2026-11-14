@@ -1,6 +1,6 @@
 # YDS / YÖKDİL Arapça Çalışma Kütüphanesi
 
-Arapça YDS ve YÖKDİL sınavlarına hazırlanmak için tek sayfalık, ücretsiz bir çalışma aracı. Kurulum yok; tarayıcıda açılır, telefonda da çalışır. İlerlemen (bildiklerin, yanlışların, deneme sonuçların) yalnızca kendi tarayıcında saklanır.
+Arapça YDS ve YÖKDİL sınavlarına hazırlanmak için tek sayfalık, ücretsiz bir çalışma aracı. Kurulum yok; tarayıcıda açılır, telefonda da çalışır. İlerlemen (bildiklerin, yanlışların, deneme sonuçların) varsayılan olarak yalnızca kendi tarayıcında saklanır. İsteğe bağlı hesap açarsan cihazlar arasında eşleşir (kurulum: `supabase/KURULUM.md`).
 
 **Canlı sürüm:** https://tumerkancimen.github.io/yds-yokdil-arapca/
 

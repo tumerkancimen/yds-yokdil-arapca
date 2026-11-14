@@ -276,6 +276,27 @@ button.btn:hover,a.btn:hover{background:var(--accent-2);border-color:var(--accen
 .feedback .box::before{border-color:var(--line)}
 .feedback a.btn{background:var(--accent);color:#f3eddc}
 @media (prefers-color-scheme:dark),(max-width:700px){.feedback a.btn{color:#1a1208}}
+/* seri, rozet, hesap, liderlik */
+.srow{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.wkw{display:flex;gap:6px;align-items:flex-end;flex:1 1 180px;max-width:300px}
+.wk{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.7rem;color:var(--muted)}
+.wkb{width:100%;max-width:28px;height:46px;display:flex;align-items:flex-end;background:var(--accent-soft);border-radius:6px;overflow:hidden}
+.wkb i{display:block;width:100%;background:var(--accent)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.rz{text-align:center;padding:10px 6px;border:1px solid var(--line);border-radius:12px;background:var(--paper);opacity:.6}
+.rz.on{opacity:1;border-color:var(--gold)}
+.rz b{display:block;font-size:.82rem;margin-top:6px;line-height:1.2}
+.rz small{display:block;color:var(--muted);font-size:.7rem;margin-top:2px}
+.seal{width:54px;height:54px;margin:0 auto;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:2px dashed var(--line);color:var(--muted);background:var(--bg)}
+.rz.on .seal{border:2px solid var(--gold);color:var(--gold);background:var(--gold-soft);box-shadow:0 0 0 3px var(--gold-soft)}
+.seal .ar{font-size:1.2rem;line-height:1}
+.seal .ar.w{font-size:.95rem}
+.seal .tn{font-style:normal;font-size:.62rem;line-height:1;opacity:.85}
+.tt{margin:14px 0 6px}
+tr.me td{background:var(--gold-soft)}
+input[type=email],input[type=password]{font:inherit;width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+#v-gizlilik h3{margin:18px 0 6px}
+#v-gizlilik p,#v-gizlilik li{font-size:.95rem}
 </style>
 </head>
 <body>
@@ -472,6 +493,9 @@ button.btn:hover,a.btn:hover{background:var(--accent-2);border-color:var(--accen
 <section class="view" id="v-takip">
   <h2>Plan &amp; Takip</h2>
   <div class="grid" id="statGrid"></div>
+  <div class="card" id="rozetCard"></div>
+  <div class="card" id="accCard" style="display:none"></div>
+  <div class="card" id="lbCard" style="display:none"></div>
   <div class="card">
     <h3>Son 10 gün planı</h3>
     <p class="small muted">Sınava kalan son günler için. Tamamladığın günü işaretle.</p>
@@ -495,7 +519,39 @@ button.btn:hover,a.btn:hover{background:var(--accent-2);border-color:var(--accen
     <div id="bLoadBox" style="display:none;margin-top:8px"><textarea id="bText" placeholder="Yedek metnini buraya yapıştır"></textarea><button class="btn small" id="bLoad" style="margin-top:6px">Yükle</button></div>
   </div>
 </section>
+<section class="view" id="v-gizlilik">
+  <h2>Gizlilik politikası</h2>
+  <p class="small muted">Son güncelleme: 15 Kasım 2026</p>
+  <div class="card">
+    <h3>Kısaca</h3>
+    <p>Bu site hesap açmadan kullanılabilir. Hesap açmadığında ilerlemen (yanlış defteri, rozetler, seri, denemeler) yalnızca bu cihazın tarayıcısında saklanır, bize ulaşmaz. Hesap açarsan ya da liderlik tablosuna katılırsan aşağıda yazılan veriler bir veri servisinde saklanır.</p>
+    <h3>Veri sorumlusu ve iletişim</h3>
+    <p>Siteyi işleten kişi: Tümerkan Çimen. İletişim: <span id="gzMail"></span></p>
+    <h3>Hangi veriler, ne için?</h3>
+    <ul>
+      <li><b>Hesap açarsan:</b> e-posta adresin ve şifren (şifre servis tarafından şifrelenmiş olarak tutulur, bizim göremeyeceğimiz biçimde). Google ile girersen Google'ın bildirdiği e-posta adresi. Amaç: giriş yapmanı sağlamak.</li>
+      <li><b>Cihazlar arası eşleşme:</b> yanlış defterin, çözdüğün sorulara ait sonuçlar, bilinen kelimeler, rozetlerin, günlük çalışma sayıların, deneme kayıtların ve site ayarların. Amaç: ilerlemeni cihazların arasında aynı tutmak.</li>
+      <li><b>Liderlik tablosuna katılırsan:</b> seçtiğin takma ad, bu haftaki doğru sayın, toplam doğru sayın, en uzun serin ve rozet sayın. Bunlar herkese açık sıralamada görünür. Gerçek adın ve e-postan gösterilmez. Amaç: sıralamayı göstermek.</li>
+      <li><b>Ziyaret istatistiği:</b> site, kişisel veri toplamayan GoatCounter ile sayfa görüntüleme sayısını ölçer.</li>
+    </ul>
+    <h3>Hukuki sebep</h3>
+    <p>Hesap ve eşleşme için açık rızan (hesap açarken verdiğin onay) ve hizmeti sunmak için veri işlemenin gerekli olması. Onayını hesabını silerek geri çekebilirsin.</p>
+    <h3>Verilerin nerede saklanır?</h3>
+    <p>Hesap, eşleşme ve liderlik verileri Supabase altyapısında saklanır. Sunucu yurt dışında olabilir, bu yüzden verilerin yurt dışına aktarılması söz konusudur. Google ile giriş yaparsan giriş işlemi Google'ın hizmetleri üzerinden yürür. Verilerini satmayız, reklam için kullanmayız.</p>
+    <h3>Ne kadar süre saklanır?</h3>
+    <p>Hesabını silene kadar. Hesabı silmek için Plan &amp; Takip sayfasındaki Hesap kartında "Hesabımı ve bulut verilerimi sil" düğmesini kullan. Bu işlem e-postanı, buluttaki ilerleme kopyanı ve liderlik kaydını kalıcı olarak siler. Hesap açmadan kullandıysan verilerin yalnızca cihazındadır; tarayıcı verilerini silerek kaldırabilirsin.</p>
+    <h3>Haklarını</h3>
+    <p>6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 11. maddesi kapsamında verilerinin işlenip işlenmediğini öğrenme, düzeltilmesini ya da silinmesini isteme ve işlemeye itiraz etme haklarına sahipsin. Silme işlemini kendin hesabından yapabilirsin; diğer talepler için yukarıdaki adrese yazabilirsin.</p>
+    <h3>Takma adlar</h3>
+    <p>Uygunsuz bulunan takma adlar sıralamadan kaldırılabilir. Bildirim için sayfanın altındaki Görüş ve öneri bölümünü kullan.</p>
+    <h3>Çocuklar</h3>
+    <p>Site çocuklara yönelik değildir. 18 yaşından küçükler hesap açmadan önce velisinin onayını almalıdır.</p>
+    <h3>Değişiklikler</h3>
+    <p>Bu metin değişirse bu sayfada güncellenir.</p>
+  </div>
+</section>
 </main>
+<p class="small muted" style="text-align:center;margin:16px 0"><a href="#gizlilik">Gizlilik politikası</a></p>
 <section class="feedback" id="gorus">
   <div class="box">
     <h2>Görüş ve Önerileriniz</h2>
@@ -526,8 +582,17 @@ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.write
 const KEY='yds-arapca-v1';
 let mem={};
 function load(){try{const s=localStorage.getItem(KEY);if(s)mem=JSON.parse(s)||{};}catch(e){}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){}}
-load();
+const _snap={};
+function snapAll(){Object.keys(mem).forEach(k=>{if(k!=='_ts'&&k!=='_sync')_snap[k]=JSON.stringify(mem[k]);});}
+function save(){
+  try{
+    const now=Date.now();const ts=(mem._ts&&typeof mem._ts==='object')?mem._ts:(mem._ts={});
+    Object.keys(mem).forEach(k=>{if(k==='_ts'||k==='_sync')return;const j=JSON.stringify(mem[k]);if(_snap[k]!==j){_snap[k]=j;ts[k]=now;}});
+    localStorage.setItem(KEY,JSON.stringify(mem));
+  }catch(e){}
+  try{accQueue();}catch(e){}
+}
+load();snapAll();
 const st=(k,d)=>{if(mem[k]===undefined)mem[k]=d;return mem[k];};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -761,7 +826,7 @@ function drawFlash(){
   c.innerHTML=`<div class="small muted">${fIdx+1} / ${fQueue.length} · ${VCATS[v[0]]}</div><div class="ar">${esc(v[1])}</div>${fShow?`<div class="back"><b style="color:var(--ink)">${esc(v[2])}</b><br>${v[3]!=='—'?esc(v[3]):''}</div>`:'<div class="back small">Anlamı görmek için dokun</div>'}`;
 }
 $('#flashCard').onclick=()=>{fShow=!fShow;drawFlash();};
-$('#fKnow').onclick=()=>{const v=fQueue[fIdx];if(!v)return;known()[v.id]=true;save();fIdx++;fShow=false;renderVProgress();drawFlash();};
+$('#fKnow').onclick=()=>{const v=fQueue[fIdx];if(!v)return;known()[v.id]=true;save();act(null);fIdx++;fShow=false;renderVProgress();drawFlash();};
 $('#fAgain').onclick=()=>{const v=fQueue[fIdx];if(!v)return;fQueue.push(v);fIdx++;fShow=false;drawFlash();};
 $('#vMode').onclick=()=>{vFlash=!vFlash;$('#vMode').textContent=vFlash?'Liste moduna geç':'Kart moduna geç';$('#vList').style.display=vFlash?'none':'';$('#vFlash').style.display=vFlash?'':'none';renderVocab();};
 $('#vSearch').oninput=renderVocab;
@@ -1749,7 +1814,7 @@ function renderQ(){
 }
 function answer(q,i){
   if(qAns!==null)return;qAns=i;
-  const res=st('qres',{});const ok=i===q.a;res[q.id]=ok?'ok':'bad';
+  const res=st('qres',{});const ok=i===q.a;res[q.id]=ok?'ok':'bad';act(ok);
   if(!ok){const w=st('wrongs',[]);if(!w.some(x=>x.qid===q.id))w.unshift({qid:q.id,type:q.c,src:'Alıştırma',text:(q.pi!==undefined?PAS[q.pi]+'\n\n':'')+q.s,note:`Doğru cevap: ${LET[q.a]}) ${q.o[q.a]}\n${q.e}`,date:new Date().toISOString().slice(0,10)});}
   save();
   document.querySelectorAll('#qBox .opt').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===i)b.classList.add('wrong');});
@@ -1798,7 +1863,7 @@ $('#dAdd').onclick=()=>{
   const sc={};let tot=0;
   for(const s of SECTIONS){let v=parseInt($('#d-'+s.id).value,10);if(isNaN(v))v=0;v=Math.max(0,Math.min(s.n,v));sc[s.id]=v;tot+=v;}
   if(!tot)return toast('Doğru sayılarını gir');
-  st('exams',[]).unshift({date:$('#dDate').value,name:$('#dName').value.trim()||'Deneme',sc,tot});save();
+  st('exams',[]).unshift({date:$('#dDate').value,name:$('#dName').value.trim()||'Deneme',sc,tot});save();act(null);
   SECTIONS.forEach(s=>$('#d-'+s.id).value='');$('#dName').value='';renderExams();renderStats();toast('Deneme kaydedildi');
 };
 function renderExams(){
@@ -1818,12 +1883,13 @@ function renderStats(){
    card('Bilinen kelime',`${k} / ${V.length}`,'Kelime & Kalıplar',k/V.length*100)+
    card('Alıştırma doğru',`${ok} / ${Q.length}`,`Defterde ${st('wrongs',[]).length} yanlış`,ok/Q.length*100)+
    card('Plan',`${pd} / ${PLAN.length}`,'tamamlanan gün',pd/PLAN.length*100);
+  renderBadges();
 }
 
 /* ---------- yedek ---------- */
 $('#bCopy').onclick=async()=>{try{await navigator.clipboard.writeText(JSON.stringify(mem));toast('Yedek panoya kopyalandı');}catch(e){$('#bLoadBox').style.display='';$('#bText').value=JSON.stringify(mem);$('#bText').select();toast('Metni seçip elle kopyala');}};
 $('#bLoadShow').onclick=()=>{$('#bLoadBox').style.display=$('#bLoadBox').style.display==='none'?'':'none';};
-$('#bLoad').onclick=()=>{try{const d=JSON.parse($('#bText').value);if(typeof d!=='object'||!d)throw 0;mem=d;save();renderAll();toast('Yedek yüklendi');}catch(e){toast('Yedek metni okunamadı');}};
+$('#bLoad').onclick=()=>{try{const d=JSON.parse($('#bText').value);if(typeof d!=='object'||!d)throw 0;mem=d;delete mem._sync;mem._ts={};const _n=Date.now();Object.keys(mem).forEach(k=>{if(k!=='_ts')mem._ts[k]=_n;});snapAll();save();renderAll();toast('Yedek yüklendi');}catch(e){toast('Yedek metni okunamadı');}};
 
 /* ---------- seviyeli soru bankası ---------- */
 const LV={A1:'Başlangıç',A2:'Temel',B1:'Orta',B2:'Orta üstü',C1:'İleri'};
@@ -1981,7 +2047,7 @@ function renderB(){
 }
 function bAnswer(q,oi){
   if(bAns!==null)return;bAns=oi;const ok=oi===q.a;
-  const res=st('bres',{});res[q.id]=ok?'ok':'bad';
+  const res=st('bres',{});res[q.id]=ok?'ok':'bad';act(ok);
   const corrL=LET[bShuf.indexOf(q.a)];
   if(!ok){const w=st('wrongs',[]);if(!w.some(x=>x.qid===q.id))w.unshift({qid:q.id,type:q.c==='rabit'?'dilb':q.c,src:'Soru bankası '+q.lv,text:q.s,note:`Doğru cevap: ${q.o[q.a]}\n${q.k}`,date:new Date().toISOString().slice(0,10)});}
   save();
@@ -2055,7 +2121,7 @@ const stripH=s=>String(s).replace(/[ً-ْٰـ]/g,'');
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
 const isArOnly=s=>/[؀-ۿ]/.test(s)&&!/[A-Za-zğüşıöçĞÜŞİÖÇ…—]/.test(s);
 const best=()=>st('gameBest',{});
-function setBest(k,v,higher=true){const b=best();if(b[k]==null||(higher?v>b[k]:v<b[k])){b[k]=v;save();return true;}return false;}
+function setBest(k,v,higher=true){const b=best();let r=false;if(b[k]==null||(higher?v>b[k]:v<b[k])){b[k]=v;save();r=true;}act(null);return r;}
 let gTimer=null;function stopTimer(){if(gTimer){clearInterval(gTimer);gTimer=null;}}
 const GAMES=[
  {id:'eslestir',n:'Eşleştirme',d:'6 Arapça kelimeyi Türkçe anlamlarıyla eşleştir. Hata yapmadan ve hızlı bitirmeye çalış.'},
@@ -2224,7 +2290,7 @@ function nextKQ(){
 }
 function kAnswer(o){
   const R=kRound;if(R.ans!==null&&R.ans!==undefined)return;R.ans=o===null?'__timeout':o;kStop();
-  const {x,correct}=R.cur;const ok=o!==null&&correct.includes(o);
+  const {x,correct}=R.cur;const ok=o!==null&&correct.includes(o);act(ok);
   if(ok){R.ok++;R.combo++;R.score+=10+Math.max(0,R.left)*2+Math.min(R.combo-1,5);}else R.combo=0;
   document.querySelectorAll('#kOpts .opt').forEach(b=>{b.disabled=true;const v=b.dataset.o;if(correct.includes(v))b.classList.add('right');else if(v===o)b.classList.add('wrong');});
   let info;
@@ -2292,7 +2358,7 @@ $('#kSearch').oninput=e=>{kQ=e.target.value;renderKList();};
 $('#kwSearch').oninput=e=>{kwQ=e.target.value;renderKWords();};
 
 /* ---------- yönlendirme ---------- */
-const VIEWS=['sinav','kelime','dilbilgisi','strateji','kalip','banka','alistirma','oyunlar','yanlis','takip'];
+const VIEWS=['sinav','kelime','dilbilgisi','strateji','kalip','banka','alistirma','oyunlar','yanlis','takip','gizlilik'];
 function route(){
   const h=(location.hash||'').slice(1);const v=VIEWS.includes(h)?h:'sinav';
   VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
@@ -2302,6 +2368,494 @@ function route(){
 }
 window.addEventListener('hashchange',()=>{route();window.scrollTo(0,0);});
 function renderAll(){renderCountdown();renderSources();renderVCats();renderVocab();startQ();bStart();renderWrongs();renderPlan();renderExams();renderStats();route();}
+/* ---------- seri ve rozetler ---------- */
+const pad2=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
+const today=()=>ymd(new Date());
+const addDays=(s,n)=>{const p=s.split('-').map(Number);return ymd(new Date(p[0],p[1]-1,p[2]+n));};
+const arNum=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const actAll=()=>st('act',{});
+const dayOn=d=>!!d&&((d.n||0)>0||(d.x||0)>0);
+function act(ok){
+  const a=actAll();const t=today();const d=a[t]||(a[t]={n:0,c:0,w:0});
+  if(ok===true){d.n=(d.n||0)+1;d.c=(d.c||0)+1;}
+  else if(ok===false){d.n=(d.n||0)+1;d.w=(d.w||0)+1;}
+  else d.x=(d.x||0)+1;
+  save();checkBadges();lbQueue();
+}
+function streakInfo(){
+  const a=actAll();const days=Object.keys(a).filter(k=>dayOn(a[k])).sort();
+  let best=0,run=0,prev=null;
+  days.forEach(k=>{run=(prev&&addDays(prev,1)===k)?run+1:1;if(run>best)best=run;prev=k;});
+  let cur=0;let t=today();if(!dayOn(a[t]))t=addDays(t,-1);
+  while(dayOn(a[t])){cur++;t=addDays(t,-1);}
+  const td=a[today()]||{};
+  return {cur,best,todayN:(td.n||0),todayC:(td.c||0)};
+}
+const cntOk=o=>Object.values(o||{}).filter(x=>x==='ok').length;
+const uniqCorrect=()=>cntOk(mem.qres)+cntOk(mem.bres);
+const knownN=()=>Object.keys(mem.known||{}).length;
+const kalipN=()=>Object.keys(mem.kalipKnown||{}).length;
+const perfectDay=()=>Object.values(actAll()).some(d=>(d.n||0)>=10&&!(d.w||0))?1:0;
+const totalAct=()=>Object.values(actAll()).reduce((s,d)=>s+(d.n||0)+(d.x||0),0);
+
+/* konuya özel sayaçlar: soru türü gruplarına göre farklı doğru sayısı */
+const TOPICS={
+  gramer:{n:'Gramer',s:'نحو',c:['dilb','rabit','tamam','cloze'],tiers:[10,40,100],d:'cümle tamamlama, parça içinde boşluk ve dil bilgisi'},
+  kelime:{n:'Sözcük',s:'لفظ',c:['kelime','yakin'],tiers:[10,30,80],d:'sözcük ve anlamca yakın'},
+  okuma:{n:'Okuma',s:'قراءة',c:['okuma','paragraf','ilgisiz'],tiers:[10,30,80],d:'okuma, paragraf tamamlama ve ilgisiz cümle'},
+  ceviri:{n:'Çeviri',s:'ترجمة',c:['ceviri'],tiers:[10,40,100],d:'çeviri'},
+  ifade:{n:'İfade',s:'حوار',c:['diyalog','durum'],tiers:[10,30,60],d:'diyalog ve duruma uygun ifade'}
+};
+const TIER_N=['Çırağı','Kalfası','Ustası'];
+let _catMap=null;
+function catMap(){
+  if(_catMap)return _catMap;
+  _catMap={};Q.forEach(q=>{_catMap[q.id]=q.c;});B.forEach(q=>{_catMap[q.id]=q.c;});
+  return _catMap;
+}
+function topicCount(t){
+  const T=TOPICS[t].c,cm=catMap();let n=0;
+  [mem.qres,mem.bres].forEach(r=>{Object.keys(r||{}).forEach(id=>{if(r[id]==='ok'&&T.includes(cm[id]))n++;});});
+  return n;
+}
+const topicsDone=()=>Object.keys(TOPICS).filter(t=>topicCount(t)>=10).length;
+
+const BADGES=[
+ {id:'ilk',n:'İlk Adım',d:'Bir soru çöz ya da bir kelime işaretle',g:1,max:1,val:totalAct},
+ {id:'d10',n:'On Doğru',d:'10 farklı soruyu doğru yanıtla',g:10,max:10,val:uniqCorrect},
+ {id:'d50',n:'Elli Doğru',d:'50 farklı soruyu doğru yanıtla',g:50,max:50,val:uniqCorrect},
+ {id:'d100',n:'Yüz Doğru',d:'100 farklı soruyu doğru yanıtla',g:100,max:100,val:uniqCorrect},
+ {id:'d250',n:'İki Yüz Elli',d:'250 farklı soruyu doğru yanıtla',g:250,max:250,val:uniqCorrect},
+ {id:'d400',n:'Dört Yüz Doğru',d:'400 farklı soruyu doğru yanıtla',g:400,max:400,val:uniqCorrect},
+ {id:'d800',n:'Sekiz Yüz Doğru',d:'800 farklı soruyu doğru yanıtla',g:800,max:800,val:uniqCorrect},
+ {id:'k25',n:'Kelime Tohumu',d:'25 kelimeyi bilinen olarak işaretle',g:25,max:25,val:knownN},
+ {id:'k50',n:'Kelime Bahçesi',d:'50 kelimeyi bilinen olarak işaretle',g:50,max:50,val:knownN},
+ {id:'kall',n:'Kelime Ormanı',d:'Kelime listesindeki tüm kelimeleri bilinen olarak işaretle',g:V.length,max:V.length,val:knownN},
+ {id:'p25',n:'Kalıp Avcısı',d:'Kalıp Avcısı\'nda 25 kalıbı bil',g:25,max:25,val:kalipN},
+ {id:'p50',n:'Kalıp Ustası',d:'Kalıp Avcısı\'nda 50 kalıbı bil',g:50,max:50,val:kalipN},
+ {id:'s3',n:'Üç Gün',d:'Üst üste 3 gün çalış',g:3,max:3,val:()=>streakInfo().best},
+ {id:'s7',n:'Bir Hafta',d:'Üst üste 7 gün çalış',g:7,max:7,val:()=>streakInfo().best},
+ {id:'s14',n:'İki Hafta',d:'Üst üste 14 gün çalış',g:14,max:14,val:()=>streakInfo().best},
+ {id:'s30',n:'Bir Ay',d:'Üst üste 30 gün çalış',g:30,max:30,val:()=>streakInfo().best},
+ {id:'e1',n:'İlk Deneme',d:'Bir deneme sonucu kaydet',g:1,max:1,val:()=>(mem.exams||[]).length},
+ {id:'e5',n:'Deneme Serisi',d:'5 deneme sonucu kaydet',g:5,max:5,val:()=>(mem.exams||[]).length},
+ {id:'kg',n:'Kusursuz Gün',d:'Bir günde en az 10 soruyu hatasız yanıtla',g:10,max:1,val:perfectDay},
+ {id:'o1',n:'Oyuncu',d:'Bir oyunu bitir',g:1,max:1,val:()=>Object.keys(mem.gameBest||{}).length},
+ {id:'dengeli',n:'Dengeli Çalışan',d:'Beş konunun hepsinde en az 10 farklı soruyu doğru yanıtla',g:5,max:5,val:topicsDone}
+];
+Object.keys(TOPICS).forEach(t=>{
+  const T=TOPICS[t];
+  T.tiers.forEach((m,i)=>BADGES.push({id:'t_'+t+(i+1),n:T.n+' '+TIER_N[i],d:T.n+' sorularında ('+T.d+') '+m+' farklı soruyu doğru yanıtla',g:m,s:T.s,max:m,val:()=>topicCount(t),konu:t}));
+});
+function checkBadges(silent){
+  const got=st('badges',{});const nw=[];
+  BADGES.forEach(b=>{if(!got[b.id]&&b.val()>=b.max){got[b.id]=today();nw.push(b);}});
+  if(nw.length){save();if(!silent)toast('Yeni rozet: '+nw.map(b=>b.n).join(', '));}
+}
+function badgeHtml(b,got){
+  const u=!!got[b.id];const v=Math.min(b.val(),b.max);
+  const seal=b.s?`<span class="ar w">${b.s}</span><em class="tn">${arNum(b.g)}</em>`:`<span class="ar">${arNum(b.g)}</span>`;
+  return `<div class="rz ${u?'on':''}" title="${esc(b.d)}"><div class="seal">${seal}</div><b>${esc(b.n)}</b><small>${u?esc(got[b.id]):(b.max>1?v+' / '+b.max:esc(b.d))}</small></div>`;
+}
+function renderBadges(){
+  const el=$('#rozetCard');if(!el)return;
+  const s=streakInfo();const a=actAll();const got=mem.badges||{};
+  const days=[];for(let i=6;i>=0;i--)days.push(addDays(today(),-i));
+  const mx=Math.max(5,...days.map(d=>(a[d]||{}).n||0));
+  const DN=['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
+  const bars=days.map(d=>{const n=(a[d]||{}).n||0;const dt=new Date(d+'T12:00:00');
+    return `<div class="wk" title="${esc(d)}: ${n} soru"><div class="wkb"><i style="height:${n?Math.max(10,Math.round(n/mx*100)):0}%"></i></div><span>${DN[dt.getDay()]}</span></div>`;}).join('');
+  const nGot=BADGES.filter(b=>got[b.id]).length;
+  const gen=BADGES.filter(b=>!b.konu).map(b=>badgeHtml(b,got)).join('');
+  const konu=Object.keys(TOPICS).map(t=>{
+    const T=TOPICS[t];
+    return `<div class="tt"><b>${esc(T.n)}</b> <span class="small muted">${topicCount(t)} farklı doğru · ${esc(T.d)}</span></div><div class="rgrid">${BADGES.filter(b=>b.konu===t).map(b=>badgeHtml(b,got)).join('')}</div>`;
+  }).join('');
+  el.innerHTML=`<h3>Seri ve rozetler</h3>
+  <div class="srow">
+    <div><div class="small muted">Güncel seri</div><div class="stat">${s.cur} gün</div><div class="small muted">En uzun: ${s.best} gün</div></div>
+    <div><div class="small muted">Bugün</div><div class="stat">${s.todayN} soru</div><div class="small muted">${s.todayC} doğru</div></div>
+    <div class="wkw" aria-label="Son 7 gün">${bars}</div>
+  </div>
+  <p class="small muted" style="margin:12px 0 8px">Rozetler: ${nGot} / ${BADGES.length}. Soru rozetleri farklı soruları sayar, aynı soruyu tekrar çözmek puan kazandırmaz.</p>
+  <div class="rgrid">${gen}</div>
+  <h3 style="margin-top:18px">Konuya göre rozetler</h3>
+  <p class="small muted" style="margin:0 0 4px">Her konuda üç basamak var. Sayılar o konudaki farklı doğru sorularını gösterir.</p>
+  ${konu}`;
+  renderAcc();
+  renderLB();
+}
+
+/* ---------- hesap, eşleşme ve liderlik tablosu (isteğe bağlı, Supabase) ---------- */
+/* Kurulum: supabase/KURULUM.md. url ve key boşsa bu bölümler sitede görünmez, site hesapsız çalışır. */
+const LB={url:'',key:'',google:false};
+const LB_ON=()=>!!(LB.url&&LB.key);
+const LB_SESS='yds-lb-sess';
+const lbSess=()=>{try{return JSON.parse(localStorage.getItem(LB_SESS)||'null');}catch(e){return null;}};
+const lbSetSess=s=>{try{if(s)localStorage.setItem(LB_SESS,JSON.stringify(s));else localStorage.removeItem(LB_SESS);}catch(e){}};
+const acc=()=>{const s=lbSess();return s&&!s.anon&&s.uid?s:null;};
+const siteUrl=()=>location.origin+location.pathname;
+const busyInput=el=>!!document.activeElement&&el.contains(document.activeElement)&&/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){}}
+
+async function lbReq(path,opt,token){
+  opt=opt||{};
+  const h=Object.assign({apikey:LB.key,'Content-Type':'application/json'},opt.headers||{});
+  if(token)h.Authorization='Bearer '+token;
+  const r=await fetch(LB.url.replace(/\/$/,'')+path,Object.assign({},opt,{headers:h}));
+  const txt=await r.text();let j=null;try{j=txt?JSON.parse(txt):null;}catch(e){}
+  if(!r.ok){
+    const e=new Error((j&&(j.message||j.msg||j.error_description))||('HTTP '+r.status));
+    e.status=r.status;e.code=j&&j.code;e.errCode=j&&(j.error_code||j.error);throw e;
+  }
+  return j;
+}
+function lbMk(j,old){
+  const u=j.user,o=old||{};
+  return {access:j.access_token,refresh:j.refresh_token,
+    exp:+j.expires_at||(Math.floor(Date.now()/1000)+(+j.expires_in||3600)-30),
+    uid:u?u.id:(o.uid||null),email:u?(u.email||''):(o.email||''),anon:u?!!u.is_anonymous:!!o.anon};
+}
+let accMsg='',accBad=false,accMode='in',accConsent=false,recoverMode=false,syncMsg='';
+async function lbToken(allowAnon){
+  const now=Math.floor(Date.now()/1000);let s=lbSess();
+  if(s&&s.exp>now+60)return s.access;
+  if(s&&s.refresh){
+    try{const j=await lbReq('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:s.refresh})});s=lbMk(j,s);lbSetSess(s);return s.access;}
+    catch(e){
+      if(e.status&&e.status<500){if(!s.anon){accMsg='Oturum süresi doldu, yeniden giriş yap.';accBad=true;}lbSetSess(null);}
+      else throw e;
+    }
+  }
+  if(!allowAnon)return null;
+  const j=await lbReq('/auth/v1/signup',{method:'POST',body:JSON.stringify({data:{}})});
+  s=lbMk(j);lbSetSess(s);return s.access;
+}
+async function lbFetch(path,opt,auth){
+  let tok=null;
+  if(auth==='acc'){tok=await lbToken(false);if(!tok){const e=new Error('oturum yok');e.status=401;throw e;}}
+  else if(auth)tok=await lbToken(true);
+  return lbReq(path,opt,tok);
+}
+const lbAuth=()=>acc()?'acc':true;
+
+/* ----- puan gönderme ve sıralama ----- */
+const weekKey=()=>addDays(today(),-((new Date().getDay()+6)%7));
+function weekCorrect(){const a=actAll();const wk=weekKey();let n=0;for(let i=0;i<7;i++)n+=(a[addDays(wk,i)]||{}).c||0;return n;}
+async function lbSubmit(){
+  const c=mem.lb;if(!LB_ON()||!c||!c.on||!c.nick)return;
+  await lbFetch('/rest/v1/rpc/submit_score',{method:'POST',body:JSON.stringify({p_nick:c.nick,p_week:weekKey(),p_week_correct:weekCorrect(),p_total:uniqCorrect(),p_streak:streakInfo().best,p_badges:Object.keys(mem.badges||{}).length})},lbAuth());
+}
+let lbT=null;
+function lbQueue(){if(!LB_ON()||!mem.lb||!mem.lb.on)return;clearTimeout(lbT);lbT=setTimeout(()=>{lbSubmit().catch(()=>{});},6000);}
+let lbKind='hafta',lbRows=null,lbErr='',lbBusy=false;
+const LB_Q={
+  hafta:()=>`/rest/v1/scores?select=nick,v:week_correct&week_key=eq.${weekKey()}&week_correct=gt.0&order=week_correct.desc,updated_at.asc&limit=30`,
+  genel:()=>`/rest/v1/scores?select=nick,v:total_correct&total_correct=gt.0&order=total_correct.desc,updated_at.asc&limit=30`,
+  seri:()=>`/rest/v1/scores?select=nick,v:streak&streak=gt.0&order=streak.desc,updated_at.asc&limit=30`
+};
+const LB_UNIT={hafta:'doğru',genel:'doğru',seri:'gün'};
+async function lbLoad(){
+  if(lbBusy)return;lbBusy=true;lbErr='';
+  try{lbRows=await lbFetch(LB_Q[lbKind]());}catch(e){lbRows=null;lbErr='Sıralama şu an alınamadı.';}
+  lbBusy=false;renderLB(true);
+}
+const nickOk=n=>/^[\p{L}\p{N} _.\-]{3,16}$/u.test(n);
+function renderLB(force){
+  const el=$('#lbCard');if(!el)return;
+  if(!LB_ON()){el.style.display='none';return;}
+  el.style.display='';
+  if(!force&&busyInput(el))return;
+  const c=mem.lb;
+  if(!c||!c.on){
+    el.innerHTML=`<h3>Liderlik tablosu</h3>
+    <p class="small muted">Katılırsan takma adın, bu haftaki doğru sayın, toplam doğru sayın ve serin herkese açık sıralamada görünür. Gerçek adın ya da e-postan gösterilmez. İstediğin zaman ayrılıp kaydını sildirebilirsin. ${acc()?'Hesabınla giriş yaptığın için kaydın cihazlar arasında korunur.':'Hesapla giriş yaparsan kaydın cihazlar arasında korunur.'}</p>
+    <div class="row"><input type="text" id="lbNick" maxlength="16" placeholder="Takma ad (3-16 karakter)" style="flex:1 1 180px"><button class="btn" id="lbJoin">Katıl</button></div>
+    <div class="small" id="lbMsg" style="margin-top:8px;color:var(--bad)"></div>`;
+    $('#lbJoin').onclick=async()=>{
+      const n=$('#lbNick').value.trim().replace(/\s+/g,' ');const msg=$('#lbMsg');
+      if(!nickOk(n)){msg.textContent='Takma ad 3-16 karakter olmalı; harf, rakam, boşluk, nokta, tire ve alt çizgi kullanabilirsin.';return;}
+      msg.style.color='var(--muted)';msg.textContent='Katılınıyor...';
+      mem.lb={nick:n,on:true};
+      try{await lbSubmit();save();lbRows=null;lbLoad();toast('Sıralamaya katıldın');renderLB(true);}
+      catch(e){
+        mem.lb=null;save();msg.style.color='var(--bad)';
+        msg.textContent=(e.code==='23505'||/duplicate|unique/i.test(e.message))?'Bu takma ad alınmış, başka bir tane dene.'
+          :(e.errCode==='anonymous_provider_disabled'||/anonymous/i.test(e.message))?'Katılmak için önce yukarıdan hesap açıp giriş yapman gerekiyor.'
+          :'Katılınamadı, biraz sonra tekrar dene.';
+      }
+    };
+    return;
+  }
+  const tabs=[['hafta','Bu hafta'],['genel','Genel'],['seri','Seri']].map(([k,n])=>`<button class="chip ${lbKind===k?'on':''}" data-k="${k}">${n}</button>`).join('');
+  let body;
+  if(lbErr)body=`<p class="small" style="color:var(--bad)">${esc(lbErr)}</p>`;
+  else if(lbRows===null)body='<p class="small muted">Yükleniyor...</p>';
+  else if(!lbRows.length)body='<p class="small muted">Henüz kimse yok. İlk sıra senin olabilir.</p>';
+  else body=`<table><tbody>${lbRows.map((r,i)=>`<tr class="${r.nick===c.nick?'me':''}"><td class="num" style="width:34px">${i+1}</td><td>${esc(r.nick)}${r.nick===c.nick?' <span class="pill">sen</span>':''}</td><td class="num" style="text-align:end"><b>${r.v}</b> <span class="small muted">${LB_UNIT[lbKind]}</span></td></tr>`).join('')}</tbody></table>`;
+  el.innerHTML=`<h3>Liderlik tablosu</h3>
+  <p class="small muted">Takma adın: <b>${esc(c.nick)}</b>. Sıralama bu haftanın doğru yanıt sayısına, toplam farklı doğru sayına ve en uzun serine göre.</p>
+  <div class="chips">${tabs}</div>${body}
+  <div class="row" style="margin-top:12px"><button class="btn small ghost" id="lbRef">Yenile</button><button class="btn small bad" id="lbLeave">Ayrıl ve kaydımı sil</button></div>
+  <p class="small muted" style="margin-top:10px">Uygunsuz bir takma ad mı gördün? <a href="#gorus" id="lbReport">Görüş ve öneri bölümünden bildir.</a></p>`;
+  el.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{lbKind=b.dataset.k;lbRows=null;renderLB(true);lbLoad();});
+  $('#lbRef').onclick=async()=>{try{await lbSubmit();}catch(e){}lbLoad();};
+  $('#lbReport').onclick=ev=>{ev.preventDefault();const g=document.getElementById('gorus');if(g&&g.scrollIntoView)g.scrollIntoView({behavior:'smooth'});};
+  $('#lbLeave').onclick=async()=>{
+    if(!confirm('Sıralamadan ayrılıp kaydın silinsin mi?'))return;
+    try{await lbFetch('/rest/v1/rpc/delete_score',{method:'POST',body:'{}'},lbAuth());}catch(e){toast('Silinemedi, biraz sonra tekrar dene');return;}
+    mem.lb=null;save();if(!acc())lbSetSess(null);lbRows=null;renderLB(true);toast('Kaydın silindi');
+  };
+  if(lbRows===null&&!lbBusy&&!lbErr)lbLoad();
+}
+
+/* ----- eşleşme: birleştirme ----- */
+const isObj=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
+function deq(a,b){
+  if(a===b)return true;
+  if(typeof a!==typeof b||a===null||b===null||typeof a!=='object')return false;
+  if(Array.isArray(a)!==Array.isArray(b))return false;
+  const ka=Object.keys(a),kb=Object.keys(b);
+  if(ka.length!==kb.length)return false;
+  return ka.every(k=>Object.prototype.hasOwnProperty.call(b,k)&&deq(a[k],b[k]));
+}
+function unionArr(k,a,b){
+  const key=x=>{
+    if(!x||typeof x!=='object')return JSON.stringify(x);
+    if(k==='wrongs')return x.qid||x.text;
+    if(k==='exams')return [x.date,x.name,JSON.stringify(x.sc)].join('|');
+    if(k==='sources')return x.n+'|'+x.u;
+    return JSON.stringify(x);
+  };
+  const seen=new Set(),out=[];
+  a.concat(b).forEach(x=>{const id=key(x);if(!seen.has(id)){seen.add(id);out.push(x);}});
+  if(k==='wrongs'||k==='exams')out.sort((p,q)=>String((q&&q.date)||'').localeCompare(String((p&&p.date)||'')));
+  return out;
+}
+/* L: bu cihaz, R: bulut. first=true: bu cihaz bu hesapla ilk kez eşleşiyor, listeler ve kümeler birleşir.
+   Sonraki eşleşmelerde, birleştirilmeyen alanlarda daha yeni değişiklik kazanır. */
+function mergeMem(L,R,first){
+  const out={};const lt=L._ts||{},rt=R._ts||{};const ts={};
+  const keys=new Set(Object.keys(L).concat(Object.keys(R)));
+  keys.delete('_ts');keys.delete('_sync');
+  keys.forEach(k=>{
+    const a=L[k],b=R[k];
+    if(b===undefined){out[k]=a;ts[k]=lt[k]||0;return;}
+    if(a===undefined){out[k]=b;ts[k]=rt[k]||0;return;}
+    const lNew=(lt[k]||0)>=(rt[k]||0);
+    let v;
+    if((k==='qres'||k==='bres')&&isObj(a)&&isObj(b)){
+      v=Object.assign({},b,a);
+      Object.keys(v).forEach(id=>{if(a[id]==='ok'||b[id]==='ok')v[id]='ok';});
+    }else if(k==='act'&&isObj(a)&&isObj(b)){
+      v={};
+      new Set(Object.keys(a).concat(Object.keys(b))).forEach(d=>{
+        const x=a[d]||{},y=b[d]||{};const o={};
+        ['n','c','w','x'].forEach(f=>{const m=Math.max(x[f]||0,y[f]||0);if(m)o[f]=m;});
+        v[d]=o;
+      });
+    }else if(k==='badges'&&isObj(a)&&isObj(b)){
+      v=Object.assign({},b,a);
+      Object.keys(v).forEach(id=>{if(a[id]&&b[id]&&String(b[id])<String(a[id]))v[id]=b[id];});
+    }else if(first&&Array.isArray(a)&&Array.isArray(b)){
+      v=unionArr(k,a,b);
+    }else if(first&&isObj(a)&&isObj(b)){
+      v=lNew?Object.assign({},b,a):Object.assign({},a,b);
+    }else v=lNew?a:b;
+    out[k]=v;ts[k]=Math.max(lt[k]||0,rt[k]||0);
+  });
+  out._ts=ts;return out;
+}
+const stripSync=o=>{const c=Object.assign({},o);delete c._sync;return c;};
+let syncBusy=false,syncAgain=false,syncT=null;
+function accQueue(){
+  if(!LB_ON()||!acc())return;
+  clearTimeout(syncT);syncT=setTimeout(()=>{syncNow();},5000);
+}
+function refreshAfterSync(){
+  try{
+    renderWrongs();renderPlan();renderExams();renderStats();renderCountdown();
+    const v=(location.hash||'#sinav').slice(1);
+    if(v==='kelime'||v==='kalip')route();
+  }catch(e){}
+}
+async function syncNow(){
+  const s=acc();if(!LB_ON()||!s)return;
+  if(syncBusy){syncAgain=true;return;}
+  syncBusy=true;
+  try{
+    const rows=await lbFetch('/rest/v1/user_data?select=data&user_id=eq.'+encodeURIComponent(s.uid),{},'acc');
+    const remote=rows&&rows[0]&&isObj(rows[0].data)?rows[0].data:null;
+    const first=!(mem._sync&&mem._sync.uid===s.uid);
+    const merged=remote?mergeMem(mem,remote,first):stripSync(mem);
+    const localChanged=!deq(stripSync(mem),merged);
+    const remoteChanged=!remote||!deq(merged,remote);
+    if(localChanged){
+      const keep=mem._sync;
+      Object.keys(mem).forEach(k=>{delete mem[k];});
+      Object.assign(mem,merged);
+      if(keep)mem._sync=keep;
+      snapAll();persist();
+    }
+    if(remoteChanged){
+      await lbFetch('/rest/v1/user_data?on_conflict=user_id',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({user_id:s.uid,data:stripSync(mem)})},'acc');
+    }
+    mem._sync={uid:s.uid,at:new Date().toISOString()};persist();
+    syncMsg='Son eşleşme: '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+    if(localChanged){checkBadges(true);refreshAfterSync();}
+  }catch(e){
+    syncMsg=(e&&e.status===401)?'Oturum geçersiz, yeniden giriş yap.':'Eşleşme şu an yapılamadı, internet gelince yeniden denenecek.';
+  }
+  syncBusy=false;
+  renderAcc(false);
+  if(syncAgain){syncAgain=false;accQueue();}
+}
+
+/* ----- hesap işlemleri ----- */
+function accSay(m,bad){accMsg=m;accBad=!!bad;const e=$('#aMsg');if(e){e.textContent=m;e.style.color=bad?'var(--bad)':'var(--muted)';}}
+function accErr(e){
+  const m=(e&&e.message)||'';
+  if(e&&e.name==='TypeError')return 'Bağlantı kurulamadı, internetini kontrol et.';
+  if(/invalid login/i.test(m))return 'E-posta ya da şifre yanlış.';
+  if(/not confirmed/i.test(m))return 'E-postanı henüz onaylamadın. Gelen kutundaki bağlantıya tıkla.';
+  if(/already registered|already been registered/i.test(m))return 'Bu e-posta ile zaten bir hesap var, giriş yapmayı dene.';
+  if(/rate limit|too many|over_/i.test(m+(e.errCode||''))||e.status===429)return 'Çok fazla deneme yapıldı, biraz sonra tekrar dene.';
+  if(/password/i.test(m))return 'Şifre kabul edilmedi. Daha uzun ya da daha zor bir şifre dene.';
+  return 'İşlem yapılamadı, biraz sonra tekrar dene.';
+}
+async function accAdopt(s,old){
+  if(old&&old.anon&&old.access&&mem.lb&&mem.lb.on){
+    try{await lbReq('/rest/v1/rpc/delete_score',{method:'POST',body:'{}'},old.access);}catch(e){}
+  }
+  lbSetSess(s);accMsg='';accBad=false;recoverMode=false;
+  await syncNow();
+  if(mem.lb&&mem.lb.on){try{await lbSubmit();}catch(e){}}
+  checkBadges(true);lbRows=null;
+  renderBadges();toast('Giriş yapıldı');
+}
+async function accSignIn(em,pw){
+  const old=lbSess();
+  const j=await lbReq('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:em,password:pw})});
+  await accAdopt(lbMk(j),old);
+}
+async function accSignUp(em,pw){
+  const old=lbSess();
+  const j=await lbReq('/auth/v1/signup?redirect_to='+encodeURIComponent(siteUrl()),{method:'POST',body:JSON.stringify({email:em,password:pw})});
+  if(j&&j.access_token){await accAdopt(lbMk(j),old);return;}
+  accMode='in';
+  accSay('Onay e-postası gönderildi. Gelen kutunu (ve gereksiz klasörünü) kontrol et, bağlantıya tıkladıktan sonra giriş yap.');
+  renderAcc(true);
+}
+async function accSignOut(wipe){
+  const s=lbSess();
+  if(s&&s.access){try{await lbReq('/auth/v1/logout',{method:'POST'},s.access);}catch(e){}}
+  lbSetSess(null);delete mem._sync;syncMsg='';
+  if(wipe){Object.keys(mem).forEach(k=>{delete mem[k];});Object.keys(_snap).forEach(k=>{delete _snap[k];});persist();renderAll();}
+  else persist();
+  lbRows=null;renderBadges();toast(wipe?'Çıkış yapıldı, bu cihazdaki veriler silindi':'Çıkış yapıldı');
+}
+function renderAcc(force){
+  const el=$('#accCard');if(!el)return;
+  if(!LB_ON()){el.style.display='none';return;}
+  el.style.display='';
+  if(!force&&busyInput(el))return;
+  const s=acc();
+  const msg=`<div class="small" id="aMsg" style="margin-top:8px;color:${accBad?'var(--bad)':'var(--muted)'}">${esc(accMsg)}</div>`;
+  const pol=`<a href="#gizlilik">gizlilik politikası</a>`;
+  if(recoverMode&&lbSess()){
+    el.innerHTML=`<h3>Yeni şifre belirle</h3>
+    <p class="small muted">Şifre sıfırlama bağlantısıyla geldin. Yeni şifreni yaz.</p>
+    <div class="row"><input type="password" id="aNew" autocomplete="new-password" placeholder="Yeni şifre (en az 8 karakter)" style="flex:1 1 200px"><button class="btn" id="aNewGo">Kaydet</button></div>${msg}`;
+    $('#aNewGo').onclick=async()=>{
+      const pw=$('#aNew').value;if(pw.length<8)return accSay('Şifre en az 8 karakter olmalı.',true);
+      try{await lbReq('/auth/v1/user',{method:'PUT',body:JSON.stringify({password:pw})},lbSess().access);recoverMode=false;accSay('Şifren güncellendi.');await accAdopt(lbSess(),null);}
+      catch(e){accSay(accErr(e),true);}
+    };
+    return;
+  }
+  if(s){
+    el.innerHTML=`<h3>Hesap ve eşleşme</h3>
+    <p class="small muted">Giriş yapılmış: <b>${esc(s.email||'hesap')}</b>. Yanlış defterin, rozetlerin, serin, denemelerin ve ilerlemen bu hesapla tüm cihazlarında aynı olur.</p>
+    <p class="small muted" id="aSync">${esc(syncMsg||'Eşleşme bekleniyor...')}</p>
+    <div class="row"><button class="btn small" id="aSyncBtn">Şimdi eşleştir</button><button class="btn small ghost" id="aOut">Çıkış yap</button></div>
+    <details style="margin-top:12px"><summary class="small">Diğer işlemler</summary>
+      <div class="row" style="margin-top:8px"><button class="btn small ghost" id="aOutWipe">Çıkış yap ve bu cihazdaki verileri sil</button><button class="btn small bad" id="aDel">Hesabımı ve bulut verilerimi sil</button></div>
+      <p class="small muted" style="margin-top:8px">Hesabı silersen e-postan, buluttaki ilerleme kopyan ve liderlik kaydın kalıcı olarak silinir. Bu cihazdaki ilerleme yerinde kalır. Ayrıntılar için ${pol}.</p>
+    </details>${msg}`;
+    $('#aSyncBtn').onclick=async()=>{accSay('Eşleştiriliyor...');await syncNow();accSay('');};
+    $('#aOut').onclick=()=>accSignOut(false);
+    $('#aOutWipe').onclick=()=>{if(confirm('Çıkış yapılacak ve bu cihazdaki tüm ilerleme silinecek. Bulutta kayıtlı kopya durur. Devam edilsin mi?'))accSignOut(true);};
+    $('#aDel').onclick=async()=>{
+      if(!confirm('Hesabın ve buluttaki tüm verilerin kalıcı olarak silinecek. Bu geri alınamaz. Devam edilsin mi?'))return;
+      try{
+        await lbFetch('/rest/v1/rpc/delete_account',{method:'POST',body:'{}'},'acc');
+        lbSetSess(null);delete mem._sync;mem.lb=null;syncMsg='';persist();lbRows=null;
+        accMsg='Hesabın silindi.';accBad=false;renderBadges();toast('Hesabın silindi');
+      }catch(e){accSay('Hesap silinemedi, biraz sonra tekrar dene.',true);}
+    };
+    return;
+  }
+  const up=accMode==='up';
+  el.innerHTML=`<h3>Hesap ve eşleşme</h3>
+  <p class="small muted">Hesap açarsan yanlış defterin, rozetlerin, serin ve denemelerin tüm cihazlarında aynı olur. Hesap açmak zorunda değilsin, site hesapsız da çalışır.</p>
+  <div class="chips"><button class="chip ${up?'':'on'}" data-m="in">Giriş yap</button><button class="chip ${up?'on':''}" data-m="up">Hesap aç</button></div>
+  <div style="display:grid;gap:8px;max-width:360px">
+    <input type="email" id="aMail" autocomplete="email" placeholder="E-posta">
+    <input type="password" id="aPass" autocomplete="${up?'new-password':'current-password'}" placeholder="Şifre (en az 8 karakter)">
+  </div>
+  <label class="small" style="display:flex;gap:8px;align-items:flex-start;margin:10px 0;max-width:420px"><input type="checkbox" id="aOk" ${accConsent?'checked':''} style="margin-top:3px"><span><a href="#gizlilik">Gizlilik politikasını</a> okudum. E-posta adresimin ve ilerleme verilerimin Supabase sunucularında saklanmasını, bunun yurt dışına aktarım içerebileceğini kabul ediyorum. (Hesap açarken ya da Google ile girerken gerekli.)</span></label>
+  <div class="row"><button class="btn" id="aGo">${up?'Hesap aç':'Giriş yap'}</button>${LB.google?'<button class="btn ghost" id="aGoogle">Google ile devam et</button>':''}<button class="btn small ghost" id="aForgot">Şifremi unuttum</button></div>${msg}`;
+  el.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{accMode=b.dataset.m;accMsg='';renderAcc(true);});
+  $('#aOk').onchange=ev=>{accConsent=ev.target.checked;};
+  $('#aGo').onclick=async()=>{
+    const em=$('#aMail').value.trim().toLowerCase(),pw=$('#aPass').value;
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em))return accSay('Geçerli bir e-posta adresi yaz.',true);
+    if(pw.length<8)return accSay('Şifre en az 8 karakter olmalı.',true);
+    if(up&&!accConsent)return accSay('Hesap açmak için gizlilik politikasını kabul etmelisin.',true);
+    const b=$('#aGo');b.disabled=true;accSay('Bekle...');
+    try{if(up)await accSignUp(em,pw);else await accSignIn(em,pw);}
+    catch(e){accSay(accErr(e),true);}
+    if($('#aGo'))$('#aGo').disabled=false;
+  };
+  if($('#aGoogle'))$('#aGoogle').onclick=()=>{
+    if(!accConsent)return accSay('Google ile devam etmek için gizlilik politikasını kabul etmelisin.',true);
+    location.href=LB.url.replace(/\/$/,'')+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(siteUrl());
+  };
+  $('#aForgot').onclick=async()=>{
+    const em=$('#aMail').value.trim().toLowerCase();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em))return accSay('Önce e-posta adresini yaz.',true);
+    try{await lbReq('/auth/v1/recover?redirect_to='+encodeURIComponent(siteUrl()),{method:'POST',body:JSON.stringify({email:em})});accSay('Bu adreste hesap varsa şifre sıfırlama bağlantısı gönderildi.');}
+    catch(e){accSay(accErr(e),true);}
+  };
+}
+
+/* ----- e-posta bağlantısından ve Google'dan dönüş ----- */
+async function lbHashLogin(){
+  const raw=(location.hash||'').replace(/^#/,'');
+  if(!/(^|&)(access_token|error_description)=/.test(raw))return;
+  const p=new URLSearchParams(raw);
+  history.replaceState(null,'',location.pathname+location.search+'#takip');
+  if(!LB_ON())return;
+  if(p.get('error_description')){accMsg='Giriş tamamlanamadı: '+p.get('error_description').replace(/\+/g,' ');accBad=true;renderAcc(true);return;}
+  const old=lbSess();
+  const tok={access_token:p.get('access_token'),refresh_token:p.get('refresh_token'),expires_at:+p.get('expires_at')||0,expires_in:+p.get('expires_in')||3600};
+  try{
+    tok.user=await lbReq('/auth/v1/user',{},tok.access_token);
+    const s=lbMk(tok);
+    if(p.get('type')==='recovery'){lbSetSess(s);recoverMode=true;renderAcc(true);}
+    else await accAdopt(s,old);
+  }catch(e){accMsg='Giriş tamamlanamadı, tekrar dene.';accBad=true;renderAcc(true);}
+}
+
+window.addEventListener('online',accQueue);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)accQueue();});
+(function(){const g=$('#gzMail');if(g){const m='tcimen.jo'+'@'+'gmail.com';g.innerHTML='<a href="mailto:'+m+'">'+m+'</a>';}})();
+/*__TEST__*/
+checkBadges(true);
+lbHashLogin();
+if(LB_ON()&&acc())setTimeout(syncNow,1200);
+
 renderAll();
 })();
 </script>
