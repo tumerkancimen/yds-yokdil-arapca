@@ -6,7 +6,7 @@
 <title>YDS Arapça Çalışma Kütüphanesi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6f1e7;--paper:#fffdf8;--ink:#2a2622;--muted:#6f675d;--line:#e3d9c7;
@@ -177,6 +177,104 @@ button.btn,a.btn{border-radius:999px}
 .feedback h2{color:var(--accent)}
 .feedback .box > *{position:relative}
 .feedback a.btn{background:var(--accent);color:#fffaf0;border-color:var(--accent)}
+
+/* ================= tema: sisli cam ================= */
+:root{
+  --ink:#10302e;--muted:#4a6866;--accent:#1d5a58;--accent-2:#123f3e;--accent-soft:rgba(29,90,88,.12);
+  --gold:#7d6125;--gold-soft:rgba(255,255,255,.5);--line:rgba(16,48,46,.15);
+  --paper:rgba(255,255,255,.62);--bg:#e2ece9;
+  --ok:#2b7a4b;--ok-soft:rgba(43,122,75,.15);--bad:#a63d32;--bad-soft:rgba(166,61,50,.13);
+  --radius:20px;
+  --shadow:0 1px 0 rgba(255,255,255,.85) inset,0 12px 32px -16px rgba(8,45,43,.38);
+  --serif:"Playfair Display","Source Serif 4",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e3efec;--muted:#9fbab6;--accent:#86d0c8;--accent-2:#5fb0a8;--accent-soft:rgba(134,208,200,.14);
+  --gold:#e0bd78;--gold-soft:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);
+  --paper:rgba(18,52,52,.55);--bg:#0b1d1e;
+  --ok:#7fcf9a;--ok-soft:rgba(127,207,154,.14);--bad:#ee8d82;--bad-soft:rgba(238,141,130,.14);
+  --shadow:0 1px 0 rgba(255,255,255,.06) inset,0 14px 34px -16px rgba(0,0,0,.6);}}
+
+body{position:relative;background:var(--bg);overflow-x:hidden}
+body::before{content:"";position:absolute;left:0;right:0;top:0;height:1100px;z-index:0;pointer-events:none;
+  background:
+   radial-gradient(55% 30% at 80% 22%,rgba(236,243,204,.45),transparent 70%),
+   radial-gradient(60% 26% at 14% 34%,rgba(130,178,176,.55),transparent 72%),
+   linear-gradient(180deg,#113738 0,#1c5352 300px,#5d908d 520px,#b3cfca 740px,rgba(226,236,233,0) 1100px)}
+body::after{content:"";position:absolute;left:0;right:0;top:70px;height:480px;z-index:0;pointer-events:none;opacity:.95;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 480' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eef3cc' stop-opacity='.55'/%3E%3Cstop offset='.18' stop-color='%2389b5b1' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23123d3d' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23d9e6c8' stop-opacity='.5'/%3E%3Cstop offset='.25' stop-color='%236a9d9a' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%23123d3d' stop-opacity='0'/%3E%3C/linearGradient%3E%3Cfilter id='f'%3E%3CfeGaussianBlur stdDeviation='6'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23f)'%3E%3Cpath d='M0 300C190 250 330 160 520 96C650 52 760 70 860 140C990 232 1190 266 1440 214V480H0Z' fill='url(%23a)'/%3E%3Cpath d='M0 360C240 320 420 270 620 250C820 230 980 300 1180 300C1300 300 1380 280 1440 262V480H0Z' fill='url(%23b)'/%3E%3C/g%3E%3C/svg%3E") center top/100% 100% no-repeat}
+@media (prefers-color-scheme:dark){
+  body::before{background:
+   radial-gradient(55% 30% at 80% 22%,rgba(150,200,190,.18),transparent 70%),
+   radial-gradient(60% 26% at 14% 34%,rgba(60,120,120,.3),transparent 72%),
+   linear-gradient(180deg,#071819 0,#0d2a2b 320px,#0c2324 640px,rgba(11,29,30,0) 1100px)}
+  body::after{opacity:.5}}
+.brandbar,header.hero,main,.feedback{position:relative;z-index:2}
+
+/* üst şerit */
+.brandbar{background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.brandbar .contact a{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+
+/* hero */
+header.hero{padding:54px 16px 20px}
+.hero h1{font-family:var(--serif);font-weight:400;color:#eef3d6;letter-spacing:-.01em;line-height:1;margin:0;
+  font-size:clamp(3.1rem,11vw,5.6rem);text-shadow:0 2px 30px rgba(8,40,40,.35)}
+.hero h1 .t2{font-style:italic;font-weight:400;color:#e4efc0;margin-inline-start:.12em}
+.hero h1 small{display:block;margin-top:.5em;font:500 clamp(.95rem,2.6vw,1.2rem)/1.3 "Source Sans 3",system-ui,sans-serif;
+  letter-spacing:.32em;text-transform:uppercase;color:rgba(238,243,214,.88)}
+.hero .orn{color:#e4efc0}
+.hero .orn svg path[fill]{fill:#1c5352}
+.hero .sub{color:rgba(238,243,214,.92);font-size:1.02rem}
+.hero .by{color:rgba(238,243,214,.7)}
+.countdown{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);color:#f3f7e2;
+  backdrop-filter:blur(12px) saturate(1.2);-webkit-backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 12px 34px -16px rgba(0,0,0,.45)}
+.countdown::before{border-color:rgba(255,255,255,.2)}
+.countdown b{color:#f0f4bf;font-family:var(--serif);font-style:italic}
+.countdown .muted{color:rgba(243,247,226,.8)}
+.countdown input{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4);color:#fff}
+
+/* sekmeler: yüzen cam hap */
+nav.tabs{background:transparent;border:0;box-shadow:none;margin-top:26px;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0 10px}
+nav.tabs .inner{max-width:max-content;margin:8px auto;padding:6px;gap:2px;border-radius:999px;
+  background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.75);
+  backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 12px 30px -14px rgba(8,45,43,.5)}
+nav.tabs a{opacity:.82;color:var(--ink)}
+nav.tabs a:hover{background:rgba(255,255,255,.6)}
+nav.tabs a.on{background:var(--accent-2);color:#f1f6df;box-shadow:none;border-color:transparent;opacity:1}
+@media (prefers-color-scheme:dark){nav.tabs .inner{background:rgba(18,52,52,.6);border-color:rgba(255,255,255,.16)}nav.tabs a.on{background:var(--accent);color:#06201f}}
+@media (max-width:620px){nav.tabs .inner{max-width:100%;border-radius:22px}}
+
+/* başlıklar */
+h2{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.9rem;line-height:1.15;letter-spacing:-.005em}
+section.view>h2::before,main>h2::before{display:none}
+h3{font-family:var(--serif);font-weight:500}
+p.lead{max-width:640px}
+.stat,.feedback h2{font-family:var(--serif)}
+
+/* cam kartlar */
+.card,details.topic{background:var(--paper);border:1px solid rgba(255,255,255,.7);border-radius:var(--radius);box-shadow:var(--shadow);
+  backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2)}
+@media (prefers-color-scheme:dark){.card,details.topic{border-color:rgba(255,255,255,.12)}}
+input[type=search],input[type=text],input[type=number],input[type=date],textarea,select{background:rgba(255,255,255,.7);border-color:var(--line)}
+@media (prefers-color-scheme:dark){input[type=search],input[type=text],input[type=number],input[type=date],textarea,select{background:rgba(255,255,255,.08)}}
+.opt{background:rgba(255,255,255,.62);border-color:var(--line);border-radius:14px}
+.opt:hover:not([disabled]){background:rgba(255,255,255,.9)}
+.opt.right{background:var(--ok-soft)}.opt.wrong{background:var(--bad-soft)}
+.chip{background:rgba(255,255,255,.55);border-color:rgba(255,255,255,.7)}
+.chip.on{background:var(--accent-2);border-color:var(--accent-2);color:#f1f6df}
+.chip.on .muted{color:rgba(241,246,223,.78)}
+@media (prefers-color-scheme:dark){.chip{background:rgba(255,255,255,.07);border-color:var(--line)}.chip.on{background:var(--accent);color:#06201f}}
+.pill{background:rgba(255,255,255,.6)}
+.passage,.explain,.tip,.ex-box{background:rgba(255,255,255,.55);border-radius:14px}
+.tip{border-inline-start-color:var(--accent)}
+button.btn,a.btn{background:var(--accent-2);border-color:var(--accent-2);color:#f1f6df}
+button.btn.ghost{background:transparent;color:var(--accent-2)}
+@media (prefers-color-scheme:dark){button.btn,a.btn{background:var(--accent);border-color:var(--accent);color:#06201f}button.btn.ghost{color:var(--accent)}}
+.bar{background:rgba(16,48,46,.14)}
+.bar>i{background:linear-gradient(90deg,var(--accent-2),#6fae9f)}
+.feedback .box{background:var(--paper);border-color:rgba(255,255,255,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.feedback .box::before{border-color:rgba(255,255,255,.5)}
+.feedback a.btn{color:#f1f6df}
 </style>
 </head>
 <body>
@@ -191,7 +289,7 @@ button.btn,a.btn{border-radius:999px}
   </div>
 </div></div>
 <header class="top hero">
-  <h1>YDS Arapça Çalışma Kütüphanesi</h1>
+  <h1><span class="t1">YDS</span> <em class="t2">Arapça</em><small>Çalışma Kütüphanesi</small></h1>
   <div class="orn"><svg viewBox="0 0 40 16" aria-hidden="true" style="width:40px;height:16px"><path d="M20 1l7 7-7 7-7-7z"/><path d="M20 5l3 3-3 3-3-3z" fill="var(--bg)"/><path d="M8 5l3 3-3 3-3-3zM32 5l3 3-3 3-3-3z"/></svg></div>
   <p class="sub">Kelime, dil bilgisi, soru tipi stratejileri, alıştırma, yanlış defteri ve deneme takibi tek yerde.</p>
   <p class="by">Hazırlayan: Cevdet Tümerkan Çimen</p>
