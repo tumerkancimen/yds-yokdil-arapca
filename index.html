@@ -6,7 +6,7 @@
 <title>YDS Arapça Çalışma Kütüphanesi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6f1e7;--paper:#fffdf8;--ink:#2a2622;--muted:#6f675d;--line:#e3d9c7;
@@ -177,6 +177,99 @@ button.btn,a.btn{border-radius:999px}
 .feedback h2{color:var(--accent)}
 .feedback .box > *{position:relative}
 .feedback a.btn{background:var(--accent);color:#fffaf0;border-color:var(--accent)}
+
+/* ================= tema: toprak ================= */
+/* Yön: krem zemin, zeytin başlıklar, koyu toprak şerit, kehribar vurgu; fotoğraflar yalnız giriş ve bölüm kapaklarında. */
+:root{
+  --bg:#e9e1cc;--paper:#f3eddc;--ink:#2a1b0c;--muted:#645a2f;--line:rgba(42,27,12,.16);
+  --accent:#6b6236;--accent-2:#4b4423;--accent-soft:rgba(107,98,54,.13);
+  --gold:#a4563a;--gold-soft:rgba(224,162,75,.2);--amber:#e0a24b;--earth:#2a1b0c;
+  --ok:#2f6b3f;--ok-soft:rgba(47,107,63,.14);--bad:#9c3a2e;--bad-soft:rgba(156,58,46,.12);
+  --radius:20px;--shadow:0 1px 0 rgba(255,255,255,.6) inset,0 10px 28px -16px rgba(42,27,12,.35);
+  --serif:"Playfair Display","Source Serif 4",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#16100a;--paper:#231a10;--ink:#ece2cb;--muted:#c4b98f;--line:rgba(236,226,203,.17);
+  --accent:#e0a24b;--accent-2:#c98a30;--accent-soft:rgba(224,162,75,.14);
+  --gold:#e0a24b;--gold-soft:rgba(224,162,75,.12);
+  --ok:#86c79a;--ok-soft:rgba(134,199,154,.14);--bad:#ee9a8c;--bad-soft:rgba(238,154,140,.14);
+  --shadow:0 1px 0 rgba(255,255,255,.05) inset,0 12px 30px -16px rgba(0,0,0,.7);}}
+body{background:var(--bg);background-image:none}
+
+/* üst şerit */
+.brandbar{background:#2a1b0c;border-bottom:1px solid rgba(233,225,204,.12);color:#e9e1cc}
+.brandbar .contact a{background:rgba(233,225,204,.08);border-color:rgba(233,225,204,.26);color:#e9e1cc}
+.brandbar .contact a:hover{background:rgba(224,162,75,.22);border-color:#e0a24b}
+
+/* giriş: mağara gecesi şeridi */
+header.hero{position:relative;max-width:none;margin:0;padding:56px 16px 44px;color:#e9e1cc;
+  background:linear-gradient(180deg,rgba(42,27,12,.94),rgba(42,27,12,.62) 42%,rgba(42,27,12,.9)),url(img/magara.jpg) center 58%/cover no-repeat,#2a1b0c}
+header.hero>h1,header.hero>.orn,header.hero>.sub,header.hero>.by{max-width:920px;margin-left:auto;margin-right:auto}
+.hero h1{font-family:var(--serif);font-weight:500;color:#efe7cf;letter-spacing:-.01em;line-height:1.02;font-size:clamp(2.9rem,10vw,5.2rem);text-shadow:0 2px 28px rgba(0,0,0,.4)}
+.hero h1 .t2{font-style:italic;font-weight:400;color:#e0a24b}
+.hero h1 small{display:block;margin-top:.6em;font:700 clamp(.78rem,2.4vw,1rem)/1.3 "Source Sans 3",system-ui,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:rgba(233,225,204,.85)}
+.hero .orn{color:#e0a24b}.hero .orn svg path[fill]{fill:#2a1b0c}
+.hero .sub{color:rgba(233,225,204,.9);font-size:1.02rem}
+.hero .by{color:rgba(233,225,204,.65)}
+.countdown{background:rgba(233,225,204,.1);border:1px solid rgba(233,225,204,.3);color:#efe7cf;box-shadow:0 14px 34px -18px rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.countdown::before{border-color:rgba(233,225,204,.18)}
+.countdown b{color:#e0a24b;font-family:var(--serif);font-style:italic}
+.countdown .muted{color:rgba(233,225,204,.78)}
+.countdown input{background:rgba(233,225,204,.16);border-color:rgba(233,225,204,.4);color:#fff;color-scheme:dark}
+/* kapsül ve daire (yalnız geniş ekran) */
+.hs{display:none;position:absolute;object-fit:cover;border:6px solid #e9e1cc;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+@media (min-width:1320px){
+  .hs{display:block}
+  .hs-pill{width:150px;height:300px;border-radius:999px;right:max(24px,calc(50% - 760px));top:44px;object-position:50% 40%}
+  .hs-dot{width:140px;height:140px;border-radius:50%;left:max(24px,calc(50% - 760px));bottom:34px;object-position:50% 62%}
+}
+
+/* sekmeler */
+nav.tabs{background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:none;margin-top:0;padding:0}
+nav.tabs a{color:var(--ink);opacity:.8;border:1px solid transparent}
+nav.tabs a:hover{opacity:1;background:var(--accent-soft)}
+nav.tabs a.on{opacity:1;background:var(--accent);color:#f3eddc;border-color:var(--accent);box-shadow:none}
+@media (prefers-color-scheme:dark){nav.tabs a.on{color:#1a1208}}
+
+/* bölüm kapakları: üç fotoğraf sırayla */
+section.view::before{content:"";display:block;height:112px;margin:0 0 20px;border-radius:22px;
+  background:linear-gradient(90deg,rgba(42,27,12,.7),rgba(42,27,12,.05) 70%),var(--cap) center/cover no-repeat;box-shadow:var(--shadow)}
+section.view:nth-of-type(3n+1){--cap:url(img/palmiye.jpg);--capos:50% 62%}
+section.view:nth-of-type(3n+2){--cap:url(img/ay-isigi.jpg);--capos:50% 36%}
+section.view:nth-of-type(3n+3){--cap:url(img/magara.jpg);--capos:50% 64%}
+section.view:nth-of-type(3n+1)::before{background-position:center,50% 62%}
+section.view:nth-of-type(3n+2)::before{background-position:center,50% 36%}
+section.view:nth-of-type(3n+3)::before{background-position:center,50% 64%}
+@media (max-width:560px){section.view::before{height:84px;border-radius:18px}}
+
+/* başlıklar */
+h2{font-family:var(--serif);font-weight:500;font-size:1.7rem;line-height:1.15;text-transform:uppercase;letter-spacing:.03em;color:var(--accent)}
+section.view>h2::before,main>h2::before{display:none}
+h3{font-family:var(--serif);font-weight:500}
+.stat,.feedback h2{font-family:var(--serif)}
+@media (prefers-color-scheme:dark){h2{color:var(--accent)}}
+
+/* kartlar, girdiler, şıklar */
+.card,details.topic{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:none;-webkit-backdrop-filter:none}
+input[type=search],input[type=text],input[type=number],input[type=date],textarea,select{background:var(--paper);border-color:var(--line);color:var(--ink)}
+.opt{background:var(--paper);border-color:var(--line);border-radius:14px}
+.opt:hover:not([disabled]){background:var(--accent-soft)}
+.opt.right{background:var(--ok-soft)}.opt.wrong{background:var(--bad-soft)}
+.chip{background:var(--paper);border-color:var(--line);color:var(--ink)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#f3eddc}.chip.on .muted{color:rgba(243,237,220,.8)}
+@media (prefers-color-scheme:dark){.chip.on{color:#1a1208}.chip.on .muted{color:rgba(26,18,8,.7)}}
+.pill{background:var(--accent-soft);color:var(--accent)}.pill.gold{background:var(--gold-soft);color:var(--gold)}
+.passage,.explain,.tip,.ex-box{background:var(--gold-soft);border-radius:14px}
+.tip{border-inline-start-color:var(--amber)}
+button.btn,a.btn{background:var(--accent);border-color:var(--accent);color:#f3eddc;border-radius:999px}
+button.btn.ghost{background:transparent;color:var(--accent)}
+@media (prefers-color-scheme:dark){button.btn,a.btn{color:#1a1208}button.btn.ghost{color:var(--accent)}}
+button.btn:hover,a.btn:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.bar{background:var(--line)}.bar>i{background:linear-gradient(90deg,var(--accent),#c9923f)}
+.feedback .box{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px}
+.feedback .box::before{border-color:var(--line)}
+.feedback a.btn{background:var(--accent);color:#f3eddc}
+@media (prefers-color-scheme:dark){.feedback a.btn{color:#1a1208}}
 </style>
 </head>
 <body>
@@ -191,11 +284,13 @@ button.btn,a.btn{border-radius:999px}
   </div>
 </div></div>
 <header class="top hero">
-  <h1>YDS Arapça Çalışma Kütüphanesi</h1>
+  <h1><span class="t1">YDS</span> <em class="t2">Arapça</em><small>Çalışma Kütüphanesi</small></h1>
   <div class="orn"><svg viewBox="0 0 40 16" aria-hidden="true" style="width:40px;height:16px"><path d="M20 1l7 7-7 7-7-7z"/><path d="M20 5l3 3-3 3-3-3z" fill="var(--bg)"/><path d="M8 5l3 3-3 3-3-3zM32 5l3 3-3 3-3-3z"/></svg></div>
   <p class="sub">Kelime, dil bilgisi, soru tipi stratejileri, alıştırma, yanlış defteri ve deneme takibi tek yerde.</p>
   <p class="by">Hazırlayan: Cevdet Tümerkan Çimen</p>
   <div class="countdown" id="countdown"></div>
+  <img class="hs hs-pill" src="img/ay-isigi.jpg" alt="" aria-hidden="true" width="736" height="1308" loading="lazy">
+  <img class="hs hs-dot" src="img/palmiye.jpg" alt="" aria-hidden="true" width="736" height="1307" loading="lazy">
 </header>
 <nav class="tabs"><div class="inner" id="tabs">
   <a href="#sinav" data-v="sinav">Sınav</a>
