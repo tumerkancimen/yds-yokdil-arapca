@@ -1,4 +1,12 @@
-# Hesap, eşleşme ve liderlik tablosunu açma (bir kez yapılır)
+# Hesap, eşleşme ve liderlik tablosunu açma
+
+> **Durum (15 Kasım 2026): kurulum tamamlandı, sistem çalışıyor.**
+> Supabase projesi kurulu, SQL çalıştırıldı, adres ayarları yapıldı, anahtar `index.html`'e yazıldı.
+> E-posta gönderimi **Brevo** üzerinden: sunucu `smtp-relay.brevo.com`, port 587, kullanıcı adı
+> `c354be001@smtp-brevo.com`, gönderen `tcimen.jo@gmail.com` (Brevo'da doğrulanmış).
+> Ücretsiz plan: günde 300 e-posta. Uçtan uca test edildi (kayıt → onay postası → giriş → eşleşme → hesap silme).
+> Gmail SMTP denendi ve olmadı (`535 BadCredentials`); Brevo ile değiştirildi.
+> Aşağısı, ileride yeniden kurman ya da başka bir projeye taşıman gerekirse diye duruyor.
 
 Site bu adımlar yapılmadan da çalışır. `index.html` içindeki `LB` satırı boşken hesap ve liderlik kartları hiç görünmez.
 
@@ -21,8 +29,25 @@ Site bu adımlar yapılmadan da çalışır. `index.html` içindeki `LB` satır�
 - **Allow anonymous sign-ins:** hesapsız takma adla liderlik tablosuna katılmaya izin vermek istiyorsan aç. Kapalıysa liderlik tablosuna yalnızca hesabıyla giren katılır, bu da sorun değil.
 - **Google (isteğe bağlı):** Supabase'in Google rehberini izleyip Google Cloud'da bir OAuth istemcisi oluştur, istemci kimliği ve gizli anahtarı buraya yaz. Sonra `index.html`'de `google:false` değerini `google:true` yap. Yapmazsan Google düğmesi sitede görünmez.
 
-## 5. E-posta gönderimi (önemli)
-Supabase'in dahili e-posta servisi çok az sayıda e-posta gönderir (saatte birkaç adet) ve yalnızca deneme içindir. Birden fazla kişi hesap açacaksa **Authentication > Emails > SMTP Settings** bölümünden kendi e-posta servisini (Resend, Brevo gibi, ücretsiz katmanları var) bağla. Bunu yapmazsan onay e-postaları geç gelir ya da hiç gelmez.
+## 5. E-posta gönderimi (yapıldı: Brevo)
+Supabase'in dahili e-posta servisi saatte yalnızca birkaç e-posta gönderir ve yalnızca deneme içindir.
+Bu yüzden **Authentication > Emails > SMTP Settings** bölümüne Brevo bağlandı:
+
+| Alan | Değer |
+| --- | --- |
+| Sender email | `tcimen.jo@gmail.com` (Brevo'da doğrulanmış gönderen) |
+| Sender name | YDS Arapça Çalışma Kütüphanesi |
+| Host | `smtp-relay.brevo.com` |
+| Port | 587 |
+| Username | `c354be001@smtp-brevo.com` |
+| Password | Brevo'daki SMTP anahtarı (Brevo > SMTP & API > Generate SMTP key) |
+
+Brevo'nun kendi bilgileri: **app.brevo.com > Settings > SMTP & API**. Anahtar bir kez gösterilir; kaybedersen yenisini üret ve Supabase'deki Password alanını güncelle.
+
+Notlar:
+- Ücretsiz plan günde 300 e-posta. Supabase tarafındaki sınır da özel SMTP ile saatte 30'a çıktı, **Authentication > Rate Limits**'ten artırılabilir.
+- Gönderen adresi bir Gmail adresi olduğu için Brevo mesajları kendi alan adından (`...@...brevosend.com`) gönderiyor ve "freemail" uyarısı veriyor. Çalışıyor, ama bazı alıcılarda gereksiz klasörüne düşebilir. Kalıcı çözüm kendi alan adını alıp Brevo'da doğrulamak.
+- Gmail SMTP de denendi, Google uygulama şifresini kabul etmedi (`535 BadCredentials`). Brevo'ya geçildi.
 
 ## 6. İki bilgiyi siteye yaz
 **Project Settings > API** bölümünde:
