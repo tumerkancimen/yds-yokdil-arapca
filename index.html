@@ -2891,6 +2891,12 @@ section.view h2{padding-bottom:12px;background:linear-gradient(var(--gold),var(-
     .grid .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(42,27,12,.45)}
   }
 }
+
+#girisBlok{display:grid;gap:12px;max-width:640px;margin:0 auto 26px}
+#girisBlok[hidden]{display:none!important}
+#girisBlok .giris-lead{margin:0;text-align:center;font-size:1.05rem;line-height:1.5;color:var(--ink)}
+#girisBlok .giris-lead b{color:var(--gold)}
+#girisBlok .card{margin:0;border-top:3px solid var(--gold)}
 </style>
 <script>
 (function(){
@@ -2905,6 +2911,42 @@ section.view h2{padding-bottom:12px;background:linear-gradient(var(--gold),var(-
     // Güvence: 4 sn sonra hâlâ gizli kalan öğe olursa göster
     setTimeout(function(){ document.querySelectorAll('.rv:not(.rv-in)').forEach(function(el){
       var r=el.getBoundingClientRect(); if(r.width&&r.top<innerHeight*1.2) el.classList.add('rv-in'); }); },4000);
+  }catch(_){}
+})();
+</script>
+
+<script id="giris-tasi">
+/* Hesap ve takma ad kartlarını, henüz giriş/katılım yapılmadıysa giriş sayfasının başına taşır;
+   yapıldıysa Plan & Takip'teki asıl yerine geri koyar. Kartların mantığına dokunmaz. */
+(function(){
+  try{
+    var sinav=document.getElementById('v-sinav'),takip=document.getElementById('v-takip');
+    var acc=document.getElementById('accCard'),lb=document.getElementById('lbCard');
+    if(!sinav||!takip||!acc||!lb) return;
+    var blok=document.createElement('div');blok.id='girisBlok';blok.hidden=true;
+    blok.innerHTML='<p class="giris-lead"><b>Hesap aç</b>, ilerlemen her cihazında seninle olsun. İstersen <b>takma adınla</b> liderlik tablosuna katıl.</p>';
+    sinav.insertBefore(blok,sinav.firstChild);
+    var rozet=document.getElementById('rozetCard');
+    function gorunur(el){return el.style.display!=='none';}
+    function esle(){
+      var kartlar=[[acc,!!acc.querySelector('#aMail')],[lb,!!lb.querySelector('#lbNick')]];
+      kartlar.forEach(function(k){
+        var el=k[0],giris=k[1]&&gorunur(el);
+        if(giris){ if(el.parentNode!==blok) blok.appendChild(el); }
+        else if(el.parentNode===blok){
+          // asıl yerine: rozet kartından sonra, hesap kartı lb kartından önce
+          var ref=(el===acc)?(lb.parentNode===takip?lb:null):null;
+          if(ref) takip.insertBefore(el,ref); else if(rozet&&rozet.nextSibling) takip.insertBefore(el,rozet.nextSibling); else takip.appendChild(el);
+        }
+      });
+      // sıra: hesap kartı her zaman takma ad kartından önce
+      if(acc.parentNode===blok&&lb.parentNode===blok&&acc.nextSibling!==lb) blok.insertBefore(acc,lb);
+      if(acc.parentNode===takip&&lb.parentNode===takip&&(acc.compareDocumentPosition(lb)&4)===0) takip.insertBefore(acc,lb);
+      blok.hidden=!blok.querySelector('.card');
+    }
+    var mo=new MutationObserver(esle);
+    [acc,lb].forEach(function(el){mo.observe(el,{childList:true,attributes:true,attributeFilter:['style']});});
+    esle();
   }catch(_){}
 })();
 </script>
