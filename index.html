@@ -2867,5 +2867,46 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<!-- ===== Görsel cila (yalnızca ek; veri ve mantığa dokunmaz) ===== -->
+<style id="cila">
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+nav.tabs a,button.btn,a.btn{transition:background .2s,opacity .2s,transform .2s,box-shadow .2s}
+button.btn:active,a.btn:active{transform:translateY(1px) scale(.98)}
+h1 .t1,h1 .t2,h1 small{display:inline-block}
+h1 small{display:block}
+section.view h2{letter-spacing:.04em}
+section.view h2{padding-bottom:12px;background:linear-gradient(var(--gold),var(--gold)) 0 100%/44px 2px no-repeat}
+.hero [class*="count"],.hero #daysLeft,.hero b,.hero strong{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes ydsRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes ydsFade{from{opacity:0}to{opacity:1}}
+  h1 .t1{animation:ydsRise .8s cubic-bezier(.2,.7,.2,1) .10s both}
+  h1 .t2{animation:ydsRise .8s cubic-bezier(.2,.7,.2,1) .28s both}
+  h1 small{animation:ydsRise .8s cubic-bezier(.2,.7,.2,1) .46s both}
+  header p,.hero p{animation:ydsFade .9s ease .65s both}
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .rv.rv-in{opacity:1;transform:none}
+  @media (hover:hover){
+    .grid .card{transition:transform .25s ease,box-shadow .25s ease}
+    .grid .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(42,27,12,.45)}
+  }
+}
+</style>
+<script>
+(function(){
+  try{
+    if(!('IntersectionObserver' in window)) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els=document.querySelectorAll('section.view > h2, section.view > .lead, section.view > .card, section.view .grid > .card');
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('rv-in'); io.unobserve(e.target);} });
+    },{rootMargin:'0px 0px -6% 0px',threshold:.05});
+    els.forEach(function(el){ el.classList.add('rv'); io.observe(el); });
+    // Güvence: 4 sn sonra hâlâ gizli kalan öğe olursa göster
+    setTimeout(function(){ document.querySelectorAll('.rv:not(.rv-in)').forEach(function(el){
+      var r=el.getBoundingClientRect(); if(r.width&&r.top<innerHeight*1.2) el.classList.add('rv-in'); }); },4000);
+  }catch(_){}
+})();
+</script>
 </body>
 </html>

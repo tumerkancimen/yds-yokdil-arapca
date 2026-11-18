@@ -1,7 +1,7 @@
 // YDS Arapça Çalışma Kütüphanesi - service worker
 // İçerik güncellemesi: sayfa için önce internet denenir, yoksa önbellek kullanılır.
 // Uygulama kabuğunu (simge, manifest) değiştirirsen CACHE_VERSION'ı artır.
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const SHELL_CACHE = 'yds-shell-' + CACHE_VERSION;
 const RUNTIME_CACHE = 'yds-runtime-' + CACHE_VERSION;
 
